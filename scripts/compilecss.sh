@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-inputdir="./src/css"
-outdir="./dist"
+inputdir="./../src/css"
+outdir="./../dist"
 green_color="\033[32m"
 default_color="\033[0m"
 
