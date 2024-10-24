@@ -749,40 +749,6 @@ select {
   outline: 1px auto -webkit-focus-ring-color;
 }
 
-.container {
-  width: 100%;
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
-}
-
 .btn-primary {
   border-radius: 9999px;
   --tw-bg-opacity: 1;
@@ -812,4 +778,17 @@ select {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
   --tw-ring-color: rgb(167 139 250 / var(--tw-ring-opacity));
   --tw-ring-opacity: 0.75;
+}
+
+rect {
+  fill: #f68f5c;
+  fill-opacity: 0.8;
+}
+
+rect:hover {
+  fill-opacity: 1;
+}
+
+.axis {
+  font-size: smaller;
 }

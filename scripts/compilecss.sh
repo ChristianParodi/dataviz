@@ -1,7 +1,8 @@
 #!/bin/zsh
 
-inputdir="./../src/css"
-outdir="./../dist"
+script_path=$(dirname "$0")
+inputdir="$script_path/../src/css"
+outdir="$script_path/../dist"
 green_color="\033[32m"
 default_color="\033[0m"
 
@@ -13,5 +14,5 @@ for file in $(ls ./$inputdir); do
   echo $green_color
   echo "compiling $file"
   echo $default_color
-  ./tailwindcss -i ./$inputdir/$file -o ./$outdir/$file
+  $script_path/tailwindcss -i ./$inputdir/$file -o ./$outdir/$file
 done
