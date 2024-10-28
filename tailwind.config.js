@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     "index.html",
+    "./dist/*.{html,js}",
     "./src/**/*.{html,js}",
     "./libs/*.js"
   ],
