@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <title>Tristimuli</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Includes -->
-    <link href="./dist/index.css" rel="stylesheet" />
-    <link href="./libs/flowbite.min.css" rel="stylesheet" type="text/css" />
-    <script src="./libs/flowbite.min.js"></script>
+    <!-- <link href="./libs/flowbite.min.css" rel="stylesheet" type="text/css" />
+    <script src="./libs/flowbite.min.js"></script> -->
     <script src="./libs/d3.v7.min.js"></script>
     <script src="./libs/tailwind.js"></script>
-
+    
+    
+    <link href="./dist/index.css" rel="stylesheet" />
     <!-- vertical carousel -->
     <link href="./dist/carousel.css" rel="stylesheet" />
   </head>
@@ -33,7 +33,7 @@
     <!-- Check w3c validator -->
     <!-- Use selector with svg to style them (no inline styling) -->
     <!-- fonts: Roboto Slab for headings and Fira sans for paragraphs -->
-    <!-- <button class="btn-primary">Prova</button>
+    <!-- <button class="btn-primary">Prova</button> 
     <div>
       <strong>Filter:</strong>
       <label><input type="checkbox" name="US" value="1" id="filter-us-only" />US only</label>
