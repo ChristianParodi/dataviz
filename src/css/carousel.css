@@ -1,3 +1,15 @@
+@tailwind components;
+@tailwind base;
+
+@layer components{
+  .buttonstyle {
+    @apply  bg-white text-gray-900 font-semibold py-2 px-4 rounded-lg shadow hover:shadow-lg focus:shadow-lg active:shadow transition-shadow duration-150;
+  }
+  .backgroundwindow{
+    @apply "bg-gray-900 text-white rounded-lg shadow-lg p-10 text-center max-w-md mx-auto;
+  }
+}
+
 .snap {
   scroll-snap-type: var(--scroll-snap-direction) var(--scroll-snap-constraint);
 }
@@ -13,3 +25,4 @@
 .snap-start {
   scroll-snap-align: start;
 }
+
