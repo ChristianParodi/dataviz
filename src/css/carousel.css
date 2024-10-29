@@ -6,7 +6,7 @@
     @apply w-full h-screen snap-start flex items-center justify-center;
   }
   .buttonstyle {
-    @apply  bg-white text-gray-900 font-semibold py-2 px-4 rounded-lg shadow hover:shadow-lg focus:shadow-lg active:shadow transition-shadow duration-150;
+    @apply bg-white text-gray-900 font-semibold py-2 px-4 rounded-lg shadow hover:shadow-lg focus:shadow-lg active:shadow transition-shadow duration-150;
   }
   .backgroundwindow{
     @apply bg-gray-900 text-white rounded-lg shadow-lg p-10 text-center max-w-md mx-auto;;
@@ -29,4 +29,3 @@
 .snap-start {
   scroll-snap-align: start;
 }
-
