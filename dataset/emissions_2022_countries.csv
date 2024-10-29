@@ -1,0 +1,215 @@
+Entity,Code,CO2,Continent
+Qatar,QAT,37.601273,Asia
+United Arab Emirates,ARE,25.833244,Asia
+Bahrain,BHR,25.672274,Asia
+Kuwait,KWT,25.578102,Asia
+Brunei,BRN,23.950201,Asia
+Trinidad and Tobago,TTO,22.423758,North America
+Saudi Arabia,SAU,18.197495,Asia
+New Caledonia,NCL,17.641167,Oceania
+Oman,OMN,15.730261,Asia
+Australia,AUS,14.985412,Oceania
+United States,USA,14.949616,North America
+Sint Maarten (Dutch part),SXM,14.352394,North America
+Canada,CAN,14.249212,North America
+Faroe Islands,FRO,14.084624,Europe
+Kazakhstan,KAZ,13.979704,Asia
+Palau,PLW,12.123921,Oceania
+Taiwan,TWN,11.630868,Asia
+Luxembourg,LUX,11.618432,Europe
+South Korea,KOR,11.598764,Asia
+Russia,RUS,11.416899,Europe
+Mongolia,MNG,11.150772,Asia
+Turkmenistan,TKM,11.03418,Asia
+Greenland,GRL,10.473997,North America
+Saint Pierre and Miquelon,SPM,10.293288,North America
+Iceland,ISL,9.499798,Europe
+Czechia,CZE,9.3357525,Europe
+Libya,LBY,9.242238,Africa
+Curacao,CUW,9.189007,North America
+Singapore,SGP,8.911513,Asia
+Anguilla,AIA,8.752724,North America
+Malaysia,MYS,8.576508,Asia
+Japan,JPN,8.501681,Asia
+Aruba,ABW,8.133404,North America
+Poland,POL,8.106886,Europe
+China,CHN,7.992761,Asia
+Germany,DEU,7.9837584,Europe
+Iran,IRN,7.7993317,Asia
+Estonia,EST,7.77628,Europe
+Ireland,IRL,7.7211185,Europe
+Belgium,BEL,7.6875386,Europe
+Turks and Caicos Islands,TCA,7.636793,North America
+Norway,NOR,7.5093055,Europe
+Netherlands,NLD,7.1372175,Europe
+Bermuda,BMU,6.9370627,North America
+Austria,AUT,6.8781943,Europe
+Bulgaria,BGR,6.8044534,Europe
+South Africa,ZAF,6.7461643,Africa
+Finland,FIN,6.5267396,Europe
+Antigua and Barbuda,ATG,6.4218745,North America
+New Zealand,NZL,6.212154,Oceania
+Israel,ISR,6.208912,Asia
+Belarus,BLR,6.1669006,Europe
+Seychelles,SYC,6.1495123,Africa
+Bosnia and Herzegovina,BIH,6.1034565,Europe
+Slovakia,SVK,6.051555,Europe
+Serbia,SRB,6.024712,Europe
+Slovenia,SVN,5.9979916,Europe
+Suriname,SUR,5.8029985,South America
+Greece,GRC,5.7451057,Europe
+Italy,ITA,5.726825,Europe
+Cyprus,CYP,5.616782,Europe
+Bahamas,BHS,5.1708703,North America
+Spain,ESP,5.1644425,Europe
+Turkey,TUR,5.1052055,Asia
+British Virgin Islands,VGB,5.0039577,North America
+Denmark,DNK,4.940161,Europe
+Montserrat,MSR,4.8447766,North America
+Kosovo,KOS,4.830646,Europe
+United Kingdom,GBR,4.7201805,Europe
+Saint Kitts and Nevis,KNA,4.708081,North America
+Andorra,AND,4.6171236,Europe
+Lithuania,LTU,4.606163,Europe
+France,FRA,4.603891,Europe
+Hungary,HUN,4.449911,Europe
+Barbados,BRB,4.3772573,North America
+Guyana,GUY,4.3736935,South America
+Lebanon,LBN,4.3543963,Asia
+Croatia,HRV,4.348515,Europe
+Chile,CHL,4.3041654,South America
+Argentina,ARG,4.2378173,South America
+Nauru,NRU,4.1700416,Oceania
+Bonaire Sint Eustatius and Saba,BES,4.083284,North America
+Hong Kong,HKG,4.081913,Asia
+Portugal,PRT,4.050785,Europe
+Switzerland,CHE,4.0478554,Europe
+Iraq,IRQ,4.024638,Asia
+Mexico,MEX,4.0153365,North America
+Cook Islands,COK,3.9950094,Oceania
+Algeria,DZA,3.9272263,Africa
+Niue,NIU,3.8729508,Oceania
+Liechtenstein,LIE,3.8097827,Europe
+Thailand,THA,3.7762568,Asia
+Romania,ROU,3.739777,Europe
+Azerbaijan,AZE,3.6746833,Asia
+Montenegro,MNE,3.6558185,Europe
+Marshall Islands,MHL,3.6353714,Oceania
+North Macedonia,MKD,3.6245701,Europe
+Sweden,SWE,3.6069093,Europe
+Latvia,LVA,3.561689,Europe
+Ukraine,UKR,3.5578535,Europe
+Vietnam,VNM,3.4995174,Asia
+Uzbekistan,UZB,3.4830604,Asia
+Saint Helena,SHN,3.2986484,Africa
+Mauritius,MUS,3.2697906,Africa
+Maldives,MDV,3.2475724,Asia
+Malta,MLT,3.1035979,Europe
+Laos,LAO,3.0803475,Asia
+Equatorial Guinea,GNQ,3.0307202,Africa
+Georgia,GEO,2.962545,Asia
+Tunisia,TUN,2.879285,Africa
+French Polynesia,PYF,2.8509297,Oceania
+Botswana,BWA,2.838951,Africa
+Venezuela,VEN,2.7168686,South America
+Grenada,GRD,2.7133646,North America
+Panama,PAN,2.699258,North America
+Indonesia,IDN,2.6456614,Asia
+Saint Lucia,LCA,2.6149206,North America
+Gabon,GAB,2.3882635,Africa
+Egypt,EGY,2.333106,Africa
+Ecuador,ECU,2.3117273,South America
+Uruguay,URY,2.3060381,South America
+Armenia,ARM,2.3045583,Asia
+Saint Vincent and the Grenadines,VCT,2.2964725,North America
+Jamaica,JAM,2.2945588,North America
+Wallis and Futuna,WLF,2.2819076,Oceania
+Brazil,BRA,2.2454574,South America
+Dominica,DMA,2.1058853,North America
+Dominican Republic,DOM,2.1051137,North America
+Jordan,JOR,2.0301995,Asia
+India,IND,1.9966822,Asia
+North Korea,PRK,1.9513915,Asia
+Colombia,COL,1.9223082,South America
+Cuba,CUB,1.8659163,North America
+Morocco,MAR,1.8263615,Africa
+Belize,BLZ,1.7894346,North America
+Peru,PER,1.7891879,South America
+Tonga,TON,1.7686282,Oceania
+Bolivia,BOL,1.7583066,South America
+Albania,ALB,1.7432004,Europe
+Moldova,MDA,1.6565942,Europe
+Namibia,NAM,1.5399038,Africa
+Costa Rica,CRI,1.5226681,North America
+Macao,MAC,1.5127679,Asia
+Kyrgyzstan,KGZ,1.4251612,Asia
+Lesotho,LSO,1.3594668,Africa
+Bhutan,BTN,1.3489918,Asia
+Paraguay,PRY,1.3299496,South America
+Micronesia,FSM,1.3243006,Oceania
+Philippines,PHL,1.3014648,Asia
+Syria,SYR,1.2490375,Asia
+Congo,COG,1.2447897,Africa
+El Salvador,SLV,1.2174718,North America
+Cambodia,KHM,1.1900775,Asia
+Fiji,FJI,1.1550449,Oceania
+Samoa,WSM,1.1218625,Oceania
+Guatemala,GTM,1.0756185,North America
+Honduras,HND,1.0696708,North America
+Eswatini,SWZ,1.0527312,Africa
+Tajikistan,TJK,1.0064901,Asia
+Tuvalu,TUV,1.0004411,Oceania
+Cape Verde,CPV,0.9588915,Africa
+Mauritania,MRT,0.957337,Africa
+Pakistan,PAK,0.84893465,Asia
+Nicaragua,NIC,0.79879653,North America
+Sri Lanka,LKA,0.7936504,Asia
+Papua New Guinea,PNG,0.77131313,Oceania
+Senegal,SEN,0.6738352,Africa
+Palestine,PSE,0.6660658,Asia
+Myanmar,MMR,0.6445672,Asia
+Vanuatu,VUT,0.6363055,Oceania
+Benin,BEN,0.631487,Africa
+Ghana,GHA,0.6215505,Africa
+Bangladesh,BGD,0.5964455,Asia
+Nigeria,NGA,0.5891771,Africa
+Sao Tome and Principe,STP,0.5816142,Africa
+Zimbabwe,ZWE,0.542628,Africa
+Kiribati,KIR,0.5184742,Oceania
+Nepal,NPL,0.5074035,Asia
+East Timor,TLS,0.49869007,Asia
+Comoros,COM,0.49327007,Africa
+Sudan,SDN,0.4696261,Africa
+Kenya,KEN,0.45998666,Africa
+Angola,AGO,0.45155162,Africa
+Zambia,ZMB,0.44570068,Africa
+Cote d'Ivoire,CIV,0.41668788,Africa
+Solomon Islands,SLB,0.41232163,Oceania
+Djibouti,DJI,0.40418932,Africa
+Guinea,GIN,0.35742033,Africa
+Cameroon,CMR,0.34292704,Africa
+Yemen,YEM,0.33701748,Asia
+Mali,MLI,0.31153768,Africa
+Afghanistan,AFG,0.29536375,Asia
+Togo,TGO,0.2910665,Africa
+Gambia,GMB,0.2847278,Africa
+Burkina Faso,BFA,0.26295447,Africa
+Mozambique,MOZ,0.24274588,Africa
+Tanzania,TZA,0.23771806,Africa
+Haiti,HTI,0.21119381,North America
+Eritrea,ERI,0.18914719,Africa
+South Sudan,SSD,0.1680176,Africa
+Liberia,LBR,0.1653753,Africa
+Guinea-Bissau,GNB,0.15518051,Africa
+Ethiopia,ETH,0.15458965,Africa
+Madagascar,MDG,0.14871116,Africa
+Chad,TCD,0.13367727,Africa
+Sierra Leone,SLE,0.13124847,Africa
+Uganda,UGA,0.12744623,Africa
+Niger,NER,0.116688,Africa
+Rwanda,RWA,0.112346195,Africa
+Malawi,MWI,0.10262384,Africa
+Burundi,BDI,0.06194545,Africa
+Central African Republic,CAF,0.040548485,Africa
+Somalia,SOM,0.03676208,Africa
+Democratic Republic of Congo,COD,0.036375992,Africa
