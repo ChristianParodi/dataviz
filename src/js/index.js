@@ -11,7 +11,6 @@ const svg = d3
 
 // Group used to enforce margin
 const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
-
 // Global variable for all data
 let data;
 
@@ -29,25 +28,31 @@ const g_yaxis = g.append("g").attr("class", "y axis");
 
 /////////////////////////
 
-d3.json("weather.json").then((json) => {
-  data = json;
+d3.csv("./dataset/emissions_2022_countries.csv").then((csv) => {
+  csv.forEach(d => {
+    d.CO2 = +d.CO2;
+  });
+  data = csv;
   update(data);
-});
+})
 
 function update(new_data) {
+  const top10 = new_data.slice(0, 10);
+  console.log(d3.max(top10, d => d.CO2))
   //update the scales
-  xscale.domain([0, d3.max(new_data, (d) => d.temperature)]);
-  yscale.domain(new_data.map((d) => d.location.city));
+  xscale.domain([0, d3.max(top10, (d) => d.CO2)]);
+  console.log(d3.max(top10, (d) => d.CO2));
+  yscale.domain(top10.map((d) => d.Country));
   //render the axis
   g_xaxis.transition().call(xaxis);
   g_yaxis.transition().call(yaxis);
 
   // Render the chart with new data
 
-  // DATA JOIN use the key argument for ensurign that the same DOM element is bound to the same data-item
+  // DATA JOIN use the key argument for ensuring that the same DOM element is bound to the same data-item
   const rect = g
     .selectAll("rect")
-    .data(new_data, (d) => d.location.city)
+    .data(top10, (d) => d.Country)
     .join(
       // ENTER
       // new elements
@@ -69,25 +74,49 @@ function update(new_data) {
   rect
     .transition()
     .attr("height", yscale.bandwidth())
-    .attr("width", (d) => xscale(d.temperature))
-    .attr("y", (d) => yscale(d.location.city));
+    .attr("width", (d) => xscale(d.CO2))
+    .attr("y", (d) => yscale(d.Country));
 
-  rect.select("title").text((d) => d.location.city);
+  rect.select("title").text((d) => d.CO2); // Hover
 }
 
 //interactivity
-d3.select("#filter-us-only").on("change", function () {
-  // This will be triggered when the user selects or unselects the checkbox
+let checkedContinents = d3.selectAll("input[name='filter']:checked").nodes().map((node) => node.value);
+
+console.log(checkedContinents)
+d3.selectAll("input[name='filter']").on("change", function () {
   const checked = d3.select(this).property("checked");
-  if (checked === true) {
-    // Checkbox was just checked
+  const filterValue = d3.select(this).property("value");
 
-    // Keep only data element whose country is US
-    const filtered_data = data.filter((d) => d.location.country === "US");
-
-    update(filtered_data); // Update the chart with the filtered data
+  if (checked) {
+    // Add the continent to the checked list
+    checkedContinents.push(filterValue);
   } else {
-    // Checkbox was just unchecked
-    update(data); // Update the chart with all the data we have
+    // Remove the continent from the checked list
+    checkedContinents = checkedContinents.filter((continent) => continent !== filterValue);
+  }
+
+  // Update the chart with the filtered data
+  if (checkedContinents.length === 0) {
+    update(data); // If no continents are checked, show all data
+  } else {
+    const filtered_data = data.filter((d) => checkedContinents.includes(d.Continent));
+    update(filtered_data);
   }
 });
+
+// d3.select("#filter-us-only").on("change", function () {
+//   // This will be triggered when the user selects or unselects the checkbox
+//   const checked = d3.select(this).property("checked");
+//   if (checked === true) {
+//     // Checkbox was just checked
+
+//     // Keep only data element whose country is US
+//     const filtered_data = data.filter((d) => d.Country === "US");
+
+//     update(filtered_data); // Update the chart with the filtered data
+//   } else {
+//     // Checkbox was just unchecked
+//     update(data); // Update the chart with all the data we have
+//   }
+// });

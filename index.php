@@ -18,6 +18,21 @@
   </head>
 
   <body>
+  <?php
+  // Path to the CSV file
+  $csvFile = './dataset/emissions_2022_countries.csv';
+
+  // Read the CSV file
+  $continents = [];
+  if (($handle = fopen($csvFile, 'r')) !== FALSE) {
+      fgetcsv($handle, 1000, ',');
+      while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
+          $continents[] = $data[3]; // Assuming the country name is in the first column
+      }
+      fclose($handle);
+  }
+  $continents = array_unique($continents);
+  ?>
     <main class="max-h-screen overflow-y-scroll snap snap-y snap-mandatory">
       <?php include("./src/html/carousel.html"); ?>
     </main>
@@ -33,11 +48,17 @@
     <!-- Check w3c validator -->
     <!-- Use selector with svg to style them (no inline styling) -->
     <!-- fonts: Roboto Slab for headings and Fira sans for paragraphs -->
-    <!-- <button class="btn-primary">Prova</button> 
-    <div>
-      <strong>Filter:</strong>
-      <label><input type="checkbox" name="US" value="1" id="filter-us-only" />US only</label>
-    </div> -->
-    <!-- <script src="./src/js/index.js" type="module"></script> -->
+    <!-- <button class="btn-primary">Prova</button> -->
+    <div class="flex items-center">
+      <div class="flex flex-col">
+          <script src="./src/js/index.js" type="module" defer></script>
+          <?php foreach ($continents as $continent): ?>
+             <label>
+               <input type="checkbox" name="filter" value="<?= htmlspecialchars($continent) ?>" checked />
+               <?= htmlspecialchars($continent) ?>
+             </label>
+          <?php endforeach; ?>
+        </div>
+    </div>
   </body>
 </html>
