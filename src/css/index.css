@@ -15,7 +15,6 @@ body {
 }
 
 rect {
-  fill: #f68f5c;
   fill-opacity: 0.8;
 }
 
@@ -30,4 +29,3 @@ rect:hover {
 .carousel-item {
   position: relative !important;
 }
-

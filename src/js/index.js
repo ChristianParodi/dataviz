@@ -36,12 +36,21 @@ d3.csv("./dataset/emissions_2022_countries.csv").then((csv) => {
   update(data);
 })
 
+// Dictionary mapping continents to colors
+const continentColors = {
+  "Africa": "fill-tangerine",
+  "Asia": "fill-pigment_green",
+  "Europe": "fill-steel_blue",
+  "North America": "fill-naples_yellow",
+  "Oceania": "fill-sky_magenta",
+  "South America": "fill-indian_red"
+};
+
+
 function update(new_data) {
   const top10 = new_data.slice(0, 10);
-  console.log(d3.max(top10, d => d.CO2))
   //update the scales
   xscale.domain([0, d3.max(top10, (d) => d.CO2)]);
-  console.log(d3.max(top10, (d) => d.CO2));
   yscale.domain(top10.map((d) => d.Country));
   //render the axis
   g_xaxis.transition().call(xaxis);
@@ -59,6 +68,7 @@ function update(new_data) {
       (enter) => {
         const rect_enter = enter.append("rect").attr("x", 0);
         rect_enter.append("title");
+        rect_enter.attr("class", d => continentColors[d.Continent])
         return rect_enter;
       },
       // UPDATE
@@ -83,7 +93,6 @@ function update(new_data) {
 //interactivity
 let checkedContinents = d3.selectAll("input[name='filter']:checked").nodes().map((node) => node.value);
 
-console.log(checkedContinents)
 d3.selectAll("input[name='filter']").on("change", function () {
   const checked = d3.select(this).property("checked");
   const filterValue = d3.select(this).property("value");

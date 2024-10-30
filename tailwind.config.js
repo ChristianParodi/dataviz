@@ -9,23 +9,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          light: '#8d6e63',
-          main: '#795548',
-          dark: '#5d4037',
-        },
-        secondary: {
-          light: '#8d6e63',
-          main: '#40c4ff',
-          dark: '#03a9f4',
-          darker: '#0288d1',
-        },
+        'indian_red': '#e05759',
+        'pigment_green': '#59a154',
+        'sky_magenta': '#b17ba0',
+        'tangerine': '#f28e34',
+        'steel_blue': '#4d78a4',
+        'naples_yellow': '#ecca52'
       },
     },
-  },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-  ],
+    plugins: [
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/typography'),
+    ],
+  }
 }
 

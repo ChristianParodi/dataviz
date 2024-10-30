@@ -49,9 +49,20 @@
     <!-- Use selector with svg to style them (no inline styling) -->
     <!-- fonts: Roboto Slab for headings and Fira sans for paragraphs -->
     <!-- <button class="btn-primary">Prova</button> -->
-    <div class="flex items-center">
+    <div class="flex items-center ">
       <div class="flex flex-col">
           <script src="./src/js/index.js" type="module" defer></script>
+
+          <rect x="0" class="fill-[]" height="49" width="660" y="3"><title>37.601273</title></rect>
+
+          <!-- <rect x="0" class="fill-mint" height="49" width="660" y="3"><title>37.601273</title></rect>
+
+          <rect x="0" class="fill-slate-blue" height="49" width="660" y="3"><title>37.601273</title></rect>
+          <rect x="0" class="fill-lavender" height="49" width="660" y="3"><title>37.601273</title></rect>
+
+          <rect x="0" class="fill-oxford-blue" height="49" width="660" y="3"><title>37.601273</title></rect>
+          <rect x="0" class="fill-maize" height="49" width="660" y="3"><title>37.601273</title></rect> -->
+
           <?php foreach ($continents as $continent): ?>
              <label>
                <input type="checkbox" name="filter" value="<?= htmlspecialchars($continent) ?>" checked />
