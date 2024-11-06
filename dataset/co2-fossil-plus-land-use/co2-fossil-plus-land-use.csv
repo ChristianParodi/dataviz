@@ -1,4 +1,4 @@
-Country,Code,Year,annual_CO2_emissions_land_use_change,annual_CO2_emissions_from_land_use_change,annual_CO2_emissions
+Country,Code,Year,Total,Land,Fossil
 Afghanistan,AFG,1949,6267968,6253312,14656
 Afghanistan,AFG,1950,7370429,7286157,84272
 Afghanistan,AFG,1951,8231908.5,8140308.5,91600
