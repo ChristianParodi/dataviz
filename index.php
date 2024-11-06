@@ -49,19 +49,19 @@
     <!-- Use selector with svg to style them (no inline styling) -->
     <!-- fonts: Roboto Slab for headings and Fira sans for paragraphs -->
     <!-- <button class="btn-primary">Prova</button> -->
-    <div class="flex items-center ">
+    <!-- <div class="flex items-center ">
       <div class="flex flex-col">
           <script src="./src/js/index.js" type="module" defer></script>
 
           <rect x="0" class="fill-[]" height="49" width="660" y="3"><title>37.601273</title></rect>
 
-          <!-- <rect x="0" class="fill-mint" height="49" width="660" y="3"><title>37.601273</title></rect>
+          <rect x="0" class="fill-mint" height="49" width="660" y="3"><title>37.601273</title></rect>
 
           <rect x="0" class="fill-slate-blue" height="49" width="660" y="3"><title>37.601273</title></rect>
           <rect x="0" class="fill-lavender" height="49" width="660" y="3"><title>37.601273</title></rect>
 
           <rect x="0" class="fill-oxford-blue" height="49" width="660" y="3"><title>37.601273</title></rect>
-          <rect x="0" class="fill-maize" height="49" width="660" y="3"><title>37.601273</title></rect> -->
+          <rect x="0" class="fill-maize" height="49" width="660" y="3"><title>37.601273</title></rect>
 
           <?php foreach ($continents as $continent): ?>
              <label>
@@ -70,6 +70,13 @@
              </label>
           <?php endforeach; ?>
         </div>
-    </div>
-  </body>
+        
+        <iframe width="100%" height="527" frameborder="0"
+        src="https://observablehq.com/embed/@d3/bar-chart-transitions/2?cells=viewof+order%2Cchart&banner=false"></iframe> -->
+      </div> -->
+      <iframe width="100%" height="589" frameborder="0"
+  src="https://observablehq.com/embed/44026229c1559fb2@1167?cells=viewof+filters%2Clegend%2Cchart1"></iframe>
+      <iframe width="100%" height="589" frameborder="0"
+      src="https://observablehq.com/embed/44026229c1559fb2?cells=viewof+filters%2Clegend%2Cchart2"></iframe>
+    </body>
 </html>

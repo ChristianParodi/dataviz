@@ -1,6 +1,6 @@
-const margin = { top: 40, bottom: 10, left: 120, right: 20 };
-const width = 800 - margin.left - margin.right;
-const height = 600 - margin.top - margin.bottom;
+const margin = { top: 40, bottom: 40, left: 120, right: 120 };
+const width = window.innerWidth - margin.left - margin.right;
+const height = window.innerHeight - margin.top - margin.bottom;
 
 // Creates sources <svg> element
 const svg = d3
@@ -16,13 +16,13 @@ let data;
 
 // Scales setup
 const xscale = d3.scaleLinear().range([0, width]);
-const yscale = d3.scaleBand().rangeRound([0, height - margin.bottom]).paddingInner(0.1);
+const yscale = d3.scaleBand().rangeRound([0, height]).paddingInner(0.1);
 
 // Axis setup
 const xaxis = d3.axisBottom().scale(xscale);
 const g_xaxis = g.append("g")
   .attr("class", "x axis")
-  .attr("transform", `translate(0, ${height - margin.bottom})`);
+  .attr("transform", `translate(0, ${height - margin.bottom - margin.top})`);
 const yaxis = d3.axisLeft().scale(yscale);
 const g_yaxis = g.append("g").attr("class", "y axis");
 
@@ -83,7 +83,7 @@ function update(new_data) {
   // both old and new elements
   rect
     .transition()
-    .attr("height", yscale.bandwidth())
+    .attr("height", yscale.bandwidth() * (height / window.innerHeight))
     .attr("width", (d) => xscale(d.CO2))
     .attr("y", (d) => yscale(d.Country));
 
