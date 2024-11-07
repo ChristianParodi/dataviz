@@ -14,7 +14,8 @@ module.exports = {
         'sky_magenta': '#b17ba0',
         'tangerine': '#f28e34',
         'steel_blue': '#4d78a4',
-        'naples_yellow': '#ecca52'
+        'naples_yellow': '#ecca52',
+        'mfn_green': '#007C58'
       },
     },
     plugins: [
