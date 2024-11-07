@@ -1,17 +1,20 @@
 @tailwind components;
 @tailwind base;
 
-@layer components{
-  .section{
+
+@layer components {
+  .section {
     @apply w-full h-screen snap-start flex items-center justify-center;
+    background-image: url('factory.jpg');
   }
+  
   .buttonstyle {
     @apply bg-white text-gray-900 font-semibold py-2 px-4 rounded-lg shadow hover:shadow-lg focus:shadow-lg active:shadow transition-shadow duration-150;
   }
+  
   .backgroundwindow {
-    @apply bg-gray-900 text-white rounded-lg shadow-lg p-10 text-center max-w-md mx-auto;;
+    @apply bg-mfn_green bg-opacity-80 text-white rounded-lg shadow-lg p-10 text-center flex flex-col items-center justify-center w-full h-full;
   }
-
 }
 
 .snap {
