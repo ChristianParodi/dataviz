@@ -73,10 +73,6 @@
         
         <iframe width="100%" height="527" frameborder="0"
         src="https://observablehq.com/embed/@d3/bar-chart-transitions/2?cells=viewof+order%2Cchart&banner=false"></iframe> -->
-      </div> -->
-      <iframe width="100%" height="589" frameborder="0"
-  src="https://observablehq.com/embed/44026229c1559fb2@1167?cells=viewof+filters%2Clegend%2Cchart1"></iframe>
-      <iframe width="100%" height="589" frameborder="0"
-      src="https://observablehq.com/embed/44026229c1559fb2?cells=viewof+filters%2Clegend%2Cchart2"></iframe>
+      <!-- </div> -->
     </body>
 </html>
