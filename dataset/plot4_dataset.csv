@@ -11,15 +11,15 @@ South Africa,Africa,404053988.7753055
 Egypt,Africa,258951675.24991798
 Brazil,South America,483477287.40398514
 Argentina,South America,192864412.94890139
-Others,Africa,753602796.876252
-Others,Asia,7545926002.088364
-Others,Europe,2779507448.2078094
-Others,North America,674329377.807645
-Others,Oceania,16585549.645186959
-Others,South America,409050553.4351666
-Total,Africa,1416608460.9014757
-Total,Asia,21772347148.50244
-Total,Europe,5097289422.459026
-Total,North America,6279576694.392881
-Total,Oceania,441076676.134695
-Total,South America,1085392253.788053
+Others (Africa),Africa,753602796.876252
+Others (Asia),Asia,7545926002.088364
+Others (Europe),Europe,2779507448.2078094
+Others (North America),North America,674329377.807645
+Others (Oceania),Oceania,16585549.645186959
+Others (South America),South America,409050553.4351666
+Total (Africa),Africa,1416608460.9014757
+Total (Asia),Asia,21772347148.50244
+Total (Europe),Europe,5097289422.459026
+Total (North America),North America,6279576694.392881
+Total (Oceania),Oceania,441076676.134695
+Total (South America),South America,1085392253.788053
