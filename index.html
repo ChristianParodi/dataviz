@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <title>Tristimuli</title>
     <meta charset="UTF-8" />
@@ -10,15 +11,15 @@
     <script src="./libs/flowbite.min.js"></script> -->
     <script src="./libs/d3.v7.min.js"></script>
     <script src="./libs/tailwind.js"></script>
-    
-    
+
+
     <link href="./dist/index.css" rel="stylesheet" />
     <!-- vertical carousel -->
     <link href="./dist/carousel.css" rel="stylesheet" />
   </head>
 
   <body>
-  <?php
+    <!-- <?php
   // Path to the CSV file
   $csvFile = './dataset/emissions_2022_countries.csv';
 
@@ -32,9 +33,25 @@
       fclose($handle);
   }
   $continents = array_unique($continents);
-  ?>
+  ?> -->
     <main class="max-h-screen overflow-y-scroll snap snap-y snap-mandatory">
-      <?php include("./src/html/carousel.html"); ?>
+      <!-- <?php include("./src/html/carousel.html"); ?> -->
+      <section class="section">
+        <div class="backgroundwindow">
+          <h1 class="text-3xl font-bold mb-4">CO2 emissions</h1>
+          <p class="text-white mb-6">
+            Compare per capita CO2 emissions
+          </p>
+          <div class="flex justify-center space-x-4">
+            <button class="buttonstyle" onclick="location.href='./src/html/assignment_1.html'">Get
+              started</button>
+            <a href="#" class="text-gray-400 hover:text-white flex items-center">
+              Learn more
+              <span class="ml-1">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
     <!-- Title -->
     <!-- Subtitle -->
@@ -73,6 +90,7 @@
         
         <iframe width="100%" height="527" frameborder="0"
         src="https://observablehq.com/embed/@d3/bar-chart-transitions/2?cells=viewof+order%2Cchart&banner=false"></iframe> -->
-      <!-- </div> -->
-    </body>
+    <!-- </div> -->
+  </body>
+
 </html>
