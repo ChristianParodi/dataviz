@@ -1,115 +1,166 @@
 // Assuming your data is an array of objects with the following structure:
-// { Country: 'Country Name', TotalCO2: x, LandCO2: y, FossilCO2: z, Continent: 'Continent Name' }
+// { Country: 'Country Name', TotalCO2: x, Land: y, Fossil: z, Continent: 'Continent Name' }
 let data;
 
 d3.csv("./../../../dataset/fossil_land_continents.csv")
   .then((csv) => {
     data = csv;
-    data = data.filter(d => +d.Year === 2022)
+    data = data.filter(d => +d.Year === 2022);  // Filter for the year 2022
+    console.log(data)
     createPlot(data);
   });
 
-// Step 1: Group data by Continent and calculate the necessary aggregations
-// const groupedData = d3.group(data, d => d.Continent);
-
 function createPlot(data) {
-  // Group data by Continent
-  const groupedData = d3.group(data, d => d.Continent);
+  // const data = [
+  //   { continent: "Asia", emission_type: "Land", country: "China", value: 30 },
+  //   { continent: "Asia", emission_type: "Land", country: "India", value: 20 },
+  //   { continent: "Asia", emission_type: "Land", country: "Indonesia", value: 15 },
+  //   { continent: "Asia", emission_type: "Fossil", country: "China", value: 40 },
+  //   { continent: "Asia", emission_type: "Fossil", country: "India", value: 25 },
+  //   { continent: "Asia", emission_type: "Fossil", country: "Indonesia", value: 10 },
 
-  // Define colors for each continent
-  const continentColors = {
-    'Africa': '#1f77b4',
-    'Asia': '#ff7f0e',
-    'Europe': '#2ca02c',
-    'North America': '#d62728',
-    'Oceania': '#9467bd',
-    'South America': '#8c564b'
-  };
+  //   { continent: "Europe", emission_type: "Land", country: "Germany", value: 18 },
+  //   { continent: "Europe", emission_type: "Land", country: "France", value: 10 },
+  //   { continent: "Europe", emission_type: "Land", country: "Italy", value: 8 },
+  //   { continent: "Europe", emission_type: "Fossil", country: "Germany", value: 22 },
+  //   { continent: "Europe", emission_type: "Fossil", country: "France", value: 12 },
+  //   { continent: "Europe", emission_type: "Fossil", country: "Italy", value: 10 },
 
-  const nodes = [];
-  const links = [];
-  const continentNodes = {};
-  const fossilNodes = {};
-  const landNodes = {};
+  //   { continent: "Africa", emission_type: "Land", country: "Nigeria", value: 14 },
+  //   { continent: "Africa", emission_type: "Land", country: "Egypt", value: 12 },
+  //   { continent: "Africa", emission_type: "Land", country: "South Africa", value: 9 },
+  //   { continent: "Africa", emission_type: "Fossil", country: "Nigeria", value: 17 },
+  //   { continent: "Africa", emission_type: "Fossil", country: "Egypt", value: 15 },
+  //   { continent: "Africa", emission_type: "Fossil", country: "South Africa", value: 10 },
+  // ];
 
-  // Iterate through each continent group
-  groupedData.forEach((countries, continent) => {
-    if (!continentColors[continent]) {
-      console.warn(`Missing color for continent: ${continent}`);
-      return;
-    }
+  // Impostazioni del grafico
+  // const width = 900;
+  // const height = 500;
+  // const color = d3.scaleOrdinal(d3.schemeCategory10);
+  // const svg = d3.create("svg")
+  //   .attr("viewBox", [0, 0, width, height])
+  //   .attr("width", width)
+  //   .attr("height", height);
 
-    // Add the continent node
-    const continentNode = { id: continent, name: continent, color: continentColors[continent] };
-    nodes.push(continentNode);
-    continentNodes[continent] = continentNode;
+  // // Funzione per creare il diagramma di Sankey
+  // const sankey = d3.sankey()
+  //   .nodeWidth(15)
+  //   .nodePadding(10)
+  //   .extent([[1, 1], [width - 1, height - 6]]);
 
-    // Aggregate CO2 data for the continent
-    const fossilEmissions = d3.sum(countries, d => +d.Fossil);
-    const landEmissions = d3.sum(countries, d => +d.Land);
+  // // Genera nodi e collegamenti per il diagramma di Sankey
+  // const nodesMap = new Map();
+  // data.forEach(d => {
+  //   nodesMap.set(d.continent, { id: d.continent });
+  //   nodesMap.set(d.emission_type, { id: d.emission_type });
+  //   nodesMap.set(d.country, { id: d.country });
+  // });
 
-    // Create fossil and land nodes
-    const fossilNode = { id: `${continent}-Fossil`, name: 'Fossil CO2', color: continentColors[continent] };
-    const landNode = { id: `${continent}-Land`, name: 'Land Change CO2', color: continentColors[continent] };
-    nodes.push(fossilNode, landNode);
-    fossilNodes[continent] = fossilNode;
-    landNodes[continent] = landNode;
+  // const nodes = Array.from(nodesMap.values());
+  // const links = data.flatMap(d => [
+  //   { source: d.continent, target: d.emission_type, value: d.value },
+  //   { source: d.emission_type, target: d.country, value: d.value }
+  // ]);
 
-    // Link continent to fossil and land nodes
-    links.push({ source: continentNode.id, target: fossilNode.id, value: fossilEmissions });
-    links.push({ source: continentNode.id, target: landNode.id, value: landEmissions });
+  // const sankeyData = sankey({
+  //   nodes: nodes,
+  //   links: links.map(link => ({
+  //     source: nodes.find(n => n.id === link.source),
+  //     target: nodes.find(n => n.id === link.target),
+  //     value: link.value
+  //   }))
+  // });
 
-    // Sort countries by TotalCO2 and get top 3 emitters
-    const sortedCountries = [...countries].sort((a, b) => b.Total - a.Total);
-    const top3 = sortedCountries.slice(0, 3);
+  // // Disegna i collegamenti (link) nel diagramma
+  // svg.append("g")
+  //   .attr("fill", "none")
+  //   .attr("stroke-opacity", 0.5)
+  //   .selectAll("path")
+  //   .data(sankeyData.links)
+  //   .join("path")
+  //   .attr("d", d3.sankeyLinkHorizontal())
+  //   .attr("stroke", d => color(d.source.id))
+  //   .attr("stroke-width", d => Math.max(1, d.width));
 
-    top3.forEach(row => {
-      const countryNode = {
-        id: `${continent}-${row.Country}`,
-        name: row.Country,
-        color: continentColors[continent]
-      };
-      nodes.push(countryNode);
+  // // Disegna i nodi (continenti, tipi di emissione, paesi)
+  // svg.append("g")
+  //   .selectAll("rect")
+  //   .data(sankeyData.nodes)
+  //   .join("rect")
+  //   .attr("x", d => d.x0)
+  //   .attr("y", d => d.y0)
+  //   .attr("height", d => d.y1 - d.y0)
+  //   .attr("width", d => d.x1 - d.x0)
+  //   .attr("fill", d => color(d.id))
+  //   .attr("stroke", "#000");
 
-      // Link fossil and land nodes to top emitters
-      links.push({ source: fossilNode.id, target: countryNode.id, value: +row.Fossil });
-      links.push({ source: landNode.id, target: countryNode.id, value: +row.Land });
-    });
+  // // Aggiungi etichette ai nodi
+  // svg.append("g")
+  //   .style("font", "10px sans-serif")
+  //   .selectAll("text")
+  //   .data(sankeyData.nodes)
+  //   .join("text")
+  //   .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+  //   .attr("y", d => (d.y1 + d.y0) / 2)
+  //   .attr("dy", "0.35em")
+  //   .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+  //   .text(d => d.id);
 
-    // Add "Other" node for the rest of the countries
-    const otherNode = { id: `${continent}-Other`, name: 'Other', color: continentColors[continent] };
-    nodes.push(otherNode);
+  // document.body.append(svg.node());
+  // Impostazioni del grafico
+  const width = 900;
+  const height = 500;
+  const color = d3.scaleOrdinal(d3.schemeCategory10);
+  const svg = d3.create("svg")
+    .attr("viewBox", [0, 0, width, height])
+    .attr("width", width)
+    .attr("height", height);
 
-    // Calculate and link "Other" emissions for fossil and land
-    const otherFossilEmissions = d3.sum(sortedCountries.slice(3), d => +d.Fossil);
-    const otherLandEmissions = d3.sum(sortedCountries.slice(3), d => +d.Land);
-    links.push({ source: fossilNode.id, target: otherNode.id, value: otherFossilEmissions });
-    links.push({ source: landNode.id, target: otherNode.id, value: otherLandEmissions });
-  });
-
-  // Step 3: Render the Sankey Diagram
-  const width = 1000, height = 600;
-  const svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
-  console.log("nodes: ", nodes)
+  // Funzione per creare il diagramma di Sankey
   const sankey = d3.sankey()
     .nodeWidth(15)
     .nodePadding(10)
-    .extent([[1, 1], [width - 1, height - 5]]);
-  const sankeyData =
-    sankey({ nodes: nodes.map(d => Object.assign({}, d)), links: links.map(d => Object.assign({}, d)) });
+    .extent([[1, 1], [width - 1, height - 6]]);
 
-  // Draw links
+  // Genera nodi e collegamenti per il diagramma di Sankey
+  const nodesMap = new Map();
+  data.forEach(d => {
+    nodesMap.set(d.Continent, { id: d.Continent });
+    nodesMap.set("Fossil", { id: "Fossil" });
+    nodesMap.set("Land", { id: "Land" });
+    nodesMap.set(d.Country, { id: d.Country });
+  });
+
+  const nodes = Array.from(nodesMap.values());
+  const links = data.flatMap(d => [
+    { source: d.Continent, target: "Fossil", value: d.Fossil },
+    { source: d.Continent, target: "Land", value: d.Land },
+    { source: "Fossil", target: d.Country, value: d.Fossil },
+    { source: "Land", target: d.Country, value: d.Land }
+  ]);
+
+  const sankeyData = sankey({
+    nodes: nodes,
+    links: links.map(link => ({
+      source: nodes.find(n => n.id === link.source),
+      target: nodes.find(n => n.id === link.target),
+      value: link.value
+    }))
+  });
+
+  // Disegna i collegamenti (link) nel diagramma
   svg.append("g")
     .attr("fill", "none")
+    .attr("stroke-opacity", 0.5)
     .selectAll("path")
     .data(sankeyData.links)
     .join("path")
     .attr("d", d3.sankeyLinkHorizontal())
-    .attr("stroke", d => d.source.color)
-    .attr("stroke-width", d => Math.max(1, d.width))
-    .attr("opacity", 0.5);
+    .attr("stroke", d => color(d.source.id))
+    .attr("stroke-width", d => Math.max(1, d.width));
 
-  // Draw nodes
+  // Disegna i nodi (continenti, tipi di emissione, paesi)
   svg.append("g")
     .selectAll("rect")
     .data(sankeyData.nodes)
@@ -118,10 +169,10 @@ function createPlot(data) {
     .attr("y", d => d.y0)
     .attr("height", d => d.y1 - d.y0)
     .attr("width", d => d.x1 - d.x0)
-    .attr("fill", d => d.color)
+    .attr("fill", d => color(d.id))
     .attr("stroke", "#000");
 
-  // Add labels
+  // Aggiungi etichette ai nodi
   svg.append("g")
     .style("font", "10px sans-serif")
     .selectAll("text")
@@ -131,5 +182,8 @@ function createPlot(data) {
     .attr("y", d => (d.y1 + d.y0) / 2)
     .attr("dy", "0.35em")
     .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
-    .text(d => d.name);
+    .text(d => d.id);
+
+  // Append the svg to the document body
+  document.body.append(svg.node());
 }
