@@ -5,11 +5,11 @@
 @layer components {
   .section {
     @apply w-full h-screen snap-start flex items-center justify-center;
-    background-image: url('factory.jpg');
+    background-image: url('https://github.com/ChristianParodi/tristimuli/blob/6d2436fb4440de19d72ae4a43e89d4c6d01b39ff/factory.jpg');
   }
   
   .buttonstyle {
-    @apply bg-white text-gray-900 font-semibold py-2 px-4 rounded-lg shadow hover:shadow-lg focus:shadow-lg active:shadow transition-shadow duration-150;
+    @apply mt-8 px-8 py-3 bg-white text-green-700 font-semibold rounded-full shadow-lg hover:bg-gray-200 transition;
   }
   
   .backgroundwindow {
