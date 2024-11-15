@@ -30,7 +30,8 @@ function createPlot(data) {
   const sankey = d3.sankey()
     .nodeWidth(15)
     .nodePadding(10)
-    .extent([[1, 1], [width - 1, height - 6]]);
+    .extent([[1, 1], [width - 1, height - 6]])
+    .nodeSort(null);
 
   // Group data by continent and sort
   const groupedData = d3.groups(data, d => d.Continent).sort((a, b) => d3.sum(b[1].map(e => e.Total)) - d3.sum(a[1].map(e => e.Total)));
