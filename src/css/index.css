@@ -3,8 +3,21 @@
 @tailwind utilities;
 
 @layer components {
-  .btn-primary {
-    @apply pointer-events-auto rounded-md bg-indigo-600 px-3 py-2 text-[0.8125rem] font-semibold leading-5 text-white hover:bg-indigo-500;
+  .btn_index {
+    @apply mt-8 px-10 py-4 bg-green-600 text-white font-semibold rounded-full shadow-xl hover:bg-green-500 transition duration-300;
+  }
+  .hsection {
+    @apply text-4xl font-bold text-gray-800 text-center mb-12;
+  }
+  .window {
+    @apply bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-2xl transition duration-300;
+  }
+  .hwindow {
+    @apply text-2xl font-semibold text-gray-800 mb-4;
+  }
+
+  .pwindow {
+    @apply text-gray-600 mb-6;
   }
 }
 
