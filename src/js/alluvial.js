@@ -11,7 +11,7 @@ d3.csv("./../../../dataset/fossil_land_continents.csv")
 
 function createPlot(data) {
   const width = 900;
-  const height = 500;
+  const height = 800;
   const svg = d3.create("svg")
     .attr("viewBox", [0, 0, width, height])
     .attr("width", width)

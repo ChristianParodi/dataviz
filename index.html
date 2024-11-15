@@ -1,104 +1,205 @@
-<!DOCTYPE html>
-<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CO2 Emissions</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="./../../libs/d3-sankey.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Sfondo per la Hero Section */
+    .hero-bg {
+      background-image: url('./../../factory.jpg');
+      /* Cambia con la tua immagine */
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
 
-  <head>
-    <title>Tristimuli</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Includes -->
-    <!-- <link href="./libs/flowbite.min.css" rel="stylesheet" type="text/css" />
-    <script src="./libs/flowbite.min.js"></script> -->
-    <script src="./libs/d3.v7.min.js"></script>
-    <script src="./libs/tailwind.js"></script>
+<body class="bg-gray-100 font-sans leading-relaxed tracking-normal">
 
+  <!-- Hero Section -->
+  <header class="relative hero-bg h-screen flex items-center justify-center">
+    <!-- Overlay con sfumatura verde -->
+    <div class="absolute inset-0 bg-gradient-to-r from-green-900 via-green-700 to-green-500 opacity-80"></div>
 
-    <link href="./dist/index.css" rel="stylesheet" />
-    <!-- vertical carousel -->
-    <link href="./dist/carousel.css" rel="stylesheet" />
-  </head>
+    <!-- Contenuto della Hero Section -->
+    <div class="relative text-center z-10 px-4 sm:px-6 lg:px-8 text-white">
+      <h1 class="text-5xl font-bold sm:text-7xl mb-6">CO2 Emissions</h1>
+      <p class="text-2xl max-w-xl mx-auto mb-8">Le emissioni sono il male del mondo</p>
+      <a href="#main_1">
+        <button
+          class="mt-8 px-10 py-4 bg-green-600 text-white font-semibold rounded-full shadow-xl hover:bg-green-500 transition duration-300">
+          Start
+        </button>
+      </a>
+    </div>
+  </header>
 
-  <body>
-    <!-- <?php
-  // Path to the CSV file
-  $csvFile = './dataset/emissions_2022_countries.csv';
+  <!-- Main Content -->
+  <main id="main_1" class=" bg-white">
+    <!-- Sezione 1 -->
+    <section id="campana1" class="bg-blue-50 py-16 ">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">Assignment 1</h2>
+        <p class="text-center text-gray-600 mb-16">Esplora i dati sulle emissioni di CO2 per comprendere meglio il
+          nostro impatto ambientale.</p>
 
-  // Read the CSV file
-  $continents = [];
-  if (($handle = fopen($csvFile, 'r')) !== FALSE) {
-      fgetcsv($handle, 1000, ',');
-      while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
-          $continents[] = $data[3]; // Assuming the country name is in the first column
-      }
-      fclose($handle);
-  }
-  $continents = array_unique($continents);
-  ?> -->
-    <main class="max-h-screen overflow-y-scroll snap snap-y snap-mandatory">
-      <!-- <?php include("./src/html/carousel.html"); ?> -->
-      <section class="section">
-        <div class="backgroundwindow">
-          <h1 class="text-3xl font-bold mb-4">How much CO2 do countries emitt?</h1>
-          <p class="text-white mb-6">
-            Compare per capita CO2 emissions
-          </p>
-          <div class="flex justify-center space-x-4">
-            <button class="buttonstyle" onclick="location.href='./src/html/assignment_1.html'">Get
-              started</button>
+        <!-- Cards Section -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-2xl transition duration-300">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Data at a glance</h3>
+            <p class="text-gray-600 mb-6">Confronta le emissioni di CO2 pro capite</p>
+            <a href src="https://github.com/ChristianParodi/tristimuli/blob/dev/src/html/plot1.html">
+              <button class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600">View more</button>
+            </a>
+          </div>
+          <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-2xl transition duration-300">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Country comparison</h3>
+            <p class="text-gray-600 mb-6">Confronta le emissioni tra paesi</p>
+            <button class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600">View more</button>
+          </div>
+          <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-2xl transition duration-300">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Emissions type</h3>
+            <p class="text-gray-600 mb-6">Confronta le emissioni per tipo (fossili/uso del suolo)</p>
+            <button class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600">View more</button>
           </div>
         </div>
-      </section>
-      <section class="section">
-        <div class="backgroundwindow">
-          <h1 class="text-3xl font-bold mb-4">Alluvial</h1>
-          <p class="text-white mb-6">
-            Compare per capita CO2 emissions
-          </p>
-          <div class="flex justify-center space-x-4">
-            <button class="buttonstyle" onclick="location.href='./src/html/alluvial.html'">Get
-              started</button>
+      </div>
+    </section>
+
+    <!-- Sezione 2 -->
+    <section id="campana2" class="bg-gray-100 py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">Assignment 2</h2>
+
+        <!-- Cards Section -->
+        <div class="flex flex-col sm:flex-row justify-center gap-12">
+          <div
+            class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-2xl transition duration-300 w-full sm:w-1/2 lg:w-1/3">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Alluvial Diagram</h3>
+            <p class="text-gray-600 mb-6">Visualizza flussi e correnti di emissioni</p>
+            <button class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600">View more</button>
           </div>
         </div>
-      </section>
-    </main>
-    <!-- Title -->
-    <!-- Subtitle -->
-    <!-- 
-      Section1: description of the project
-      data at hand etc.
-    -->
-    <!-- 
-      following sections (one for each secondary page)
-    -->
-    <!-- Check w3c validator -->
-    <!-- Use selector with svg to style them (no inline styling) -->
-    <!-- fonts: Roboto Slab for headings and Fira sans for paragraphs -->
-    <!-- <button class="btn-primary">Prova</button> -->
-    <!-- <div class="flex items-center ">
-      <div class="flex flex-col">
-          <script src="./src/js/index.js" type="module" defer></script>
+      </div>
+    </section>
+  </main>
 
-          <rect x="0" class="fill-[]" height="49" width="660" y="3"><title>37.601273</title></rect>
+  <script>
+    // Sezione JavaScript adattata dal notebook Observable
 
-          <rect x="0" class="fill-mint" height="49" width="660" y="3"><title>37.601273</title></rect>
+    // Dati per le emissioni dei continenti
+    const data = [
+      { continent: "Asia", emission_type: "Land", country: "China", value: 30 },
+      { continent: "Asia", emission_type: "Land", country: "India", value: 20 },
+      { continent: "Asia", emission_type: "Land", country: "Indonesia", value: 15 },
+      { continent: "Asia", emission_type: "Fossil", country: "China", value: 40 },
+      { continent: "Asia", emission_type: "Fossil", country: "India", value: 25 },
+      { continent: "Asia", emission_type: "Fossil", country: "Indonesia", value: 10 },
 
-          <rect x="0" class="fill-slate-blue" height="49" width="660" y="3"><title>37.601273</title></rect>
-          <rect x="0" class="fill-lavender" height="49" width="660" y="3"><title>37.601273</title></rect>
+      { continent: "Europe", emission_type: "Land", country: "Germany", value: 18 },
+      { continent: "Europe", emission_type: "Land", country: "France", value: 10 },
+      { continent: "Europe", emission_type: "Land", country: "Italy", value: 8 },
+      { continent: "Europe", emission_type: "Fossil", country: "Germany", value: 22 },
+      { continent: "Europe", emission_type: "Fossil", country: "France", value: 12 },
+      { continent: "Europe", emission_type: "Fossil", country: "Italy", value: 10 },
 
-          <rect x="0" class="fill-oxford-blue" height="49" width="660" y="3"><title>37.601273</title></rect>
-          <rect x="0" class="fill-maize" height="49" width="660" y="3"><title>37.601273</title></rect>
+      { continent: "Africa", emission_type: "Land", country: "Nigeria", value: 14 },
+      { continent: "Africa", emission_type: "Land", country: "Egypt", value: 12 },
+      { continent: "Africa", emission_type: "Land", country: "South Africa", value: 9 },
+      { continent: "Africa", emission_type: "Fossil", country: "Nigeria", value: 17 },
+      { continent: "Africa", emission_type: "Fossil", country: "Egypt", value: 15 },
+      { continent: "Africa", emission_type: "Fossil", country: "South Africa", value: 10 },
+    ];
 
-          <?php foreach ($continents as $continent): ?>
-             <label>
-               <input type="checkbox" name="filter" value="<?= htmlspecialchars($continent) ?>" checked />
-               <?= htmlspecialchars($continent) ?>
-             </label>
-          <?php endforeach; ?>
+    // Impostazioni del grafico
+    const width = 900;
+    const height = 500;
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+    const svg = d3.create("svg")
+      .attr("viewBox", [0, 0, width, height])
+      .attr("width", width)
+      .attr("height", height);
+
+    // Funzione per creare il diagramma di Sankey
+    const sankey = d3.sankey()
+      .nodeWidth(15)
+      .nodePadding(10)
+      .extent([[1, 1], [width - 1, height - 6]]);
+
+    // Genera nodi e collegamenti per il diagramma di Sankey
+    const nodesMap = new Map();
+    data.forEach(d => {
+      nodesMap.set(d.continent, { id: d.continent });
+      nodesMap.set(d.emission_type, { id: d.emission_type });
+      nodesMap.set(d.country, { id: d.country });
+    });
+
+    const nodes = Array.from(nodesMap.values());
+    const links = data.flatMap(d => [
+      { source: d.continent, target: d.emission_type, value: d.value },
+      { source: d.emission_type, target: d.country, value: d.value }
+    ]);
+
+    const sankeyData = sankey({
+      nodes: nodes,
+      links: links.map(link => ({
+        source: nodes.find(n => n.id === link.source),
+        target: nodes.find(n => n.id === link.target),
+        value: link.value
+      }))
+    });
+
+    // Disegna i collegamenti (link) nel diagramma
+    svg.append("g")
+      .attr("fill", "none")
+      .attr("stroke-opacity", 0.5)
+      .selectAll("path")
+      .data(sankeyData.links)
+      .join("path")
+      .attr("d", d3.sankeyLinkHorizontal())
+      .attr("stroke", d => color(d.source.id))
+      .attr("stroke-width", d => Math.max(1, d.width));
+
+    // Disegna i nodi (continenti, tipi di emissione, paesi)
+    svg.append("g")
+      .selectAll("rect")
+      .data(sankeyData.nodes)
+      .join("rect")
+      .attr("x", d => d.x0)
+      .attr("y", d => d.y0)
+      .attr("height", d => d.y1 - d.y0)
+      .attr("width", d => d.x1 - d.x0)
+      .attr("fill", d => color(d.id))
+      .attr("stroke", "#000");
+
+    // Aggiungi etichette ai nodi
+    svg.append("g")
+      .style("font", "10px sans-serif")
+      .selectAll("text")
+      .data(sankeyData.nodes)
+      .join("text")
+      .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+      .attr("y", d => (d.y1 + d.y0) / 2)
+      .attr("dy", "0.35em")
+      .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+      .text(d => d.id);
+
+    document.body.append(svg.node());
+  </script>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col sm:flex-row justify-between items-center">
+        <p class="text-center sm:text-left mb-4 sm:mb-0">© 2024 Data Visualization - Bazzi, Parodi, Valentini</p>
+        <div class="flex space-x-6">
+          <a href="#" class="hover:text-gray-400">About Us</a>
+          <a href="#" class="hover:text-gray-400">Contact</a>
+          <a href="#" class="hover:text-gray-400">Privacy Policy</a>
         </div>
-        
-        <iframe width="100%" height="527" frameborder="0"
-        src="https://observablehq.com/embed/@d3/bar-chart-transitions/2?cells=viewof+order%2Cchart&banner=false"></iframe> -->
-    <!-- </div> -->
-  </body>
-
-</html>
+      </div>
+    </div>
+  </footer>
+</body>
