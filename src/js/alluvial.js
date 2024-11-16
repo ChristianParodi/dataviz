@@ -153,7 +153,6 @@ function createPlot(data) {
 
       // Reset nodes opacity
       svg.selectAll("rect").attr("fill-opacity", 1);
-      d3.select(this).attr("stroke-opacity", 0.8);
 
       // Hide tooltip
       tooltip.transition().duration(500).style("opacity", 0);
