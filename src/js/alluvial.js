@@ -1,6 +1,7 @@
 // Assuming your data is an array of objects with the following structure:
 // { Country: 'Country Name', TotalCO2: x, Land: y, Fossil: z, Continent: 'Continent Name' }
 let data;
+const nTop = 2;  // Number of top emitters to display
 
 d3.csv("./../../../dataset/fossil_land_continents.csv")
   .then((csv) => {
@@ -46,8 +47,8 @@ function createPlot(data) {
     countries.sort((a, b) => b.Total - a.Total);
 
     // Top 3 emitters and Other group
-    const topEmitters = countries.slice(0, 3);
-    const otherEmitters = countries.slice(3);
+    const topEmitters = countries.slice(0, nTop);
+    const otherEmitters = countries.slice(nTop);
 
     // Create nodes for the continent and countries with continent color
     nodesMap.set(continent, { id: continent, color: continentColorMap.get(continent) });
@@ -57,7 +58,7 @@ function createPlot(data) {
     });
 
     if (otherEmitters.length > 0) {
-      nodesMap.set(`Other (${continent})`, { id: `Other (${continent})`, color: continentColorMap.get(continent) });
+      nodesMap.set(`Others (${continent})`, { id: `Others (${continent})`, color: continentColorMap.get(continent) });
     }
   });
 
@@ -68,8 +69,8 @@ function createPlot(data) {
   groupedData.forEach(([continent, countries]) => {
     countries.sort((a, b) => b.Total - a.Total);
 
-    const topEmitters = countries.slice(0, 3);
-    const otherEmitters = countries.slice(3);
+    const topEmitters = countries.slice(0, nTop);
+    const otherEmitters = countries.slice(nTop);
 
     const fossilTotal = d3.sum(countries, d => d.Fossil);
     const landTotal = d3.sum(countries, d => d.Land);
@@ -88,8 +89,8 @@ function createPlot(data) {
       const otherFossilTotal = d3.sum(otherEmitters, d => d.Fossil);
       const otherLandTotal = d3.sum(otherEmitters, d => d.Land);
 
-      links.push({ source: "Fossil", target: `Other (${continent})`, value: otherFossilTotal });
-      links.push({ source: "Land", target: `Other (${continent})`, value: otherLandTotal });
+      links.push({ source: "Fossil", target: `Others (${continent})`, value: otherFossilTotal });
+      links.push({ source: "Land", target: `Others (${continent})`, value: otherLandTotal });
     }
   });
 
@@ -132,6 +133,8 @@ function createPlot(data) {
       d3.selectAll("path").filter(link => link !== d)
         .attr("stroke-opacity", 0.1);
 
+      svg.selectAll("rect").attr("fill-opacity", node => { d.target === node || d.source === node ? 1 : 0.1 });
+
       // if we check continent -> fossil/land, display "continent (fossil/land)",
       // if we check from fossil -> country display "country (fossil/land)"
       const tooltip_text =
@@ -146,8 +149,11 @@ function createPlot(data) {
     })
     .on("mouseout", function () {
       // Reset link opacity
-      d3.select(this).attr("stroke-opacity", 0.5);
       d3.selectAll("path").attr("stroke-opacity", 0.5);
+
+      // Reset nodes opacity
+      svg.selectAll("rect").attr("fill-opacity", 1);
+      d3.select(this).attr("stroke-opacity", 0.8);
 
       // Hide tooltip
       tooltip.transition().duration(500).style("opacity", 0);
@@ -156,6 +162,7 @@ function createPlot(data) {
   // Draw nodes
   svg.append("g")
     .selectAll("rect")
+    .attr("stroke-opacity", 0.8)
     .data(sankeyData.nodes)
     .join("rect")
     .attr("x", d => d.x0)
@@ -166,11 +173,22 @@ function createPlot(data) {
     .attr("stroke", "#000")
     .on("mouseover", function (event, d) {
       // Highlight hovered node by increasing opacity
-      d3.select(this).attr("stroke-opacity", 0.8);
+      d3.select(this).attr("stroke-opacity", 1);
 
       // Gray out all other nodes and links
       svg.selectAll("rect").attr("fill-opacity", node => (node === d ? 1 : 0.1));
-      svg.selectAll("path").attr("stroke-opacity", link => (link.source === d || link.target === d ? 0.5 : 0.1));
+
+      // Highlight the nodes that are the source of links targeting the hovered node
+      svg.selectAll("path").attr("stroke-opacity", link => {
+        if (link.target === d || link.source === d) {
+          if (link.target === d)
+            svg.selectAll("rect").filter(node => node.id === link.source.id).attr("fill-opacity", 1);
+          else
+            svg.selectAll("rect").filter(node => node.id === link.target.id).attr("fill-opacity", 1);
+          return 0.5;
+        }
+        return 0.1;
+      });
 
       // Determine tooltip content based on the type of node
       let tooltip_text;
@@ -194,7 +212,7 @@ function createPlot(data) {
       svg.selectAll("path").attr("stroke-opacity", 0.5);
 
       // Reset hovered node opacity
-      d3.select(this).attr("stroke-opacity", 0.5);
+      d3.select(this).attr("stroke-opacity", 0.8);
 
       // Hide tooltip
       tooltip.transition().duration(500).style("opacity", 0);
