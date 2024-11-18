@@ -11,11 +11,14 @@ d3.csv("./../../../dataset/fossil_land_continents.csv")
   });
 
 function createPlot(data) {
-  const width = 900;
+  // const container = d3.select("main");
+  // const width = container.node().getBoundingClientRect().width;
+  const width = window.innerWidth;
   const height = 800;
-  const svg = d3.create("svg")
-    .attr("viewBox", [0, 0, width, height])
-    .attr("width", width)
+  const svg = d3.select("#sankey-container")
+    .append("svg")
+    .attr("viewBox", [0, 0, width + 20, height + 20])
+    .attr("width", "100%")
     .attr("height", height);
 
   // Set color for continents
@@ -219,7 +222,7 @@ function createPlot(data) {
 
   // Add labels to nodes
   svg.append("g")
-    .style("font", "10px sans-serif")
+    .style("font", "20px sans-serif")
     .selectAll("text")
     .data(sankeyData.nodes)
     .join("text")
@@ -231,4 +234,5 @@ function createPlot(data) {
 
   // Append the svg to the document body
   document.body.append(svg.node());
+
 }

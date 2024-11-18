@@ -4,12 +4,32 @@
   <head>
     <script src="./../../libs/d3-sankey.min.js"></script>
     <script src="./../../libs/d3.v7.min.js"></script>
+    <link href="./../../libs/typography.min.css" rel="stylesheet" />
+    <link href="./../../dist/global.css" rel="stylesheet" />
+    <link href="./../../dist/alluvial.css" rel="stylesheet" />
+    <!-- <script src="
+    https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.15/src/index.min.js
+    "></script> -->
   </head>
 
-  <body style="display: flex; align-items: center; justify-content: center;">
-    <script>
-
-    </script>
+  <body class="flex flex-col items-center">
+    <main class="max-w-full sm:max-w-[70%] flex flex-col items-center gap-4 p-10">
+      <div class="flex gap-4 self-start justify-center items-center">
+        <a href="./../../index.html">
+          <button class="buttonstyle">←</button>
+        </a>
+        <span>Home</span>
+      </div>
+      <h1 class="text-3xl">Distribution of CO2 Emissions by Region and Country</h1>
+      <p>
+        An important factor to consider is how much each region influences
+        the global emissions and, respectively, which country of a specific region
+        is the main responsable. In the following visualization, it's trivial
+        to spot the world top emitter (i.e. China), as it outrace all the other
+        countries by at least 5 billion of tonnes of CO2 emissions
+      </p>
+      <div id="sankey-container" class="w-full"></div>
+    </main>
     <script src="./../js/alluvial.js"></script>
   </body>
 

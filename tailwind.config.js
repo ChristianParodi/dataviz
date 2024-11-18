@@ -2,9 +2,7 @@
 module.exports = {
   content: [
     "index.html",
-    "./dist/*.{html,js}",
-    "./src/**/*.{html,js}",
-    "./libs/*.js"
+    "./src/**/*.html"
   ],
   theme: {
     extend: {
@@ -19,7 +17,6 @@ module.exports = {
       },
     },
     plugins: [
-      require('@tailwindcss/forms'),
       require('@tailwindcss/typography'),
     ],
   }

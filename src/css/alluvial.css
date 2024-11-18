@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+
+svg {
+  /* max-width: 80%;
+  min-width: 600px; */
+  margin-bottom: 100px;
+}
