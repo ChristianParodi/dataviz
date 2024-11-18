@@ -60,13 +60,15 @@
           <div class="window">
             <h3 class="hwindow">Country comparison</h3>
             <p class="pwindow">Confronta le emissioni tra paesi</p>
-            <button class="btn-primary">View more</button>
+            <a href src="./src/html/plot2.html">
+              <button class="btn-primary">View more</button>
+            </a>
           </div>
 
           <div class="window">
             <h3 class="hwindow">Emissions type</h3>
             <p class="pwindow">Confronta le emissioni per tipo (fossili/uso del suolo)</p>
-            <a href src="./src/html/plot2.html">
+            <a href src="./src/html/plot3.html">
               <button class="btn-primary">View more</button>
             </a>
           </div>
@@ -93,109 +95,6 @@
       </div>
     </section>
   </main>
-
-  <!-- <script>
-    // Sezione JavaScript adattata dal notebook Observable
-
-    // Dati per le emissioni dei continenti
-    const data = [
-      { continent: "Asia", emission_type: "Land", country: "China", value: 30 },
-      { continent: "Asia", emission_type: "Land", country: "India", value: 20 },
-      { continent: "Asia", emission_type: "Land", country: "Indonesia", value: 15 },
-      { continent: "Asia", emission_type: "Fossil", country: "China", value: 40 },
-      { continent: "Asia", emission_type: "Fossil", country: "India", value: 25 },
-      { continent: "Asia", emission_type: "Fossil", country: "Indonesia", value: 10 },
-
-      { continent: "Europe", emission_type: "Land", country: "Germany", value: 18 },
-      { continent: "Europe", emission_type: "Land", country: "France", value: 10 },
-      { continent: "Europe", emission_type: "Land", country: "Italy", value: 8 },
-      { continent: "Europe", emission_type: "Fossil", country: "Germany", value: 22 },
-      { continent: "Europe", emission_type: "Fossil", country: "France", value: 12 },
-      { continent: "Europe", emission_type: "Fossil", country: "Italy", value: 10 },
-
-      { continent: "Africa", emission_type: "Land", country: "Nigeria", value: 14 },
-      { continent: "Africa", emission_type: "Land", country: "Egypt", value: 12 },
-      { continent: "Africa", emission_type: "Land", country: "South Africa", value: 9 },
-      { continent: "Africa", emission_type: "Fossil", country: "Nigeria", value: 17 },
-      { continent: "Africa", emission_type: "Fossil", country: "Egypt", value: 15 },
-      { continent: "Africa", emission_type: "Fossil", country: "South Africa", value: 10 },
-    ];
-
-    // Impostazioni del grafico
-    const width = 900;
-    const height = 500;
-    const color = d3.scaleOrdinal(d3.schemeCategory10);
-    const svg = d3.create("svg")
-      .attr("viewBox", [0, 0, width, height])
-      .attr("width", width)
-      .attr("height", height);
-
-    // Funzione per creare il diagramma di Sankey
-    const sankey = d3.sankey()
-      .nodeWidth(15)
-      .nodePadding(10)
-      .extent([[1, 1], [width - 1, height - 6]]);
-
-    // Genera nodi e collegamenti per il diagramma di Sankey
-    const nodesMap = new Map();
-    data.forEach(d => {
-      nodesMap.set(d.continent, { id: d.continent });
-      nodesMap.set(d.emission_type, { id: d.emission_type });
-      nodesMap.set(d.country, { id: d.country });
-    });
-
-    const nodes = Array.from(nodesMap.values());
-    const links = data.flatMap(d => [
-      { source: d.continent, target: d.emission_type, value: d.value },
-      { source: d.emission_type, target: d.country, value: d.value }
-    ]);
-
-    const sankeyData = sankey({
-      nodes: nodes,
-      links: links.map(link => ({
-        source: nodes.find(n => n.id === link.source),
-        target: nodes.find(n => n.id === link.target),
-        value: link.value
-      }))
-    });
-
-    // Disegna i collegamenti (link) nel diagramma
-    svg.append("g")
-      .attr("fill", "none")
-      .attr("stroke-opacity", 0.5)
-      .selectAll("path")
-      .data(sankeyData.links)
-      .join("path")
-      .attr("d", d3.sankeyLinkHorizontal())
-      .attr("stroke", d => color(d.source.id))
-      .attr("stroke-width", d => Math.max(1, d.width));
-
-    // Disegna i nodi (continenti, tipi di emissione, paesi)
-    svg.append("g")
-      .selectAll("rect")
-      .data(sankeyData.nodes)
-      .join("rect")
-      .attr("x", d => d.x0)
-      .attr("y", d => d.y0)
-      .attr("height", d => d.y1 - d.y0)
-      .attr("width", d => d.x1 - d.x0)
-      .attr("fill", d => color(d.id))
-      .attr("stroke", "#000");
-
-    // Aggiungi etichette ai nodi
-    svg.append("g")
-      .style("font", "10px sans-serif")
-      .selectAll("text")
-      .data(sankeyData.nodes)
-      .join("text")
-      .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
-      .attr("y", d => (d.y1 + d.y0) / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
-      .text(d => d.id);
-
-    document.body.append(svg.node());
-  </script> -->
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-white py-8">
