@@ -192,7 +192,6 @@ function createPlot(data) {
           currentNode = d3.selectAll("rect").filter(node => node.id === lookingForId);
           currentNode.attr("fill-opacity", 1);
 
-          console.log(currentNode)
           if (currentNode.id === "Fossil" || currentNode.id === "Land") {
           }
           return 0.8;
