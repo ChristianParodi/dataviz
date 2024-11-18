@@ -3,7 +3,7 @@
 let data;
 const nTop = 2;  // Number of top emitters to display
 
-d3.csv("./../../../dataset/fossil_land_continents.csv")
+d3.csv("./dataset/fossil_land_continents.csv")
   .then((csv) => {
     data = csv;
     data = data.filter(d => +d.Year === 2022);  // Filter for the year 2022
