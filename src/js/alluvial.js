@@ -181,17 +181,26 @@ function createPlot(data) {
       // Gray out all other nodes and links
       svg.selectAll("rect").attr("fill-opacity", node => (node === d ? 1 : 0.1));
 
-      // Highlight the nodes that are the source of links targeting the hovered node
+      // Highlight the nodes that are the source/target of links whose target/source is the hovered node
       svg.selectAll("path").attr("stroke-opacity", link => {
         if (link.target === d || link.source === d) {
           if (link.target === d)
-            svg.selectAll("rect").filter(node => node.id === link.source.id).attr("fill-opacity", 1);
+            lookingForId = link.source.id
           else
-            svg.selectAll("rect").filter(node => node.id === link.target.id).attr("fill-opacity", 1);
+            lookingForId = link.target.id;
+
+          currentNode = d3.selectAll("rect").filter(node => node.id === lookingForId);
+          currentNode.attr("fill-opacity", 1);
+
+          console.log(currentNode)
+          if (currentNode.id === "Fossil" || currentNode.id === "Land") {
+          }
           return 0.8;
         }
         return 0.1;
       });
+
+
 
       // Determine tooltip content based on the type of node
       let tooltip_text;

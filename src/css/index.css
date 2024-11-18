@@ -7,7 +7,7 @@
     @apply mt-8 px-10 py-4 bg-green-600 text-white font-semibold rounded-full shadow-xl hover:bg-green-500 transition duration-500;
   }
   .hsection {
-    @apply text-4xl font-bold text-gray-800 text-center mb-12;
+    @apply text-4xl font-bold text-gray-800 text-center mb-10;
   }
   .window {
     @apply bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-2xl transition duration-300;
