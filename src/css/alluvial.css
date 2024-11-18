@@ -2,7 +2,8 @@
 @tailwind components;
 
 svg {
-  /* max-width: 80%;
-  min-width: 600px; */
-  margin-bottom: 100px;
+  max-width: 900px;
+  /* min-width: 600px; */ 
+  /* margin-bottom: 100px; */
+  margin: 0 !important;
 }

@@ -11,15 +11,16 @@ d3.csv("./../../../dataset/fossil_land_continents.csv")
   });
 
 function createPlot(data) {
-  // const container = d3.select("main");
-  // const width = container.node().getBoundingClientRect().width;
-  const width = window.innerWidth;
+  const container = d3.select("#alluvial");
+  const width = container.node().getBoundingClientRect().width;
+  // const width = window.innerWidth;
   const height = 800;
-  const svg = d3.select("#sankey-container")
+  const svg = container
     .append("svg")
-    .attr("viewBox", [0, 0, width + 20, height + 20])
-    .attr("width", "100%")
-    .attr("height", height);
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", [0, 0, width, height])
+    .attr("width", width)
+  // .attr("height", height);
 
   // Set color for continents
   const color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -187,7 +188,7 @@ function createPlot(data) {
             svg.selectAll("rect").filter(node => node.id === link.source.id).attr("fill-opacity", 1);
           else
             svg.selectAll("rect").filter(node => node.id === link.target.id).attr("fill-opacity", 1);
-          return 0.5;
+          return 0.8;
         }
         return 0.1;
       });
@@ -222,7 +223,7 @@ function createPlot(data) {
 
   // Add labels to nodes
   svg.append("g")
-    .style("font", "20px sans-serif")
+    .style("font", "16px sans-serif")
     .selectAll("text")
     .data(sankeyData.nodes)
     .join("text")
@@ -232,7 +233,7 @@ function createPlot(data) {
     .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
     .text(d => d.id);
 
-  // Append the svg to the document body
-  document.body.append(svg.node());
+  // Append the svg to the document main
+  document.getElementById("alluvial").append(svg.node());
 
 }
