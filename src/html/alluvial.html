@@ -1,43 +1,66 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <script src="./../../libs/d3-sankey.min.js"></script>
-    <script src="./../../libs/d3.v7.min.js"></script>
-    <link href="./../../libs/typography.min.css" rel="stylesheet" />
-    <link href="./../../dist/global.css" rel="stylesheet" />
-    <link href="./../../dist/alluvial.css" rel="stylesheet" />
-    <!-- <script src="
+<head>
+  <script src="./../../libs/d3-sankey.min.js"></script>
+  <script src="./../../libs/d3.v7.min.js"></script>
+  <link href="./../../libs/typography.min.css" rel="stylesheet" />
+  <link href="./../../dist/global.css" rel="stylesheet" />
+  <link href="./../../dist/alluvial.css" rel="stylesheet" />
+  <!-- <script src="
     https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.15/src/index.min.js
     "></script> -->
-  </head>
+</head>
 
-  <body class="flex flex-col items-center">
-    <main class="max-w-full sm:max-w-[70%] flex flex-col items-center gap-4 py-5">
-      <div class="flex gap-4 self-start justify-center items-center">
-        <a href="./../../index.html">
-          <button class="buttonstyle">←</button>
-        </a>
-        <span>Home</span>
+<body class="flex flex-col items-center">
+  <main class="max-w-full sm:max-w-[80%] flex flex-col items-center gap-4 py-5">
+    <div class="flex gap-4 self-start justify-center items-center">
+      <a href="./../../index.html">
+        <button class="buttonstyle">←</button>
+      </a>
+      <span>Home</span>
+    </div>
+    <h1 class="text-3xl font-bold">Distribution of CO₂ Emissions by Region and Country (2022)</h1>
+    <p>
+      An important factor to consider is how much each region influences
+      the global emissions and, respectively, which country of a specific region
+      is the main responsable. In the following visualization, it's trivial
+      to spot the world top emitter (i.e. China), as it outrace all the other
+      countries by at least 5 billion of tonnes of CO2 emissions
+    </p>
+    <div id="alluvial" class="flex items-center justify-center w-full my-10"></div>
+    <div class="flex flex-row gap-10 items-stretch">
+      <div class="flex flex-col items-center basis-1/2">
+        <h2 class="text-2xl items-center">Design choices</h2>
+        <ul class="list-disc list-inside">
+          <li>
+            For each continent, only the top 2 emittors are shown, while
+            all the other countries are grouped in the "Others" category.
+          </li>
+          <li>
+            The "Fossil" and "Land" categories are placed in the center of the
+            diagram, in order to show the contribution of each country and continent
+            to the overall emissions.
+          </li>
+          <li>
+            Each country color-coded using the same color of the
+            continent it belongs to.
+          </li>
+        </ul>
       </div>
-      <h1 class="text-3xl">Distribution of CO2 Emissions by Region and Country</h1>
-      <p>
-        An important factor to consider is how much each region influences
-        the global emissions and, respectively, which country of a specific region
-        is the main responsable. In the following visualization, it's trivial
-        to spot the world top emitter (i.e. China), as it outrace all the other
-        countries by at least 5 billion of tonnes of CO2 emissions
-      </p>
-      <div id="alluvial" class="flex items-center justify-center w-full my-10"></div>
-      <p>
-        An important factor to consider is how much each region influences
-        the global emissions and, respectively, which country of a specific region
-        is the main responsable. In the following visualization, it's trivial
-        to spot the world top emitter (i.e. China), as it outrace all the other
-        countries by at least 5 billion of tonnes of CO2 emissions
-      </p>
-    </main>
-    <script src="./../js/alluvial.js"></script>
-  </body>
+      <div class="flex flex-col items-center basis-1/2">
+        <h2 class="text-2xl items-center">Comments on data</h2>
+        <p>
+          An important factor to consider is how much each region influences
+          the global emissions and, respectively, which country of a specific region
+          is the main responsable. In the following visualization, it's trivial
+          to spot the world top emitter (i.e. China), as it outrace all the other
+          countries by at least 5 billion of tonnes of CO2 emissions
+        </p>
+      </div>
+    </div>
+  </main>
+  <script src="./../js/alluvial.js"></script>
+</body>
 
 </html>

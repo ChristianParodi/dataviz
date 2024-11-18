@@ -137,7 +137,7 @@ function createPlot(data) {
       d3.selectAll("path").filter(link => link !== d)
         .attr("stroke-opacity", 0.1);
 
-      svg.selectAll("rect").attr("fill-opacity", node => { d.target === node || d.source === node ? 1 : 0.1 });
+      d3.selectAll("rect").attr("fill-opacity", node => { d.target === node || d.source === node ? 1 : 0.1 });
 
       // if we check continent -> fossil/land, display "continent (fossil/land)",
       // if we check from fossil -> country display "country (fossil/land)"
