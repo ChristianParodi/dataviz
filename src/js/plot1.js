@@ -8,180 +8,112 @@ d3.csv("./../../../dataset/emissions_2022_total.csv")
     data = csv;
     createPlot(data);
   });
-function createPlot(data) {
-viewof filters = Inputs.checkbox(continents, {
-    label: "Filters",
-    value: continents,
-    format: (x) =>
-      html`<div width="20px" height="20px" style="background-color: ${continentColors[x]}"></div>
-            <span style="text-transform: capitalize; border-bottom: solid 2px ${continentColors[x]}; margin-bottom: -2px;">
-            ${x}
-           </span>`
-  })
+function createPlot(data) {    const nTop = 2; // Number of top emitters to display
 
-  legend = Swatches(colorScale, { columns: "180px" })
+    // Load CSV Data
+    d3.csv("./../../../dataset/emissions_2022_total.csv").then((data) => {
+      createPlot(data);
+    });
 
+    const continentColors = {
+      "Asia": "#f44336",
+      "Europe": "#3f51b5",
+      "Africa": "#ff9800",
+      "Americas": "#4caf50",
+      "Oceania": "#9c27b0"
+    };
 
+    const continents = Object.keys(continentColors);
 
-const height = 450;
-const marginTop = 50;
-const marginRight = 20;
-const marginBottom = 80;
-const marginLeft = 100;
+    function createPlot(data) {
+      // Create filters (checkboxes)
+      const filtersDiv = d3.select("#filters");
+      continents.forEach(continent => {
+        filtersDiv.append("label")
+          .attr("class", "checkbox-label")
+          .html(`
+            <input type="checkbox" class="filter-checkbox" value="${continent}" checked>
+            <div class="legend-color" style="background-color: ${continentColors[continent]}"></div>
+            ${continent}
+          `);
+      });
 
-const top10 = emissions2022.sort((a, b) => b.CO2 - a.CO2).slice(0, 10);
+      // Event listener for filtering data
+      d3.selectAll(".filter-checkbox").on("change", function() {
+        const selectedContinents = Array.from(
+          d3.selectAll(".filter-checkbox")
+            .nodes()
+            .filter(cb => cb.checked)
+        ).map(cb => cb.value);
 
-// Scala verticale per i nomi dei paesi
-const y = d3
-    .scaleBand()
-    .domain(top10.map((d) => d.Country))
-    .range([marginTop, height - marginBottom]) // tutti e 214 i paesi dovranno in qualche modo comparire sull'asse
-    .padding(0.1);
+        updateChart(data, selectedContinents);
+      });
 
-const yAxis = d3.axisLeft(y).tickSizeOuter(0);
+      // Initial plot
+      updateChart(data, continents);
+      createLegend();
+    }
 
-// Scala orizzontale per i valori di CO2
-const x = d3
-    .scaleLinear()
-    .domain([0, d3.max(top10, (d) => d.CO2)])
-    .nice()
-    .range([marginLeft, width - marginRight]);
+    function updateChart(data, selectedContinents) {
+      const svg = d3.select("#chart");
+      svg.selectAll("*").remove();
 
-const xAxis = d3.axisBottom(x).tickFormat((x) => `${x} t`);
+      // Filter data based on selected continents
+      const filteredData = data.filter(d => selectedContinents.includes(d.Continent));
+      
+      // Sort data by emissions and get top emitters
+      const topEmitters = filteredData
+        .sort((a, b) => b.Emissions - a.Emissions)
+        .slice(0, nTop);
 
-// Contenitore SVG
-const svg = d3
-    .create("svg")
-    .attr("viewBox", [0, 0, width, height])
-    .attr(
-    "style",
-    `max-width: ${width}px; height: auto; font: 10px sans-serif; overflow: visible;`
-    );
+      // Set up scales
+      const xScale = d3.scaleBand()
+        .domain(topEmitters.map(d => d.Country))
+        .range([50, 750])
+        .padding(0.1);
 
-const title = svg
-    .append("text")
-    .attr("x", width / 2) // Center horizontally
-    .attr("y", marginTop - 20) // Position above the chart
-    .attr("text-anchor", "middle") // Center the text
-    .attr("font-size", "24px") // Set font size
-    .attr("font-weight", "bold") // Make it bold
-    .attr("font-family", "Roboto Slab")
-    .attr("text-wrap", "break-word")
-    .attr("margin-top", "10px")
-    .text("Top 10 per capita CO₂ emitters (2022)");
+      const yScale = d3.scaleLinear()
+        .domain([0, d3.max(topEmitters, d => +d.Emissions)])
+        .range([450, 50]);
 
-// Tooltip for hover effect
-const tooltip = d3
-    .select("body")
-    .append("div")
-    .attr("class", "tooltip")
-    .style("position", "absolute")
-    .style("visibility", "hidden")
-    .style("background-color", "#fff")
-    .style("border", "1px solid #ccc")
-    .style("padding", "5px")
-    .style("border-radius", "3px")
-    .style("box-shadow", "2px 2px 5px rgba(0,0,0,0.1)");
+      const colorScale = d3.scaleOrdinal()
+        .domain(continents)
+        .range(Object.values(continentColors));
 
-const bars = svg
-    .append("g")
-    .attr("fill", "steelblue")
-    .selectAll("rect")
-    .data(top10)
-    .join("rect")
-    .style("mix-blend-mode", "multiply") // Darker color when bars overlap during the transition.
-    .attr("y", (d) => y(d.Country))
-    .attr("x", marginLeft)
-    .attr("height", y.bandwidth())
-    .attr("width", (d) => x(d.CO2) - marginLeft)
-    .attr("fill", (d) => continentColors[d.Continent] || "#ccc")
-    .on("mouseover", function (event, d) {
-    tooltip
-        .style("visibility", "visible")
-        .html(`${d.Country}: ${d.CO2.toFixed(2)} t`);
-    })
-    .on("mousemove", function (event) {
-    tooltip
-        .style("top", event.pageY + 5 + "px")
-        .style("left", event.pageX + 5 + "px");
-    })
-    .on("mouseout", function () {
-    tooltip.style("visibility", "hidden");
-    })
-    .text((d) => d.Country);
+      // Draw bars
+      svg.selectAll("rect")
+        .data(topEmitters)
+        .enter()
+        .append("rect")
+        .attr("x", d => xScale(d.Country))
+        .attr("y", d => yScale(d.Emissions))
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => 450 - yScale(d.Emissions))
+        .attr("fill", d => colorScale(d.Continent));
 
-const gx = svg
-    .append("g")
-    .attr("class", "xaxis")
-    .attr("transform", `translate(0,${height - marginBottom})`)
-    .call(xAxis);
+      // Add axes
+      const xAxis = d3.axisBottom(xScale);
+      const yAxis = d3.axisLeft(yScale);
 
-const gy = svg
-    .append("g")
-    .attr("class", "yaxis")
-    .attr("transform", `translate(${marginLeft}, 0)`)
-    .call(yAxis)
-    .call((g) => g.select(".domain").remove());
+      svg.append("g")
+        .attr("transform", "translate(0,450)")
+        .call(xAxis);
 
-svg.node().update = function (checked_filters) {
-    const data = emissions2022
-    .filter((d) => checked_filters.includes(d.Continent))
-    .sort((a, b) => b.CO2 - a.CO2)
-    .slice(0, 10);
+      svg.append("g")
+        .attr("transform", "translate(50,0)")
+        .call(yAxis);
+    }
 
-    //change x domain
-    // x.domain([0, d3.max(data, (d) => d.CO2)]);
-    //change y domain
-    y.domain(data.map((d) => d.Country));
+    function createLegend() {
+      const legendDiv = d3.select("#legend");
 
-    //change bars
-    const rects = svg.selectAll("rect").data(data);
-    rects.join(
-    (enter) =>
-        enter
-        .transition()
-        .duration(750)
-        .delay((d, i) => i * 20)
-        .attr("x", marginLeft)
-        .attr("y", (d) => y(d.Country))
-        .attr("height", y.bandwidth())
-        .attr("width", (d) => x(d.CO2) - marginLeft)
-        .attr("fill", (d) => continentColors[d.Continent] || "#ccc"),
-    (update) =>
-        update
-        .transition()
-        .duration(750)
-        .delay((d, i) => i * 20)
-        .attr("x", marginLeft)
-        .attr("y", (d) => y(d.Country))
-        .attr("height", y.bandwidth())
-        .attr("width", (d) => x(d.CO2) - marginLeft)
-        .attr("fill", (d) => continentColors[d.Continent] || "#ccc"),
-    (exit) => exit
-    );
-    //change x axis
-    gx.transition()
-    .duration(750)
-    .delay((d, i) => i * 20)
-    .call(xAxis);
-
-    //change y axis
-    gy.transition()
-    .duration(750)
-    .delay((d, i) => i * 20)
-    .call(yAxis);
-};
-
-// Add x-axis label
-svg
-    .append("text")
-    .attr("x", width / 2)
-    .attr("y", height - marginBottom / 3) // Position the label below the x-axis
-    .attr("text-anchor", "middle")
-    .attr("font-size", "18px")
-    .attr("font-family", "Roboto Slab")
-    .text("Tonnes of CO₂");
-
-document.getElementById("plot1").append(svg.node());
+      Object.entries(continentColors).forEach(([continent, color]) => {
+        const legendItem = legendDiv.append("div").attr("class", "legend-item");
+        legendItem.append("div")
+          .attr("class", "legend-color")
+          .style("background-color", color);
+        legendItem.append("span").text(continent);
+      });
+    }
 }
 
