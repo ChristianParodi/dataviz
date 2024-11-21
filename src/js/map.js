@@ -2,7 +2,7 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 
 // Colori per la scala
-const colorScale = d3.scaleSequential(d3.interpolateReds).domain([0, 10000]);
+const colorScale = d3.scaleSequential(d3.interpolateReds).domain([0, 100000000]);
 
 // Tooltip per mostrare informazioni
 const tooltip = d3.select("body").append("div")
@@ -38,7 +38,7 @@ Promise.all([
   d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"), // GeoJSON
   d3.csv("./../../dataset/emissions_2022_total.csv") // Dataset con emissioni
 ]).then(([world, emissions]) => {
-  const emissionsByCountry = new Map(emissions.map(d => [d.Country, d.Total]));
+  const emissionsByCountry = new Map(emissions.map(d => [d.Country, +d.Total]));
 
   // Disegnare la mappa
   g.selectAll("path")
@@ -46,13 +46,14 @@ Promise.all([
     .join("path")
     .attr("d", path)
     .attr("fill", d => {
-      const emissions = emissionsByCountry.get(d.Code) || 0; // d.id è il codice ISO del paese
+      // console.log(emissionsByCountry.get(d.Country))
+      const emissions = emissionsByCountry.get(d.properties.name) || 0; // d.id è il codice ISO del paese
       return colorScale(emissions);
     })
     .attr("stroke", "#ccc")
     .attr("stroke-width", 0.5)
     .on("mousemove", (event, d) => {
-      const emissions = emissionsByCountry.get(d.Code) || 0;
+      const emissions = emissionsByCountry.get(d.properties.name) || 0;
       tooltip.style("opacity", 1)
         .html(`<strong>${d.properties.name}</strong><br>Emissions: ${emissions}`)
         .style("left", `${event.pageX + 10}px`)
