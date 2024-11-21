@@ -1,0 +1,2 @@
+topoJSONData = d3.json('https://gist.githubusercontent.com/markolalovic/79320d72f56c760660b6f14b0cdb4807/raw/ce5fcaeba59644b4726ebb7981ec040140553225/worldmap-covid-risks.json')
+  .then((data) => console.log(data))
