@@ -1,12 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa Coropletica Interattiva</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 100vh;
+        }
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+        .info h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
 
-  <head>
-    <script src="./../../libs/d3.v7.min.js"></script>
-  </head>
+    <script>
+        // Dati di esempio per le emissioni (sostituire con i tuoi dati reali)
+        const emissionData = fossil_land_continents.csv;
 
-  <body>
-    <script src="./../js/map.js"></script>
-  </body>
+        // Funzione per determinare il colore in base al valore delle emissioni
+        function getColor(d) {
+            return d > 10000 ? '#800026' :
+                   d > 5000  ? '#BD0026' :
+                   d > 2000  ? '#E31A1C' :
+                   d > 1000  ? '#FC4E2A' :
+                   d > 500   ? '#FD8D3C' :
+                               '#FFEDA0';
+        }
 
+        // Stile dei paesi
+        function style(feature) {
+            return {
+                fillColor: getColor(emissionData[feature.properties.ISO_A3] || 0),
+                weight: 1,
+                opacity: 1,
+                color: 'white',
+                fillOpacity: 0.7
+            };
+        }
+
+        // Creazione della mappa
+        const map = L.map('map').setView([20, 0], 2);
+
+        // Aggiungere il layer base (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Aggiungere un popup informativo
+        const info = L.control();
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+        info.update = function (props) {
+            this._div.innerHTML = '<h4>Emissioni di CO2</h4>' +  (props ?
+                `<b>${props.NAME}</b><br>${emissionData[props.ISO_A3] || 0} Mt`
+                : 'Passa sopra un paese');
+        };
+        info.addTo(map);
+
+        // Caricare i dati GeoJSON (esempio semplice)
+        fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJson(data, {
+                    style: style,
+                    onEachFeature: function (feature, layer) {
+                        layer.on({
+                            mouseover: function (e) {
+                                const layer = e.target;
+                                layer.setStyle({
+                                    weight: 2,
+                                    color: '#666',
+                                    fillOpacity: 0.9
+                                });
+                                info.update(layer.feature.properties);
+                            },
+                            mouseout: function (e) {
+                                geojson.resetStyle(e.target);
+                                info.update();
+                            },
+                            click: function (e) {
+                                map.fitBounds(e.target.getBounds());
+                            }
+                        });
+                    }
+                }).addTo(map);
+            });
+
+        // Referenza globale per il reset dello stile
+        let geojson;
+    </script>
+</body>
 </html>
