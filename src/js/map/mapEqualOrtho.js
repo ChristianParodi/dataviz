@@ -2,21 +2,6 @@ function mapOrthographic() {
   const width = 1000;
   const height = 600;
 
-  const countryNameMapping = {
-    "USA": "United States",
-    "England": "United Kingdom",
-    "Czech Republic": "Czechia",
-    "Republic of Serbia": "Serbia",
-    "Guinea Bissau": "Guinea-Bissau",
-    "Macedonia": "North Macedonia",
-    "Ivory Coast": "Cote d'Ivoire",
-    "Somaliland": "Somalia",
-    "Republic of the Congo": "Congo",
-    "Democratic Republic of the Congo": "Congo",
-    "United Republic of Tanzania": "Tanzania",
-    "The Bahamas": "Bahamas"
-  };
-
   // Tooltip for showing information
   const tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")

@@ -4,21 +4,29 @@
   <head>
     <link href="./../../dist/global.css" rel="stylesheet" />
     <script src="./../../libs/d3.v7.min.js"></script>
+    <style>
+      p {
+        max-width: 80%;
+      }
+    </style>
   </head>
 
   <body>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id ratione eos enim veniam quas harum earum mollitia
-      possimus odio? Laboriosam ipsum architecto expedita temporibus modi ipsa ullam quod optio eum.
-    </p>
-    <div id="map-container-mercator"></div>
-    <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores amet praesentium at hic quaerat, eos aut soluta
-      nam quis nemo? Magni blanditiis eos voluptate iusto laborum quibusdam esse dolores excepturi.
-    </p>
-    <div id="map-container-ortho"></div>
-    <script src="./../js/map/mapMercator.js"></script>
-    <script src="./../js/map/mapEqualOrtho.js"></script>
+    <main class="flex flex-col gap-4 items-center">
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id ratione eos enim veniam quas harum earum mollitia
+        possimus odio? Laboriosam ipsum architecto expedita temporibus modi ipsa ullam quod optio eum.
+      </p>
+      <div id="map-container-mercator"></div>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores amet praesentium at hic quaerat, eos aut
+        soluta
+        nam quis nemo? Magni blanditiis eos voluptate iusto laborum quibusdam esse dolores excepturi.
+      </p>
+      <div id="map-container-ortho"></div>
+      <script src="./../js/map/mapMercator.js"></script>
+      <script src="./../js/map/mapEqualOrtho.js"></script>
+    </main>
   </body>
 
 </html>
