@@ -53,7 +53,7 @@ function mapMercator() {
     d3.csv("./../../dataset/emissions_2022_total.csv"), // Dataset con emissioni
     d3.csv("./../../dataset/fossil_land_continents.csv")
   ]).then(([world, emissions, emissions_type]) => {
-    const emissionsByCountry = new Map(emissions.map(d => [d.Country, +d.Total]));
+    const emissionsByCountry = new Map(emissions.map(d => [d.Code, +d.Total]));
     // Colori per la scala
     const colorScale = d3.scaleSequential(d3.interpolateReds)
       .domain([d3.min(emissions.map(d => +d.Total)), d3.max(emissions.map(d => +d.Total))]);
@@ -64,13 +64,13 @@ function mapMercator() {
       .join("path")
       .attr("d", path)
       .attr("fill", d => {
-        const emissions = emissionsByCountry.get(d.properties.name) || 0;
-        return colorScale(emissions);
+        const emissions = emissionsByCountry.get(d.id) || 0;
+        return emissions === 0 ? "#ccc" : colorScale(emissions);
       })
       .attr("stroke", "#ccc")
       .attr("stroke-width", 0.5)
       .on("mousemove", function (event, d) {
-        const emissions = emissionsByCountry.get(d.properties.name) || 0;
+        const emissions = emissionsByCountry.get(d.id) || 0;
 
         // Tooltip
         tooltip.style("opacity", 1)
@@ -100,7 +100,7 @@ function mapMercator() {
           .style("opacity", 1);
       })
       .on("click", function (event, d) {
-        const countryEmissions = emissions.find(r => r.Country == d.properties.name);
+        const countryEmissions = emissions.find(r => r.Code == d.id);
         const emissionsPerCapita = +countryEmissions.CO2;
         const countryPopulation = +countryEmissions.Population;
 
