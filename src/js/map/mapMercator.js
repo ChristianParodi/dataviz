@@ -167,31 +167,43 @@ function mapMercator() {
       });
     // Aggiungere effetti di zoom e panoramica
     svg.call(zoom);
+// Create the bins for the legend (based on thresholds and colors)
+const legendBins = thresholds.map((threshold, i) => {
+  return { threshold, color: colors[i], next: thresholds[i + 1] };
+}).slice(0, -1); // Remove the last bin as it doesn't have a corresponding range
 
-    // Create the bins for the legend (based on thresholds and colors)
-    const legendBins = thresholds.map((threshold, i) => {
-      return { threshold, color: colors[i] };
-    }).reverse();
+// Set dimensions for the legend
+const squareSize = 20; // Size of each square
+const spacing = 5; // Space between squares and text
+const legendPadding = 20; // Padding for the legend container
 
-    // Draw the legend rectangles (corresponding to the bins)
-    legendSvg.selectAll("rect")
-      .data(legendBins)
-      .join("rect")
-      .attr("x", 20) // Offset from the left of the legend container
-      .attr("y", (d, i) => (height - legendHeight) / 2 + i * (legendHeight / legendBins.length)) // Position each rect
-      .attr("width", 20) // Width of the legend rectangle
-      .attr("height", legendHeight / legendBins.length) // Height for each rectangle
-      .style("fill", d => d.color); // Use the color for the bin
+// Draw the legend squares (corresponding to the bins)
+legendSvg.selectAll("rect")
+  .data(legendBins)
+  .join("rect")
+  .attr("x", 20) // Offset from the left of the legend container
+  .attr("y", (d, i) => legendPadding + i * (squareSize + spacing)) // Position each square
+  .attr("width", squareSize) // Width of each square
+  .attr("height", squareSize) // Height of each square
+  .style("fill", d => d.color); // Use the color for the bin
+
+// Add labels beside each square to show the range
+legendSvg.selectAll("text")
+  .data(legendBins)
+  .join("text")
+  .attr("x", 50) // Position text to the right of the square
+  .attr("y", (d, i) => legendPadding + i * (squareSize + spacing) + squareSize / 2) // Align text with the middle of each square
+  .attr("dy", "0.35em") // Center the text vertically
+  .text(d => `${(d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2)} bil t`) // Format the range
+  .style("font-size", "12px")
+  .style("fill", "#333");
+
 
     // Scale for the legend axis (match the vertical position of rectangles)
     const legendScale = d3.scaleLinear()
       .domain([0, thresholds.length - 1]) // Map indices to the range of bins
       .range([(height - legendHeight) / 2 + legendHeight, (height - legendHeight) / 2]); // Fit within the legend height
 
-    // Add ticks to match thresholds (formatted as billions)
-    const legendAxis = d3.axisRight(legendScale)
-      .tickValues(thresholds.map((_, i) => i)) // Map indices of thresholds to axis positions
-      .tickFormat((d, i) => (thresholds[i] / 1e9).toFixed(2) + " bil t"); // Format threshold values
 
     // Append the axis to the legend
     legendSvg.append("g")
