@@ -34,10 +34,10 @@ function mapMercator() {
   const g = svg.append("g");
 
   // Creare una seconda SVG per la legenda
-  const legendWidth = 120;
+  const legendWidth = 800;
   const legendHeight = 400;
 
-  const legendSvg = d3.select("#map-container-mercator")
+  const legendSvg = d3.select("#legend-container-mercator")
     .append("svg")
     .attr("width", legendWidth)
     .attr("height", height)
@@ -174,29 +174,41 @@ const legendBins = thresholds.map((threshold, i) => {
 
 // Set dimensions for the legend
 const squareSize = 20; // Size of each square
-const spacing = 5; // Space between squares and text
-const legendPadding = 20; // Padding for the legend container
+const spacing = 20; // Space between squares and text
+const legendPadding = 10; // Padding for the legend container
 
-// Draw the legend squares (corresponding to the bins)
-legendSvg.selectAll("rect")
-  .data(legendBins)
-  .join("rect")
-  .attr("x", 20) // Offset from the left of the legend container
-  .attr("y", (d, i) => legendPadding + i * (squareSize + spacing)) // Position each square
-  .attr("width", squareSize) // Width of each square
-  .attr("height", squareSize) // Height of each square
-  .style("fill", d => d.color); // Use the color for the bin
+// Define a scale for the widths of the legend squares based on the range
+const maxRange = d3.max(legendBins, d => d.next - d.threshold); // Maximum range
+const squareWidthScale = d3.scaleLinear()
+  .domain([0, maxRange]) // Input domain is the range of emission values
+  .range([20, 120]); // Output range for square widths (min to max length)
+
+  let cumulativeX = legendPadding; // Inizializza la posizione iniziale
+
+  legendSvg.selectAll("rect")
+    .data(legendBins)
+    .join("rect")
+    .attr("x", (d, i) => {
+      const currentX = cumulativeX; // Memorizza la posizione corrente
+      cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
+      return currentX; // Ritorna la posizione corrente per l'elemento
+    })
+    .attr("y", 10) // Posizione verticale costante
+    .attr("width", d => squareWidthScale(d.next - d.threshold)) // Larghezza proporzionale
+    .attr("height", squareSize) // Altezza costante
+    .style("fill", d => d.color); // Colore basato sulla scala
 
 // Add labels beside each square to show the range
 legendSvg.selectAll("text")
   .data(legendBins)
   .join("text")
-  .attr("x", 50) // Position text to the right of the square
-  .attr("y", (d, i) => legendPadding + i * (squareSize + spacing) + squareSize / 2) // Align text with the middle of each square
+  .attr("x", (d, i) => legendPadding + i * (squareSize + spacing) ) // Position text to the right of the square
+  .attr("y", d => 50  ) // Align text with the middle of each square
   .attr("dy", "0.35em") // Center the text vertically
   .text(d => `${(d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2)} bil t`) // Format the range
-  .style("font-size", "12px")
+  .style("font-size", "10px")
   .style("fill", "#333");
+
 
 
     // Scale for the legend axis (match the vertical position of rectangles)
