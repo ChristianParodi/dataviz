@@ -61,10 +61,6 @@ function mapMercator() {
     const thresholds = [
       0,
       0.01e9,
-      0.02e9,
-      0.04e9,
-      0.06e9,
-      0.1e9,
       0.3e9,
       0.5e9,
       0.7e9,
