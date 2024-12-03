@@ -57,23 +57,7 @@ function mapMercator() {
     ];
     const emissionsValues = emissions.map(d => +d.Total).sort((a, b) => a - b);
     // Colori per la scala
-    // Custom quantile thresholds
-    const customQuantiles = [
-      0,
-      0.1,
-      0.15,
-      0.2,
-      0.25,        // Min
-      0.95,      // 10th percentile
-      0.96,     // 25th percentile
-      0.97,      // 50th percentile
-      0.98,     // 75th percentile (focus ends here for < 5 bil t)
-      0.995,     // 95th percentile (>= 5 bil t)
-      1         // Max
-    ];
 
-    const quantileValues = customQuantiles.map(q => d3.quantile(emissionsValues, q));
-    console.log(quantileValues)
     const thresholds = [
       0,
       0.01e9,
@@ -96,10 +80,10 @@ function mapMercator() {
     const colors = thresholds.map((d, i) => {
       return d3.interpolateOranges(i / (thresholds.length - 1)); // Spread the shades evenly
     });
+
     const colorScale = d3.scaleThreshold()
       .domain(thresholds)
-      .range(colors);
-
+      .range(colors.slice(1));
 
     // Disegnare la mappa
     g.selectAll("path")
@@ -184,36 +168,37 @@ function mapMercator() {
     // Aggiungere effetti di zoom e panoramica
     svg.call(zoom);
 
-    const legendBins = colorScale.range().map(color => colorScale.invertExtent(color)).reverse();
+    // Create the bins for the legend (based on thresholds and colors)
+    const legendBins = thresholds.map((threshold, i) => {
+      return { threshold, color: colors[i] };
+    }).reverse();
 
+    // Draw the legend rectangles (corresponding to the bins)
     legendSvg.selectAll("rect")
       .data(legendBins)
       .join("rect")
-      .attr("x", 40)
-      .attr("y", (d, i) => (height - legendHeight) / 2 + i * (legendHeight / legendBins.length))
-      .attr("width", 20)
-      .attr("height", legendHeight / legendBins.length)
-      .style("fill", d => colorScale(d[0]));
+      .attr("x", 20) // Offset from the left of the legend container
+      .attr("y", (d, i) => (height - legendHeight) / 2 + i * (legendHeight / legendBins.length)) // Position each rect
+      .attr("width", 20) // Width of the legend rectangle
+      .attr("height", legendHeight / legendBins.length) // Height for each rectangle
+      .style("fill", d => d.color); // Use the color for the bin
 
-
-
+    // Scale for the legend axis (match the vertical position of rectangles)
     const legendScale = d3.scaleLinear()
-      .domain([emissionDomain[0], emissionDomain[1]])
-      .range([(height - legendHeight) / 2 + legendHeight, (height - legendHeight) / 2]);
+      .domain([0, thresholds.length - 1]) // Map indices to the range of bins
+      .range([(height - legendHeight) / 2 + legendHeight, (height - legendHeight) / 2]); // Fit within the legend height
 
-    // Use d3.ticks to generate evenly spaced tick values
-    const legendTicks = thresholds;
-
+    // Add ticks to match thresholds (formatted as billions)
     const legendAxis = d3.axisRight(legendScale)
-      .tickValues(legendTicks)
-      .tickFormat(d => (d / 1e9).toFixed(2) + " bil t"); // Format as billions
+      .tickValues(thresholds.map((_, i) => i)) // Map indices of thresholds to axis positions
+      .tickFormat((d, i) => (thresholds[i] / 1e9).toFixed(2) + " bil t"); // Format threshold values
 
-
-
+    // Append the axis to the legend
     legendSvg.append("g")
-      .attr("transform", `translate(60, 0)`)
+      .attr("transform", `translate(60, 0)`) // Position the axis beside the legend rectangles
       .call(legendAxis)
-      .call(g => g.select(".domain").remove());
+      .call(g => g.select(".domain").remove()); // Remove the line of the axis
+
 
   });
 }
