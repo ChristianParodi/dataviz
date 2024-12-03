@@ -76,13 +76,29 @@ function mapMercator() {
     console.log(quantileValues)
     const thresholds = [
       0,
-
-      emissionsValues[-1]
+      0.01e9,
+      0.02e9,
+      0.04e9,
+      0.06e9,
+      0.1e9,
+      0.3e9,
+      0.5e9,
+      0.7e9,
+      1e9,
+      3e9,
+      5e9,
+      6e9,
+      8e9,
+      10e9,
+      emissionsValues[emissionsValues.length - 1]
     ];
 
+    const colors = thresholds.map((d, i) => {
+      return d3.interpolateOranges(i / (thresholds.length - 1)); // Spread the shades evenly
+    });
     const colorScale = d3.scaleThreshold()
       .domain(thresholds)
-      .range(d3.schemeOranges[6]);
+      .range(colors);
 
 
     // Disegnare la mappa
