@@ -166,13 +166,6 @@ function mapOrthographic() {
                 g.selectAll("path").attr("d", path);
               };
             });
-
-          // Update the tooltip with country-specific data
-          const emissions = emissionsByCountry.get(d.id) || 0;
-          tooltip.style("opacity", 1)
-            .html(`<strong>${d.properties.name}</strong><br>Emissions: ${(emissions / 1e9).toFixed(3)} Bil t`)
-            .style("left", `${event.pageX + 10}px`)
-            .style("top", `${event.pageY + 10}px`);
         });
 
       // Add graticule (optional, for better visual effect)
