@@ -2,7 +2,6 @@ function mapMercator() {
   const width = 1000;
   const height = 600;
   let zoomed = false;
-  let currentZoomLevel = d3.zoomIdentity.k;
 
   // Select the reset button
   const resetButton = document.getElementById("reset");
@@ -14,9 +13,6 @@ function mapMercator() {
     svg.transition() // Add a smooth transition
       .duration(750) // Set transition duration
       .call(zoom.transform, d3.zoomIdentity); // Reset to the default zoom and pan
-
-    // Update currentZoomLevel to match the default zoom
-    currentZoomLevel = d3.zoomIdentity.k;
   });
 
 
