@@ -1,7 +1,7 @@
 function mapMercator() {
   const width = 1000;
   const height = 600;
-  zoomed = false;
+  let zoomed = false;
 
   // Tooltip per mostrare informazioni
   const tooltip = d3.select("body").append("div")
@@ -131,22 +131,22 @@ function mapMercator() {
             ? emissionsPerCapitaByCountry.get(d.id)
             : emissionsByCountry.get(d.id);
 
-            
-        if (!zoomed) {
-          let tooltipText = `<strong>${d.properties.name}</strong><br>Data not available`;
-          if (emissions !== undefined)
-            tooltipText = `<strong>${d.properties.name}</strong><br>
+
+          if (!zoomed) {
+            let tooltipText = `<strong>${d.properties.name}</strong><br>Data not available`;
+            if (emissions !== undefined)
+              tooltipText = `<strong>${d.properties.name}</strong><br>
               ${isPerCapita
-                ? `CO₂ per capita: ${(emissions).toFixed(3)} t`
-                : `Total emissions: ${(emissions / 1e9).toFixed(3)} Bil t`}`;
+                  ? `CO₂ per capita: ${(emissions).toFixed(3)} t`
+                  : `Total emissions: ${(emissions / 1e9).toFixed(3)} Bil t`}`;
             tooltip.style("opacity", 1)
               .html(tooltipText)
               .style("left", `${event.pageX + 10}px`)
               .style("top", `${event.pageY + 10}px`);
-        }
-        else {
-          setZoomedTooltip(event, d);
-        }
+          }
+          else {
+            setZoomedTooltip(event, d);
+          }
 
           // Highlight the hovered country
           d3.select(this)
@@ -154,22 +154,22 @@ function mapMercator() {
             .attr("stroke-width", 0.5)
             .style("opacity", 1);
 
-        // Gray out all other countries
-        g.selectAll("path")
-          .filter(node => node !== d) // Exclude the hovered country
-          .style("opacity", 0.3);
-      })
-      .on("mouseout", function () {
-        // Reset tooltip
-        tooltip.style("opacity", 0);
+          // Gray out all other countries
+          g.selectAll("path")
+            .filter(node => node !== d) // Exclude the hovered country
+            .style("opacity", 0.3);
+        })
+        .on("mouseout", function () {
+          // Reset tooltip
+          tooltip.style("opacity", 0);
 
-        // Reset all countries to original state
-        g.selectAll("path")
-          .attr("stroke", "#ccc")
-          .attr("stroke-width", 0.5)
-          .style("opacity", 1);
-      }).on("click", function (event, d) {
-        zoomed = true;
+          // Reset all countries to original state
+          g.selectAll("path")
+            .attr("stroke", "#ccc")
+            .attr("stroke-width", 0.5)
+            .style("opacity", 1);
+        }).on("click", function (event, d) {
+          zoomed = true;
 
           const [[x0, y0], [x1, y1]] = path.bounds(d);
           const bboxWidth = x1 - x0;
@@ -185,12 +185,12 @@ function mapMercator() {
             .duration(750)
             .call(zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(scale));
 
-        setZoomedTooltip(event, d);
-      });
-    // Aggiungere effetti di zoom e panoramica
-    svg.call(zoom);
+          setZoomedTooltip(event, d);
+        });
+      // Aggiungere effetti di zoom e panoramica
+      svg.call(zoom);
     }
-    
+
     // Initialize the map with total emissions
     updateMap();
 
@@ -210,31 +210,31 @@ function mapMercator() {
       .domain([0, maxRange])
       .range([20, 120]);
 
-      let cumulativeX = legendPadding;
+    let cumulativeX = legendPadding;
 
-  legendSvg.selectAll("rect")
-    .data(legendBins)
-    .join("rect")
-    .attr("x", (d, i) => {
-      const currentX = cumulativeX; // Memorizza la posizione corrente
-      cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
-      return currentX; // Ritorna la posizione corrente per l'elemento
-    })
-    .attr("y", 10) // Posizione verticale costante
-    .attr("width", d => squareWidthScale(d.next - d.threshold)) // Larghezza proporzionale
-    .attr("height", squareSize) // Altezza costante
-    .style("fill", d => d.color); // Colore basato sulla scala
+    legendSvg.selectAll("rect")
+      .data(legendBins)
+      .join("rect")
+      .attr("x", (d, i) => {
+        const currentX = cumulativeX; // Memorizza la posizione corrente
+        cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
+        return currentX; // Ritorna la posizione corrente per l'elemento
+      })
+      .attr("y", 10) // Posizione verticale costante
+      .attr("width", d => squareWidthScale(d.next - d.threshold)) // Larghezza proporzionale
+      .attr("height", squareSize) // Altezza costante
+      .style("fill", d => d.color); // Colore basato sulla scala
 
-// Add labels beside each square to show the range
-legendSvg.selectAll("text")
-  .data(legendBins)
-  .join("text")
-  .attr("x", (d, i) => legendPadding + i * (squareSize + spacing) ) // Position text to the right of the square
-  .attr("y", d => 50  ) // Align text with the middle of each square
-  .attr("dy", "0.35em") // Center the text vertically
-  .text(d => `${(d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2)} bil t`) // Format the range
-  .style("font-size", "10px")
-  .style("fill", "#333");
+    // Add labels beside each square to show the range
+    legendSvg.selectAll("text")
+      .data(legendBins)
+      .join("text")
+      .attr("x", (d, i) => legendPadding + i * (squareSize + spacing)) // Position text to the right of the square
+      .attr("y", d => 50) // Align text with the middle of each square
+      .attr("dy", "0.35em") // Center the text vertically
+      .text(d => `${(d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2)} bil t`) // Format the range
+      .style("font-size", "10px")
+      .style("fill", "#333");
 
 
 
