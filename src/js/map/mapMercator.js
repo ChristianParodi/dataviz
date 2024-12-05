@@ -267,6 +267,9 @@ const squareWidthScale = d3.scaleLinear()
         .html(`</strong>${ "Emissions: " + (d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2) + " Bil t"}`)
         .style("left", `${event.pageX + 10}px`)
         .style("top", `${event.pageY + 10}px`);
+      })
+      .on("mouseout", function () {
+        tooltip.style("opacity", 0);
 
     });
 
