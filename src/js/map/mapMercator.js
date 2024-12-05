@@ -197,22 +197,22 @@ function mapMercator() {
             .attr("stroke-width", 0.5)
             .style("opacity", 1);
         }).on("click", function (event, d) {
-          zoomed = true;
-
+          
           const [[x0, y0], [x1, y1]] = path.bounds(d);
           const bboxWidth = x1 - x0;
           const bboxHeight = y1 - y0;
           const bboxCenterX = (x0 + x1) / 2;
           const bboxCenterY = (y0 + y1) / 2;
-
+          
           const scale = Math.max(1, Math.min(8, 0.9 / Math.max(bboxWidth / width, bboxHeight / height)));
           const translateX = width / 2 - scale * bboxCenterX;
           const translateY = height / 2 - scale * bboxCenterY;
-
+          
           svg.transition()
-            .duration(750)
-            .call(zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(scale));
-
+          .duration(750)
+          .call(zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(scale));
+          
+          zoomed = true;
           setZoomedTooltip(event, d);
         });
       // Aggiungere effetti di zoom e panoramica
