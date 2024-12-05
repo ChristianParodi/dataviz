@@ -3,6 +3,8 @@ function mapMercator() {
   const height = 600;
   let zoomed = false;
   let clicked = false;
+  let currentZoomLevel = d3.zoomIdentity.k;
+  let previousZoomLevel = currentZoomLevel;
 
   // Select the reset button
   const resetButton = document.getElementById("reset");
@@ -11,6 +13,9 @@ function mapMercator() {
   resetButton.addEventListener("click", () => {
     clicked = false;
     zoomed = false;
+    currentZoomLevel = d3.zoomIdentity.k;
+    previousZoomLevel = currentZoomLevel;
+
     // Reset the zoom to the default view
     svg.transition() // Add a smooth transition
       .duration(750) // Set transition duration
@@ -39,6 +44,12 @@ function mapMercator() {
     .scaleExtent([1, 8])
     .on("zoom", (event) => {
       zoomed = event.transform.k > 4 || clicked;
+      previousZoomLevel = currentZoomLevel;
+      currentZoomLevel = event.transform.k;
+
+      if(previousZoomLevel > currentZoomLevel)
+        clicked = false;
+
       svg.selectAll("g").attr("transform", event.transform);
     });
 
@@ -200,21 +211,21 @@ function mapMercator() {
             .style("opacity", 1);
         }).on("click", function (event, d) {
           clicked = true;
-          
+
           const [[x0, y0], [x1, y1]] = path.bounds(d);
           const bboxWidth = x1 - x0;
           const bboxHeight = y1 - y0;
           const bboxCenterX = (x0 + x1) / 2;
           const bboxCenterY = (y0 + y1) / 2;
-          
+
           const scale = Math.max(1, Math.min(8, 0.9 / Math.max(bboxWidth / width, bboxHeight / height)));
           const translateX = width / 2 - scale * bboxCenterX;
           const translateY = height / 2 - scale * bboxCenterY;
-          
+
           svg.transition()
-          .duration(750)
-          .call(zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(scale));
-          
+            .duration(750)
+            .call(zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(scale));
+
           zoomed = true;
           setZoomedTooltip(event, d);
         });
@@ -233,60 +244,60 @@ function mapMercator() {
       return { threshold, color: colors[i], next: thresholds[i + 1] };
     }).slice(0, -1); // Remove the last bin as it doesn't have a corresponding range
 
-// Set dimensions for the legend
-const squareSize = 20; // Size of each square
-const spacing = 0; // Space between squares and text
-const legendPadding = 10; // Padding for the legend container
+    // Set dimensions for the legend
+    const squareSize = 20; // Size of each square
+    const spacing = 0; // Space between squares and text
+    const legendPadding = 10; // Padding for the legend container
 
-// Define a scale for the widths of the legend squares based on the range
-const maxRange = d3.max(legendBins, d => d.next - d.threshold); // Maximum range
-const squareWidthScale = d3.scaleLinear()
-  .domain([0, maxRange]) // Input domain is the range of emission values
-  .range([20, 120]); // Output range for square widths (min to max length)
+    // Define a scale for the widths of the legend squares based on the range
+    const maxRange = d3.max(legendBins, d => d.next - d.threshold); // Maximum range
+    const squareWidthScale = d3.scaleLinear()
+      .domain([0, maxRange]) // Input domain is the range of emission values
+      .range([20, 120]); // Output range for square widths (min to max length)
 
-  let cumulativeX = legendPadding; // Inizializza la posizione iniziale
+    let cumulativeX = legendPadding; // Inizializza la posizione iniziale
 
-  legendSvg.selectAll("rect")
-    .data(legendBins)
-    .join("rect")
-    .attr("x", (d, i) => {
-      const currentX = cumulativeX; // Memorizza la posizione corrente
-      cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
-      return currentX; // Ritorna la posizione corrente per l'elemento
-    })
-    .attr("y", 10) // Posizione verticale costante
-    .attr("width", d => squareWidthScale(d.next - d.threshold)) // Larghezza proporzionale
-    .attr("height", squareSize) // Altezza costante
-    .attr("style", "outline: 0.05px solid orange;") 
-    .style("fill", d => d.color) // Colore basato sulla scala
-    .on("mousemove", function (event, d) {
-      const emissions = emissionsByCountry.get(d.id);
+    legendSvg.selectAll("rect")
+      .data(legendBins)
+      .join("rect")
+      .attr("x", (d, i) => {
+        const currentX = cumulativeX; // Memorizza la posizione corrente
+        cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
+        return currentX; // Ritorna la posizione corrente per l'elemento
+      })
+      .attr("y", 10) // Posizione verticale costante
+      .attr("width", d => squareWidthScale(d.next - d.threshold)) // Larghezza proporzionale
+      .attr("height", squareSize) // Altezza costante
+      .attr("style", "outline: 0.05px solid orange;")
+      .style("fill", d => d.color) // Colore basato sulla scala
+      .on("mousemove", function (event, d) {
+        const emissions = emissionsByCountry.get(d.id);
 
-      // Tooltip
-      tooltip.style("opacity", 1)
-        .html(`</strong>${ "Emissions: " + (d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2) + " Bil t"}`)
-        .style("left", `${event.pageX + 10}px`)
-        .style("top", `${event.pageY + 10}px`);
+        // Tooltip
+        tooltip.style("opacity", 1)
+          .html(`</strong>${"Emissions: " + (d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2) + " Bil t"}`)
+          .style("left", `${event.pageX + 10}px`)
+          .style("top", `${event.pageY + 10}px`);
       })
       .on("mouseout", function () {
         tooltip.style("opacity", 0);
 
-    });
+      });
 
-cumulativeX = legendPadding; // Reinizializza per i testi
-legendSvg.selectAll(".bar-text")
-  .data(legendBins.slice(1)) // I numeri per le barrette
-  .join("text")
-  .attr("x", (d, i) => {
-    const currentX = cumulativeX; // Memorizza la posizione corrente
-    cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
-    return currentX; // Ritorna la posizione corrente per l'elemento
-  })
-  .attr("y", 5) // Posizione sopra i quadratini
-  .text((d, i) => (legendBins[i].next / 1e9).toFixed(2)) // Mostra il valore di tonnellate
-  .style("font-size", "10px")
-  .style("fill", "#333")
-  .style("text-anchor", "middle");
+    cumulativeX = legendPadding; // Reinizializza per i testi
+    legendSvg.selectAll(".bar-text")
+      .data(legendBins.slice(1)) // I numeri per le barrette
+      .join("text")
+      .attr("x", (d, i) => {
+        const currentX = cumulativeX; // Memorizza la posizione corrente
+        cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
+        return currentX; // Ritorna la posizione corrente per l'elemento
+      })
+      .attr("y", 5) // Posizione sopra i quadratini
+      .text((d, i) => (legendBins[i].next / 1e9).toFixed(2)) // Mostra il valore di tonnellate
+      .style("font-size", "10px")
+      .style("fill", "#333")
+      .style("text-anchor", "middle");
 
     // Scale for the legend axis (match the vertical position of rectangles)
     const legendScale = d3.scaleLinear()
