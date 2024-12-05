@@ -3,12 +3,11 @@ p {
 }
 
 .switch {
-  @apply h-6 bg-gray-200 border-2 border-gray-200 
+  @apply h-6 bg-orange-600 border-2 border-gray-200 
         rounded-full w-11 after:absolute after:top-0.5 after:left-0.5 
         after:bg-white after:border after:border-gray-400 after:h-5 after:w-5 
         after:shadow-sm after:rounded-full 
         peer-checked:after:translate-x-full peer-checked:after:border-white 
-        peer-checked:bg-orange-600 peer-checked:border-orange-600 
         after:transition-all after:duration-300 
         transition-colors duration-300 focus:outline focus:outline-orange-800 focus:outline-offset-2;
 }
