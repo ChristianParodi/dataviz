@@ -130,9 +130,9 @@ function mapMercator() {
 
     // Function to update the map
     function updateMap() {
-      const isPerCapita = document.getElementById("toggle").checked;
+      const isPerCapita = document.getElementById("toggle-mercator").checked;
 
-      const t = d3.transition().duration(750);
+      const t = d3.transition().duration(500);
 
       g.selectAll("path")
         .data(world.features)
@@ -227,7 +227,7 @@ function mapMercator() {
     updateMap();
 
     // Add event listener for the toggle switch
-    document.getElementById("toggle").addEventListener("change", updateMap);
+    document.getElementById("toggle-mercator").addEventListener("change", updateMap);
 
     // Create the bins for the legend (based on thresholds and colors)
     const legendBins = thresholds.map((threshold, i) => {
@@ -279,7 +279,7 @@ function mapMercator() {
     // Append the axis to the legend
     legendSvg.append("g")
       .attr("transform", `translate(60, 0)`) // Position the axis beside the legend rectangles
-      .call(legendAxis)
+      // .call(legendAxis)
       .call(g => g.select(".domain").remove()); // Remove the line of the axis
 
 

@@ -61,80 +61,127 @@ function mapOrthographic() {
     d3.csv("./../../dataset/fossil_land_continents.csv")
   ]).then(([world, emissions, emissions_type]) => {
     const emissionsByCountry = new Map(emissions.map(d => [d.Code, +d.Total]));
+    const emissionsPerCapitaByCountry = new Map(emissions.map(d => [d.Code, +d.CO2]));
 
-    const colorScale = d3.scaleSequential(d3.interpolateReds)
-      .domain([d3.min(emissions.map(d => +d.Total)), d3.max(emissions.map(d => +d.Total))]);
+    const thresholds = [
+      0,
+      0.01e9,
+      0.3e9,
+      0.5e9,
+      0.7e9,
+      1e9,
+      3e9,
+      5e9,
+      6e9,
+      8e9,
+      10e9,
+    ];
 
-    // Draw the map
-    g.selectAll("path")
-      .data(world.features)
-      .join("path")
-      .attr("d", path)
-      .attr("fill", d => {
-        const emissions = emissionsByCountry.get(d.id) || 0;
-        return emissions === 0 ? "#ccc" : colorScale(emissions);
-      })
-      .attr("stroke", "#ccc")
-      .attr("stroke-width", 0.5)
-      .on("mousemove", function (event, d) {
-        const emissions = emissionsByCountry.get(d.id) || 0;
+    const colors = thresholds.map((d, i) => d3.interpolateOranges(i / (thresholds.length - 1)));
 
-        // Tooltip
-        tooltip.style("opacity", 1)
-          .html(`<strong>${d.properties.name}</strong><br>Emissions: ${(emissions / 1e9).toFixed(3)} Bil t`)
-          .style("left", `${event.pageX + 10}px`)
-          .style("top", `${event.pageY + 10}px`);
+    const colorScaleTotal = d3.scaleThreshold()
+      .domain(thresholds)
+      .range(colors.slice(1));
 
-        // Highlight the hovered country
-        d3.select(this)
-          .attr("stroke", "black")
-          .attr("stroke-width", 2)
-          .style("opacity", 1);
-      })
-      .on("mouseout", function () {
-        // Reset tooltip
-        tooltip.style("opacity", 0);
+    const perCapitaThresholds = [0, 1, 2, 5, 10, 20, 30, 50];
+    const colorScalePerCapita = d3.scaleThreshold()
+      .domain(perCapitaThresholds)
+      .range(d3.schemeOranges[9]);
 
-        // Reset all countries to original state
-        g.selectAll("path")
-          .attr("stroke", "#ccc")
-          .attr("stroke-width", 0.5)
-          .style("opacity", 1);
-      })
-      .on("click", function (event, d) {
-        const [longitude, latitude] = d3.geoCentroid(d); // Get the centroid of the country
+    function updateMap() {
+      const isPerCapita = document.getElementById("toggle-ortho").checked;
+      const scale = isPerCapita ? colorScalePerCapita : colorScaleTotal;
+      const t = d3.transition().duration(500);
 
-        // Calculate new rotation to center the country
-        const newRotation = [-longitude, -latitude];
-        rotation = newRotation;
+      // Draw the map
+      g.selectAll("path")
+        .data(world.features)
+        .join(
+          enter => enter.append("path") // Handle new paths
+            .attr("d", path)
+            .attr("fill", d => {
+              const emissions = isPerCapita
+                ? emissionsPerCapitaByCountry.get(d.id)
+                : emissionsByCountry.get(d.id);
+              const scale = isPerCapita ? colorScalePerCapita : colorScaleTotal;
+              return emissions === undefined ? "#ccc" : scale(emissions);
+            })
+            .attr("stroke", "#ccc")
+            .attr("stroke-width", 0.5),
+          update => update // Handle updating paths
+            .transition(t) // Smoothly transition the color
+            .attr("fill", d => {
+              const emissions = isPerCapita
+                ? emissionsPerCapitaByCountry.get(d.id)
+                : emissionsByCountry.get(d.id);
+              const scale = isPerCapita ? colorScalePerCapita : colorScaleTotal;
+              return emissions === undefined ? "#ccc" : scale(emissions);
+            }),
+          exit => exit.remove())// Handle exiting paths
+        .on("mousemove", function (event, d) {
+          const emissions = emissionsByCountry.get(d.id) || 0;
 
-        // Smoothly transition the rotation
-        d3.transition()
-          .duration(1000)
-          .tween("rotate", () => {
-            const interpolate = d3.interpolate(projection.rotate(), newRotation);
-            return t => {
-              projection.rotate(interpolate(t));
-              g.selectAll("path").attr("d", path);
-            };
-          });
+          // Tooltip
+          tooltip.style("opacity", 1)
+            .html(`<strong>${d.properties.name}</strong><br>Emissions: ${(emissions / 1e9).toFixed(3)} Bil t`)
+            .style("left", `${event.pageX + 10}px`)
+            .style("top", `${event.pageY + 10}px`);
 
-        // Update the tooltip with country-specific data
-        const emissions = emissionsByCountry.get(d.id) || 0;
-        tooltip.style("opacity", 1)
-          .html(`<strong>${d.properties.name}</strong><br>Emissions: ${(emissions / 1e9).toFixed(3)} Bil t`)
-          .style("left", `${event.pageX + 10}px`)
-          .style("top", `${event.pageY + 10}px`);
-      });
+          // Highlight the hovered country
+          d3.select(this)
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .style("opacity", 1);
+        })
+        .on("mouseout", function () {
+          // Reset tooltip
+          tooltip.style("opacity", 0);
 
-    // Add graticule (optional, for better visual effect)
-    const graticule = d3.geoGraticule();
-    g.append("path")
-      .datum(graticule)
-      .attr("d", path)
-      .attr("fill", "none")
-      .attr("stroke", "#ccc")
-      .attr("stroke-width", 0.5);
+          // Reset all countries to original state
+          g.selectAll("path")
+            .attr("stroke", "#ccc")
+            .attr("stroke-width", 0.5)
+            .style("opacity", 1);
+        })
+        .on("click", function (event, d) {
+          const [longitude, latitude] = d3.geoCentroid(d); // Get the centroid of the country
+
+          // Calculate new rotation to center the country
+          const newRotation = [-longitude, -latitude];
+          rotation = newRotation;
+
+          // Smoothly transition the rotation
+          d3.transition()
+            .duration(1000)
+            .tween("rotate", () => {
+              const interpolate = d3.interpolate(projection.rotate(), newRotation);
+              return t => {
+                projection.rotate(interpolate(t));
+                g.selectAll("path").attr("d", path);
+              };
+            });
+
+          // Update the tooltip with country-specific data
+          const emissions = emissionsByCountry.get(d.id) || 0;
+          tooltip.style("opacity", 1)
+            .html(`<strong>${d.properties.name}</strong><br>Emissions: ${(emissions / 1e9).toFixed(3)} Bil t`)
+            .style("left", `${event.pageX + 10}px`)
+            .style("top", `${event.pageY + 10}px`);
+        });
+
+      // Add graticule (optional, for better visual effect)
+      const graticule = d3.geoGraticule();
+      g.append("path")
+        .datum(graticule)
+        .attr("d", path)
+        .attr("fill", "none")
+        .attr("stroke", "#ccc")
+        .attr("stroke-width", 0.5);
+    }
+
+    updateMap()
+
+    document.getElementById("toggle-ortho").addEventListener("change", updateMap)
   });
 }
 
