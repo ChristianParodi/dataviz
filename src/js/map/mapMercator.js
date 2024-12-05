@@ -2,6 +2,24 @@ function mapMercator() {
   const width = 1000;
   const height = 600;
   let zoomed = false;
+  let currentZoomLevel = d3.zoomIdentity.k;
+
+  // Select the reset button
+  const resetButton = document.getElementById("reset");
+
+  // Add click event listener to the button
+  resetButton.addEventListener("click", () => {
+    zoomed = false;
+    // Reset the zoom to the default view
+    svg.transition() // Add a smooth transition
+      .duration(750) // Set transition duration
+      .call(zoom.transform, d3.zoomIdentity); // Reset to the default zoom and pan
+
+    // Update currentZoomLevel to match the default zoom
+    currentZoomLevel = d3.zoomIdentity.k;
+  });
+
+
 
   // Tooltip per mostrare informazioni
   const tooltip = d3.select("body").append("div")
@@ -19,9 +37,12 @@ function mapMercator() {
   const path = d3.geoPath().projection(projection);
 
   // Zoom e panoramica
-  const zoom = d3.zoom().scaleExtent([1, 8]).on("zoom", (event) => {
-    svg.selectAll("g").attr("transform", event.transform);
-  });
+  const zoom = d3.zoom()
+    .scaleExtent([1, 8])
+    .on("zoom", (event) => {
+      zoomed = event.transform.k > 4;
+      svg.selectAll("g").attr("transform", event.transform);
+    });
 
   // Aggiungere SVG con sfondo
   const svg = d3.select("#map-container-mercator")
