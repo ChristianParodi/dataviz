@@ -2,12 +2,14 @@ function mapMercator() {
   const width = 1000;
   const height = 600;
   let zoomed = false;
+  let clicked = false;
 
   // Select the reset button
   const resetButton = document.getElementById("reset");
 
   // Add click event listener to the button
   resetButton.addEventListener("click", () => {
+    clicked = false;
     zoomed = false;
     // Reset the zoom to the default view
     svg.transition() // Add a smooth transition
@@ -36,7 +38,7 @@ function mapMercator() {
   const zoom = d3.zoom()
     .scaleExtent([1, 8])
     .on("zoom", (event) => {
-      zoomed = event.transform.k > 4;
+      zoomed = event.transform.k > 4 || clicked;
       svg.selectAll("g").attr("transform", event.transform);
     });
 
@@ -197,6 +199,7 @@ function mapMercator() {
             .attr("stroke-width", 0.5)
             .style("opacity", 1);
         }).on("click", function (event, d) {
+          clicked = true;
           
           const [[x0, y0], [x1, y1]] = path.bounds(d);
           const bboxWidth = x1 - x0;
