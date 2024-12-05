@@ -47,7 +47,7 @@ function mapMercator() {
       previousZoomLevel = currentZoomLevel;
       currentZoomLevel = event.transform.k;
 
-      if(previousZoomLevel > currentZoomLevel)
+      if (previousZoomLevel > currentZoomLevel)
         clicked = false;
 
       svg.selectAll("g").attr("transform", event.transform);
@@ -114,22 +114,30 @@ function mapMercator() {
 
     function setZoomedTooltip(event, d) {
       const countryEmissions = emissions.find(r => r.Code == d.id);
-      const emissionsPerCapita = +countryEmissions.CO2;
-      const countryPopulation = +countryEmissions.Population;
+      if (countryEmissions !== undefined) {
+        const emissionsPerCapita = +countryEmissions.CO2;
+        const countryPopulation = +countryEmissions.Population;
 
-      const emissionsType2022 = emissions_type.filter(d => +d.Year === 2022);
-      const fossilEmissions = d3.sum(emissionsType2022.map(d => +d.Fossil)) || 0;
-      const landEmissions = d3.sum(emissionsType2022.map(d => +d.Land)) || 0;
+        const emissionsType2022 = emissions_type.filter(d => +d.Year === 2022);
+        const fossilEmissions = d3.sum(emissionsType2022.map(d => +d.Fossil)) || 0;
+        const landEmissions = d3.sum(emissionsType2022.map(d => +d.Land)) || 0;
 
-      tooltip.style("opacity", 1)
-        .html(`<strong>${d.properties.name}</strong><br>
+        tooltip.style("opacity", 1)
+          .html(`<strong>${d.properties.name}</strong><br>
                  Total fossil emissions: ${(fossilEmissions / 1e9).toFixed(3)} Bil t<br />
                  Total land change emissions: ${(landEmissions / 1e9).toFixed(3)} bil t<br />
                  CO₂ emissions per capita: ${emissionsPerCapita.toFixed(3).toLocaleString()} t<br />
                  Population: ${countryPopulation.toLocaleString()} people
                  `)
-        .style("left", `${event.pageX + 10}px`)
-        .style("top", `${event.pageY + 10}px`);
+          .style("left", `${event.pageX + 10}px`)
+          .style("top", `${event.pageY + 10}px`);
+      }
+      else {
+        tooltip.style("opacity", 1)
+          .html(`<strong>${d.properties.name}</strong><br>Data not available`)
+          .style("left", `${event.pageX + 10}px`)
+          .style("top", `${event.pageY + 10}px`);
+      }
     }
 
     const perCapitaThresholds = [0, 1, 2, 5, 10, 20, 30, 50];
@@ -308,7 +316,7 @@ function mapMercator() {
     // Append the axis to the legend
     legendSvg.append("g")
       .attr("transform", `translate(60, 0)`) // Position the axis beside the legend rectangles
-      .call(legendAxis)
+      // .call(legendAxis)
       .call(g => g.select(".domain").remove()); // Remove the line of the axis
 
 
