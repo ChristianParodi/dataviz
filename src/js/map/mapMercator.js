@@ -253,59 +253,85 @@ function mapMercator() {
     }).slice(0, -1); // Remove the last bin as it doesn't have a corresponding range
 
     // Set dimensions for the legend
-    const squareSize = 20; // Size of each square
-    const spacing = 0; // Space between squares and text
-    const legendPadding = 10; // Padding for the legend container
+const squareSize = 20; // Size of each square
+const spacing = 0; // Space between squares and text
+const legendPadding = 10; // Padding for the legend container
 
-    // Define a scale for the widths of the legend squares based on the range
-    const maxRange = d3.max(legendBins, d => d.next - d.threshold); // Maximum range
-    const squareWidthScale = d3.scaleLinear()
-      .domain([0, maxRange]) // Input domain is the range of emission values
-      .range([20, 120]); // Output range for square widths (min to max length)
+// Define a scale for the widths of the legend squares based on the range
+const maxRange = d3.max(legendBins, d => d.next - d.threshold); // Maximum range
+const squareWidthScale = d3.scaleLinear()
+  .domain([0, maxRange]) // Input domain is the range of emission values
+  .range([20, 120]); // Output range for square widths (min to max length)
 
-    let cumulativeX = legendPadding; // Inizializza la posizione iniziale
+  let cumulativeX = legendPadding+95; // Inizializza la posizione iniziale
 
-    legendSvg.selectAll("rect")
-      .data(legendBins)
-      .join("rect")
-      .attr("x", (d, i) => {
-        const currentX = cumulativeX; // Memorizza la posizione corrente
-        cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
-        return currentX; // Ritorna la posizione corrente per l'elemento
-      })
-      .attr("y", 10) // Posizione verticale costante
-      .attr("width", d => squareWidthScale(d.next - d.threshold)) // Larghezza proporzionale
-      .attr("height", squareSize) // Altezza costante
-      .attr("style", "outline: 0.05px solid orange;")
-      .style("fill", d => d.color) // Colore basato sulla scala
-      .on("mousemove", function (event, d) {
-        const emissions = emissionsByCountry.get(d.id);
+  legendSvg.selectAll("rect")
+    .data(legendBins)
+    .join("rect")
+    .attr("x", (d, i) => {
+      const currentX = cumulativeX; // Memorizza la posizione corrente
+      cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
+      return currentX; // Ritorna la posizione corrente per l'elemento
+    })
+    .attr("y", 10) // Posizione verticale costante
+    .attr("width", d => squareWidthScale(d.next - d.threshold)) // Larghezza proporzionale
+    .attr("height", squareSize) // Altezza costante
+    .attr("style", "outline: 0.05px solid orange;") 
+    .style("fill", d => d.color) // Colore basato sulla scala
+    .on("mousemove", function (event, d) {
+      const emissions = emissionsByCountry.get(d.id);
 
-        // Tooltip
-        tooltip.style("opacity", 1)
-          .html(`</strong>${"Emissions: " + (d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2) + " Bil t"}`)
-          .style("left", `${event.pageX + 10}px`)
-          .style("top", `${event.pageY + 10}px`);
+      // Tooltip
+      tooltip.style("opacity", 1)
+        .html(`</strong>${ "Emissions: " + (d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2) + " Bil t"}`)
+        .style("left", `${event.pageX + 10}px`)
+        .style("top", `${event.pageY + 10}px`);
       })
       .on("mouseout", function () {
         tooltip.style("opacity", 0);
 
-      });
+    });
 
-    cumulativeX = legendPadding; // Reinizializza per i testi
-    legendSvg.selectAll(".bar-text")
-      .data(legendBins.slice(1)) // I numeri per le barrette
-      .join("text")
-      .attr("x", (d, i) => {
-        const currentX = cumulativeX; // Memorizza la posizione corrente
-        cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
-        return currentX; // Ritorna la posizione corrente per l'elemento
-      })
-      .attr("y", 5) // Posizione sopra i quadratini
-      .text((d, i) => (legendBins[i].next / 1e9).toFixed(2)) // Mostra il valore di tonnellate
-      .style("font-size", "10px")
-      .style("fill", "#333")
-      .style("text-anchor", "middle");
+  let cumulativeZ = legendPadding+95; // Reinizializza per i testi
+legendSvg.selectAll(".bar-text")
+  .data(legendBins.slice(0)) // I numeri per le barrette
+  .join("text")
+  .attr("x", (d, i) => {
+    const currentX = cumulativeZ; // Memorizza la posizione corrente
+    cumulativeZ += squareWidthScale(d.next - d.threshold); // Aggiorna la posizione cumulativa
+    return currentX; // Ritorna la posizione corrente per l'elemento
+  })
+  .attr("y", 45) // Posizione sopra i quadratini
+  .text((d, i) => i === 0 ? "0" :(legendBins[i].threshold / 1e9).toFixed(2)) // Mostra il valore di tonnellate
+  .style("font-size", "10px")
+  .style("fill", "#333")
+  .style("text-anchor", "middle");
+
+  legendSvg.append("text")
+  .attr("x", cumulativeZ - spacing) // Posizione finale dopo l'ultimo quadratino
+  .attr("y", 45)
+  .text((legendBins[legendBins.length - 1].next / 1e9).toFixed(2)) // Ultimo valore (d.next)
+  .style("font-size", "10px")
+  .style("fill", "#333")
+  .style("text-anchor", "middle");
+
+  // Primo tick (iniziale)
+legendSvg.append("rect")
+.attr("x", legendPadding + 94) // Posizione iniziale del primo tick
+.attr("y", 10)
+.attr("width", 2)
+.attr("height", 25)
+.attr("fill", "orange")
+.attr("stroke-width", "2px");
+
+// Ultimo tick (finale)
+legendSvg.append("rect")
+.attr("x", cumulativeX-1) // Posizione finale dopo l'ultimo rettangolo
+.attr("y", 10)
+.attr("width", 2)
+.attr("height", 25)
+.attr("fill", "orange")
+.attr("stroke-width", "2px");
 
     // Scale for the legend axis (match the vertical position of rectangles)
     const legendScale = d3.scaleLinear()
@@ -316,7 +342,7 @@ function mapMercator() {
     // Append the axis to the legend
     legendSvg.append("g")
       .attr("transform", `translate(60, 0)`) // Position the axis beside the legend rectangles
-      // .call(legendAxis)
+      .call(legendAxis)
       .call(g => g.select(".domain").remove()); // Remove the line of the axis
 
 
