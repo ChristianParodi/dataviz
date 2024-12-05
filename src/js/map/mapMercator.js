@@ -115,17 +115,28 @@ function mapMercator() {
 
       g.selectAll("path")
         .data(world.features)
-        .join("path")
-        .attr("d", path)
-        .attr("fill", d => {
-          const emissions = isPerCapita
-            ? emissionsPerCapitaByCountry.get(d.id)
-            : emissionsByCountry.get(d.id);
-          const scale = isPerCapita ? colorScalePerCapita : colorScaleTotal;
-          return emissions === undefined ? "#ccc" : scale(emissions);
-        })
-        .attr("stroke", "#ccc")
-        .attr("stroke-width", 0.5)
+        .join(
+          enter => enter.append("path") // Handle new paths
+            .attr("d", path)
+            .attr("fill", d => {
+              const emissions = isPerCapita
+                ? emissionsPerCapitaByCountry.get(d.id)
+                : emissionsByCountry.get(d.id);
+              const scale = isPerCapita ? colorScalePerCapita : colorScaleTotal;
+              return emissions === undefined ? "#ccc" : scale(emissions);
+            })
+            .attr("stroke", "#ccc")
+            .attr("stroke-width", 0.5),
+          update => update // Handle updating paths
+            .transition(t) // Smoothly transition the color
+            .attr("fill", d => {
+              const emissions = isPerCapita
+                ? emissionsPerCapitaByCountry.get(d.id)
+                : emissionsByCountry.get(d.id);
+              const scale = isPerCapita ? colorScalePerCapita : colorScaleTotal;
+              return emissions === undefined ? "#ccc" : scale(emissions);
+            }),
+          exit => exit.remove())// Handle exiting paths
         .on("mousemove", function (event, d) {
           const emissions = isPerCapita
             ? emissionsPerCapitaByCountry.get(d.id)
