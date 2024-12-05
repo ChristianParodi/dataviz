@@ -56,13 +56,13 @@ function mapMercator() {
   const g = svg.append("g");
 
   // Creare una seconda SVG per la legenda
-  const legendWidth = 800;
-  const legendHeight = 400;
+  const legendWidth = 1000;
+  const legendHeight = 100;
 
   const legendSvg = d3.select("#legend-container-mercator")
     .append("svg")
     .attr("width", legendWidth)
-    .attr("height", height)
+    .attr("height", legendHeight)
     .style("background", "#fff");
 
   // Caricare i dati GeoJSON e il dataset
@@ -234,41 +234,57 @@ function mapMercator() {
       return { threshold, color: colors[i], next: thresholds[i + 1] };
     }).slice(0, -1); // Remove the last bin as it doesn't have a corresponding range
 
-    const squareSize = 20;
-    const spacing = 20;
-    const legendPadding = 10;
-    const maxRange = d3.max(legendBins, d => d.next - d.threshold);
-    const squareWidthScale = d3.scaleLinear()
-      .domain([0, maxRange])
-      .range([20, 120]);
+// Set dimensions for the legend
+const squareSize = 20; // Size of each square
+const spacing = 0; // Space between squares and text
+const legendPadding = 10; // Padding for the legend container
 
-    let cumulativeX = legendPadding;
+// Define a scale for the widths of the legend squares based on the range
+const maxRange = d3.max(legendBins, d => d.next - d.threshold); // Maximum range
+const squareWidthScale = d3.scaleLinear()
+  .domain([0, maxRange]) // Input domain is the range of emission values
+  .range([20, 120]); // Output range for square widths (min to max length)
 
-    legendSvg.selectAll("rect")
-      .data(legendBins)
-      .join("rect")
-      .attr("x", (d, i) => {
-        const currentX = cumulativeX; // Memorizza la posizione corrente
-        cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
-        return currentX; // Ritorna la posizione corrente per l'elemento
-      })
-      .attr("y", 10) // Posizione verticale costante
-      .attr("width", d => squareWidthScale(d.next - d.threshold)) // Larghezza proporzionale
-      .attr("height", squareSize) // Altezza costante
-      .style("fill", d => d.color); // Colore basato sulla scala
+  let cumulativeX = legendPadding; // Inizializza la posizione iniziale
 
-    // Add labels beside each square to show the range
-    legendSvg.selectAll("text")
-      .data(legendBins)
-      .join("text")
-      .attr("x", (d, i) => legendPadding + i * (squareSize + spacing)) // Position text to the right of the square
-      .attr("y", d => 50) // Align text with the middle of each square
-      .attr("dy", "0.35em") // Center the text vertically
-      .text(d => `${(d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2)} bil t`) // Format the range
-      .style("font-size", "10px")
-      .style("fill", "#333");
+  legendSvg.selectAll("rect")
+    .data(legendBins)
+    .join("rect")
+    .attr("x", (d, i) => {
+      const currentX = cumulativeX; // Memorizza la posizione corrente
+      cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
+      return currentX; // Ritorna la posizione corrente per l'elemento
+    })
+    .attr("y", 10) // Posizione verticale costante
+    .attr("width", d => squareWidthScale(d.next - d.threshold)) // Larghezza proporzionale
+    .attr("height", squareSize) // Altezza costante
+    .attr("style", "outline: 0.05px solid orange;") 
+    .style("fill", d => d.color) // Colore basato sulla scala
+    .on("mousemove", function (event, d) {
+      const emissions = emissionsByCountry.get(d.id);
 
+      // Tooltip
+      tooltip.style("opacity", 1)
+        .html(`</strong>${ "Emissions: " + (d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2) + " Bil t"}`)
+        .style("left", `${event.pageX + 10}px`)
+        .style("top", `${event.pageY + 10}px`);
 
+    });
+
+cumulativeX = legendPadding; // Reinizializza per i testi
+legendSvg.selectAll(".bar-text")
+  .data(legendBins.slice(1)) // I numeri per le barrette
+  .join("text")
+  .attr("x", (d, i) => {
+    const currentX = cumulativeX; // Memorizza la posizione corrente
+    cumulativeX += squareWidthScale(d.next - d.threshold) + spacing; // Aggiorna la posizione cumulativa
+    return currentX; // Ritorna la posizione corrente per l'elemento
+  })
+  .attr("y", 5) // Posizione sopra i quadratini
+  .text((d, i) => (legendBins[i].next / 1e9).toFixed(2)) // Mostra il valore di tonnellate
+  .style("font-size", "10px")
+  .style("fill", "#333")
+  .style("text-anchor", "middle");
 
     // Scale for the legend axis (match the vertical position of rectangles)
     const legendScale = d3.scaleLinear()
@@ -279,7 +295,7 @@ function mapMercator() {
     // Append the axis to the legend
     legendSvg.append("g")
       .attr("transform", `translate(60, 0)`) // Position the axis beside the legend rectangles
-      // .call(legendAxis)
+      .call(legendAxis)
       .call(g => g.select(".domain").remove()); // Remove the line of the axis
 
 
