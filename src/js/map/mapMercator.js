@@ -170,7 +170,7 @@ function mapMercator() {
               tooltipText = `<strong>${d.properties.name}</strong><br>
               ${isPerCapita
                   ? `CO₂ per capita: ${(emissions).toFixed(3)} t`
-                  : `Total emissions: ${(emissions / 1e9).toFixed(3)} Bil t`}`;
+                  : `Total CO₂ emissions: ${(emissions / 1e9).toFixed(3)} Bil t`}`;
             tooltip.style("opacity", 1)
               .html(tooltipText)
               .style("left", `${event.pageX + 10}px`)

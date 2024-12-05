@@ -90,7 +90,6 @@ function mapOrthographic() {
 
     function updateMap() {
       const isPerCapita = document.getElementById("toggle-ortho").checked;
-      const scale = isPerCapita ? colorScalePerCapita : colorScaleTotal;
       const t = d3.transition().duration(500);
 
       // Draw the map
@@ -119,11 +118,18 @@ function mapOrthographic() {
             }),
           exit => exit.remove())// Handle exiting paths
         .on("mousemove", function (event, d) {
-          const emissions = emissionsByCountry.get(d.id) || 0;
+          const emissions = isPerCapita
+            ? emissionsPerCapitaByCountry.get(d.id)
+            : emissionsByCountry.get(d.id);
 
-          // Tooltip
+          let tooltipText = `<strong>${d.properties.name}</strong><br>Data not available`;
+          if (emissions !== undefined)
+            tooltipText = `<strong>${d.properties.name}</strong><br>
+              ${isPerCapita
+                ? `CO₂ per capita: ${(emissions).toFixed(3)} t`
+                : `Total CO₂ emissions: ${(emissions / 1e9).toFixed(3)} Bil t`}`;
           tooltip.style("opacity", 1)
-            .html(`<strong>${d.properties.name}</strong><br>Emissions: ${(emissions / 1e9).toFixed(3)} Bil t`)
+            .html(tooltipText)
             .style("left", `${event.pageX + 10}px`)
             .style("top", `${event.pageY + 10}px`);
 
