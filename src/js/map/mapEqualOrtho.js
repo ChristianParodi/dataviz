@@ -77,16 +77,18 @@ function mapOrthographic() {
       10e9,
     ];
 
-    const colors = thresholds.map((d, i) => d3.interpolateOranges(i / (thresholds.length - 1)));
+    const colors = (thresholds) => thresholds.map((d, i) => {
+      return d3.interpolateOranges(i / (thresholds.length - 1)); // Spread the shades evenly
+    });
 
     const colorScaleTotal = d3.scaleThreshold()
       .domain(thresholds)
-      .range(colors.slice(1));
+      .range(colors(thresholds).slice(0));
 
     const perCapitaThresholds = [0, 1, 2, 5, 10, 20, 30, 50];
     const colorScalePerCapita = d3.scaleThreshold()
       .domain(perCapitaThresholds)
-      .range(d3.schemeOranges[9]);
+      .range(colors(perCapitaThresholds));
 
     function updateMap() {
       const isPerCapita = document.getElementById("toggle-ortho").checked;
