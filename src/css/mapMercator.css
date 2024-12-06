@@ -1,7 +1,9 @@
 p {
   max-width: 80%;
 }
-
+.rule_container{
+  @apply bg-gray-500 border-2 border-gray-200 
+}
 .switch {
   @apply h-6 bg-orange-600 border-2 border-gray-200 
         rounded-full w-11 after:absolute after:top-0.5 after:left-0.5 

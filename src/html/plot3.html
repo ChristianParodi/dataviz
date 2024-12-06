@@ -5,12 +5,62 @@
     <script src="./../../libs/d3-sankey.min.js"></script>
     <script src="./../../libs/d3.v7.min.js"></script>
 </head>
+<style>
+    body {
+      display: flex;
+      flex-direction: column; /* Imposta la direzione verticale */
+      align-items: center; /* Centra gli elementi orizzontalmente */
+      margin: 0; /* Rimuove il margine predefinito */
+      min-height: 100vh; /* Assicura che il corpo riempia tutta l'altezza della finestra */
+    }
 
-<body style="display: flex; align-items: center; justify-content: center;">
-    <iframe width="80%" height="852" frameborder="0"
+    iframe {
+      width: 80%;
+      height: 1697px;
+      border: none;
+    }
+
+    footer {
+      width: 100%; /* Assicura che il footer occupi tutta la larghezza */
+      background: #1a202c; /* Colore di sfondo (gray-900) */
+      color: white;
+      text-align: center;
+      padding: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      max-width: 1200px; /* Larghezza massima per il contenitore */
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .space-x-6 > * + * {
+      margin-left: 24px;
+    }
+  </style>
+<body>
+    <iframe 
         src="https://observablehq.com/embed/44026229c1559fb2@3035?cells=title5%2CchartHeatmap%2ClegendHeatmap%2Ccomment6">
     </iframe>
-
+    <footer>
+        <div class="container">
+          <div class="flex">
+            <p>© 2024 Data Visualization - Bazzi, Parodi, Valentini</p>
+            <div class="space-x-6">
+              <a href="#" class="hover:text-gray-400" style="color: white; text-decoration: none;">About Us</a>
+              <a href="#" class="hover:text-gray-400" style="color: white; text-decoration: none;">Contact</a>
+              <a href="#" class="hover:text-gray-400" style="color: white; text-decoration: none;">Privacy Policy</a>
+            </div>
+          </div>
+        </div>
+      </footer>
 </body>
 
 </html>
