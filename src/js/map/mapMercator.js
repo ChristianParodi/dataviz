@@ -1,5 +1,5 @@
 function mapMercator() {
-  const width = 1000;
+  const width = 1200;
   const height = 600;
   let zoomed = false;
   let clicked = false;
@@ -65,7 +65,7 @@ function mapMercator() {
   const g = svg.append("g");
 
   // Creare una seconda SVG per la legenda
-  const legendWidth = window.innerWidth;
+  const legendWidth = width + 30;
   const legendHeight = 100;
 
   const legendSvg = d3.select("#legend-container-mercator")
@@ -84,6 +84,7 @@ function mapMercator() {
     const emissionsPerCapitaByCountry = new Map(emissions.map(d => [d.Code, +d.CO2]));
     const emissionsValues = emissions.map(d => +d.Total).sort((a, b) => a - b);
     const perCapitaEmissionsValues = emissions.map(d => +d.CO2).sort((a, b) => a - b);
+
     // Colori per la scala
     const thresholds = [
       0,
@@ -99,13 +100,13 @@ function mapMercator() {
       emissionsValues[emissionsValues.length - 1]
     ];
 
-    const colors = thresholds.map((d, i) => {
+    const colors = (thresholds) => thresholds.map((d, i) => {
       return d3.interpolateOranges(i / (thresholds.length - 1)); // Spread the shades evenly
     });
 
     const colorScaleTotal = d3.scaleThreshold()
       .domain(thresholds)
-      .range(colors.slice(0));
+      .range(colors(thresholds).slice(0));
 
     function setZoomedTooltip(event, d) {
       const countryEmissions = emissions.find(r => r.Code == d.id);
@@ -135,10 +136,10 @@ function mapMercator() {
       }
     }
 
-    const perCapitaThresholds = [0, 1, 2, 5, 10, 20, 30, 40];
+    const perCapitaThresholds = [0, 1, 2, 5, 10, 20, 30, perCapitaEmissionsValues[perCapitaEmissionsValues.length - 1]];
     const colorScalePerCapita = d3.scaleThreshold()
       .domain(perCapitaThresholds)
-      .range(d3.schemeOranges[9]);
+      .range(colors(perCapitaThresholds));
 
     // Function to update the map
     function updateMap() {
@@ -251,13 +252,15 @@ function mapMercator() {
       // Set dimensions for the legend
       const squareSize = 20; // Size of each square
       const spacing = 15; // Space between squares and text
-      const legendPadding = 30; // Padding for the legend container
+      const legendPadding = 15; // Padding for the legend container
 
+      const legendSpacing = isPerCapita
+        ? squareSize + spacing
+        : 2 * (squareSize + spacing)
       // Define a scale for the widths of the legend squares based on the range
       const squareWidthScale = d3.scaleLinear()
         .domain([0, selectedThreshold[selectedThreshold.length - 1]]) // Input domain is the range of emission values
-        .range([0, legendWidth - 2 * legendPadding - 2 * squareSize - 2 * spacing]); // Output range for square widths (min to max length)
-      console.log(selectedThreshold[selectedThreshold.length - 1])
+        .range([0, legendWidth - 2 * legendPadding - legendSpacing]); // Output range for square widths (min to max length)
       let cumulativeX = legendPadding; // Inizializza la posizione iniziale
 
       legendSvg.selectAll("rect")
@@ -265,7 +268,7 @@ function mapMercator() {
         .join("rect")
         .attr("x", (d, i) => {
           const currentX = cumulativeX; // Memorizza la posizione corrente
-          if (i > 1) { // after the gray and the 0.00 - 0.01, do it normally
+          if ((isPerCapita && i > 0) || i > 1) { // after the gray and the 0.00 - 0.01, do it normally. Do it on total only
             cumulativeX += squareWidthScale(d.next - d.threshold); // Aggiorna la posizione cumulativa
           }
           else
@@ -274,15 +277,20 @@ function mapMercator() {
         })
         .attr("y", 10) // Posizione verticale costante
         .attr("width", (d, i) => {
-          return i > 1 ? squareWidthScale(d.next - d.threshold) : squareSize;
+          return (isPerCapita && i > 0) || i > 1 ? squareWidthScale(d.next - d.threshold) : squareSize;
         }) // Larghezza proporzionale
         .attr("height", squareSize) // Altezza costante
         .attr("style", "outline: 0.05px solid orange;")
         .style("fill", d => d.color) // Colore basato sulla scala
         .on("mousemove", function (event, d) {
+          const legendValue = isPerCapita ? d.threshold : d.threshold / 1e9;
+          const legendValueNext = isPerCapita ? d.next : d.next / 1e9;
+          const tooltipText = isPerCapita
+            ? `Emissions: ${legendValue.toFixed(2)} - ${legendValueNext.toFixed(2)} t`
+            : `Emissions: ${legendValue.toFixed(2)} - ${legendValueNext.toFixed(2)} Bil t`
           // Tooltip
           tooltip.style("opacity", 1)
-            .html(`</strong>${"Emissions: " + (d.threshold / 1e9).toFixed(2)} - ${(d.next / 1e9).toFixed(2) + " Bil t"}`)
+            .html(d.color === "#ccc" ? "Data not available" : tooltipText)
             .style("left", `${event.pageX + 10}px`)
             .style("top", `${event.pageY + 10}px`);
         })
@@ -299,8 +307,8 @@ function mapMercator() {
         .join("text")
         .attr("x", (d, i) => {
           let currentX = cumulativeX;
-          if (i > 1) { // after the gray and the 0.00 - 0.01, do it normally
-            if (i === 2)
+          if ((isPerCapita && i > 0) || i > 1) { // after the gray and the 0.00 - 0.01, do it normally
+            if ((!isPerCapita && i === 2) || (isPerCapita && i === 1))
               currentX -= squareSize * 0.5;
             cumulativeX = currentX + squareWidthScale(d.next - d.threshold); // Aggiorna la posizione cumulativa
             return currentX; // Ritorna la posizione corrente per l'elemento
@@ -317,7 +325,7 @@ function mapMercator() {
           if (i === 0) // gray
             return "Nd";
 
-          if (i === 1 && isPerCapita) // 0 - 0.01
+          if (i === 1 && !isPerCapita) // 0 - 0.01
             return "<0.01";
 
           return (isPerCapita ? legendBins[i].threshold : legendBins[i].threshold / 1e9).toFixed(2)
@@ -330,14 +338,18 @@ function mapMercator() {
       legendSvg.append("text")
         .attr("x", cumulativeX) // Posizione finale dopo l'ultimo quadratino
         .attr("y", 45)
-        .text((legendBins[legendBins.length - 1].next / 1e9).toFixed(2)) // Ultimo valore (d.next)
+        .text((isPerCapita ? selectedThreshold[selectedThreshold.length - 1] : selectedThreshold[selectedThreshold.length - 1] / 1e9).toFixed(2)) // Ultimo valore (d.next)
         .style("font-size", "10px")
         .style("fill", "#333")
         .style("text-anchor", "middle");
 
+      const firstTickX = isPerCapita
+        ? legendPadding + spacing + squareSize
+        : legendPadding + 2 * spacing + 2 * squareSize;
+
       // Primo tick (iniziale)
       legendSvg.append("rect")
-        .attr("x", legendPadding + 2 * spacing + 2 * squareSize - 1) // Posizione iniziale del primo tick
+        .attr("x", firstTickX - 1) // Posizione iniziale del primo tick
         .attr("y", 10)
         .attr("width", 2)
         .attr("height", 25)
