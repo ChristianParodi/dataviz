@@ -114,16 +114,19 @@ function mapMercator() {
         const emissionsPerCapita = +countryEmissions.CO2;
         const countryPopulation = +countryEmissions.Population;
 
-        const emissionsType2022 = emissions_type.filter(d => +d.Year === 2022);
-        const fossilEmissions = d3.sum(emissionsType2022.map(d => +d.Fossil)) || 0;
-        const landEmissions = d3.sum(emissionsType2022.map(d => +d.Land)) || 0;
+        const emissionsType2022 = emissions_type.filter(r => (+r.Year === 2022) && (r.Code === d.id));
+        const fossilEmissions = d3.sum(emissionsType2022.map(r => +r.Fossil)) || 0;
+        const landEmissions = d3.sum(emissionsType2022.map(r => +r.Land)) || 0;
+        function formatNumberWithApexDots(number) {
+          return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "˙");
+        }
 
         tooltip.style("opacity", 1)
           .html(`<strong>${d.properties.name}</strong><br>
                  Total fossil emissions: ${(fossilEmissions / 1e9).toFixed(3)} Bil t<br />
-                 Total land change emissions: ${(landEmissions / 1e9).toFixed(3)} bil t<br />
+                 Total land change emissions: ${(landEmissions / 1e9).toFixed(3)} Bil t<br />
                  CO₂ emissions per capita: ${emissionsPerCapita.toFixed(3).toLocaleString()} t<br />
-                 Population: ${countryPopulation.toLocaleString()} people
+                 Population: ${formatNumberWithApexDots(countryPopulation)} people
                  `)
           .style("left", `${event.pageX + 10}px`)
           .style("top", `${event.pageY + 10}px`);
@@ -213,7 +216,8 @@ function mapMercator() {
             .attr("stroke", "#ccc")
             .attr("stroke-width", 0.5)
             .style("opacity", 1);
-        }).on("click", function (event, d) {
+        })
+        .on("click", function (event, d) {
           clicked = true;
 
           const [[x0, y0], [x1, y1]] = path.bounds(d);
@@ -280,7 +284,8 @@ function mapMercator() {
           return (isPerCapita && i > 0) || i > 1 ? squareWidthScale(d.next - d.threshold) : squareSize;
         }) // Larghezza proporzionale
         .attr("height", squareSize) // Altezza costante
-        .attr("style", "outline: 0.05px solid orange;")
+        .attr("stroke", "orange")
+        .attr("stroke-width", "1px")
         .style("fill", d => d.color) // Colore basato sulla scala
         .on("mousemove", function (event, d) {
           const legendValue = isPerCapita ? d.threshold : d.threshold / 1e9;
@@ -293,10 +298,58 @@ function mapMercator() {
             .html(d.color === "#ccc" ? "Data not available" : tooltipText)
             .style("left", `${event.pageX + 10}px`)
             .style("top", `${event.pageY + 10}px`);
+
+          // Highlight the legend square
+          d3.select(this)
+            .style("opacity", 1);
+
+          // Gray out all other legend squares
+          legendSvg.selectAll("rect")
+            .filter(node => node !== d) // Exclude the hovered square
+            .style("opacity", 0.3);
+
+          // Highlight the countries with the same emission
+          g.selectAll("path")
+            .data(world.features)
+            .attr("stroke", function (node) {
+              const emissions = isPerCapita
+                ? emissionsPerCapitaByCountry.get(node.id)
+                : emissionsByCountry.get(node.id) / 1e9;
+              if (isNaN(legendValue))
+                return isNaN(emissions) ? "#000" : null;
+              return emissions >= legendValue && emissions <= legendValueNext ? "#000" : null;
+            })
+            .attr("stroke-width", function (node) {
+              const emissions = isPerCapita
+                ? emissionsPerCapitaByCountry.get(node.id)
+                : emissionsByCountry.get(node.id) / 1e9;
+              if (isNaN(legendValue))
+                return isNaN(emissions) ? 0.5 : 0;
+              return (emissions >= legendValue && emissions <= legendValueNext) ? 0.5 : 0;
+            })
+            .attr("fill-opacity", function (node) {
+              const emissions = isPerCapita
+                ? emissionsPerCapitaByCountry.get(node.id)
+                : emissionsByCountry.get(node.id) / 1e9;
+              if (isNaN(legendValue))
+                return isNaN(emissions) ? 1 : 0.5;
+              return emissions >= legendValue && emissions <= legendValueNext ? 1 : 0.5;
+            });
         })
         .on("mouseout", function () {
-          tooltip.style("opacity", 0);
+          // reset legend squares
+          legendSvg.selectAll("rect")
+            .attr("stroke", "orange")
+            .attr("stroke-width", "1px")
+            .style("opacity", 1);
 
+          // Reset the countries highlighting
+          g.selectAll("path")
+            .attr("stroke", "#ccc")
+            .attr("stroke-width", 0.5)
+            .attr("fill-opacity", 1);
+
+          tooltip.style("opacity", 0);
         });
 
       legendSvg.selectAll("text").remove();
@@ -350,7 +403,7 @@ function mapMercator() {
       // Primo tick (iniziale)
       legendSvg.append("rect")
         .attr("x", firstTickX - 1) // Posizione iniziale del primo tick
-        .attr("y", 10)
+        .attr("y", 9.5)
         .attr("width", 2)
         .attr("height", 25)
         .attr("fill", "orange")
@@ -359,7 +412,7 @@ function mapMercator() {
       // Ultimo tick (finale)
       legendSvg.append("rect")
         .attr("x", cumulativeX - 1) // Posizione finale dopo l'ultimo rettangolo
-        .attr("y", 10)
+        .attr("y", 9.5)
         .attr("width", 2)
         .attr("height", 25)
         .attr("fill", "orange")
