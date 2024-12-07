@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link href="./../../dist/global.css" rel="stylesheet" />
+    <link href="./../../dist/mapMercator.css" rel="stylesheet" />
+    <script src="./../../libs/d3.v7.min.js"></script>
+    <style>
+      p {
+        max-width: 80%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col sm:flex-row justify-between items-center">
+          <div class="flex gap-4 self-start justify-center items-center">
+            <a href="./../../index.html">
+              <button class="buttonstyle ">←</button>
+            </a>
+            <span>Home</span>
+          </div>
+        <img src="./../../tristi.png" width="50">
+        </div>
+      </div>
+    </div>
+    <main class="flex flex-col gap-10 items-center my-10">
+      <h1>Countries total emissions and densities (2022)</h1>
+      <p>
+        The choropleth highlights a significant difference between total CO₂ 
+        emissions and per capita emissions. It shows that China, the USA, India,
+         and Russia are the countries emitting the most CO₂ overall, 
+         due to total emissions caused by land use and fossil fuels, 
+         and these countries also correspond to those with higher population densities. 
+         However, when switching to view per capita emissions, substantial differences emerge.
+          For example, in India, despite having very high total emissions of 2.830 billion 
+          tons, the per capita figure is significantly lower at 1.997 tons. On the other
+           hand, Europe, which does not show particularly high total emissions, 
+           far surpasses India in per capita consumption, reflecting a more 
+           energy-intensive lifestyle in terms of individual consumption.
+      </p>
+      
+      <!-- switch -->
+      <div class="flex gap-4">
+        <button id="reset">Reset Zoom</button>
+        <span class="ml-2 text-gray-800">Total</span>
+        <label for="toggle-mercator" class="relative flex items-center cursor-pointer">
+          <input type="checkbox" id="toggle-mercator" class="sr-only peer" />
+          <div class="switch"></div>
+          <span class="ml-2 text-gray-800">Per capita</span>
+        </label>
+      </div>
+      <!-- end switch -->
+      <div class="flex" id="map-container-mercator"></div>
+      <div class="flex" id="legend-container-mercator"></div>
+      <p>
+        In the following visualization, the only element different 
+        from the previous one is the type of projection used, which
+         shows countries based on their actual size on the Earth's surface.
+          This helps correct distorted perceptions, such as that of
+           Russia, which in the classic projection appears much larger 
+           than Africa. It highlights that the perception of emissions
+            should not be based solely on a country's surface area, as
+             a vast area does not necessarily imply higher emissions.
+      </p>
+      
+      <!-- switch ortho -->
+      <div class="flex gap-4">
+        <span class="ml-2 text-base text-gray-800">Total</span>
+        <label for="toggle-ortho" class="relative flex items-center cursor-pointer">
+          <input type="checkbox" id="toggle-ortho" class="sr-only peer" />
+          <div class="switch"></div>
+          <span class="ml-2 text-base text-gray-800">Per capita</span>
+        </label>
+      </div>
+      <!-- end switch ortho -->
+  
+      <div id="map-container-ortho"></div>
+      <script src="./../js/map/mapMercator.js"></script>
+      <script src="./../js/map/mapEqualOrtho.js"></script>
+    </main>
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col sm:flex-row justify-between items-center">
+          <p class="text-center sm:text-left mb-4 sm:mb-0">© 2024 Data Visualization - Bazzi, Parodi, Valentini</p>
+          <div class="flex space-x-6">
+            <a href="#" class="hover:text-gray-400">About Us</a>
+            <a href="#" class="hover:text-gray-400">Contact</a>
+            <a href="#" class="hover:text-gray-400">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  
+
+</html>
