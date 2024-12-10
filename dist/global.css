@@ -848,6 +848,10 @@ video {
   align-self: flex-start;
 }
 
+.self-center{
+  align-self: center;
+}
+
 .rounded{
   border-radius: 0.25rem;
 }
