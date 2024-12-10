@@ -41,94 +41,91 @@
     <!-- Sezione 1 -->
     <section id="campana1" class="bg-blue-50 py-16 ">
       <div class="max-w-6xl mx-auto px-6">
-        <h2 class="hsection">Section 1</h2>
-        <div class="flex flex-col">
-          <p class="text-center text-gray-600 mb-4">
+        <h2 class="hsection">Who are the bad guys?</h2>
+        <div class="flex flex-col items-center">
+          <p class="text-gray-600 mb-10 max-w-[80%]">
             Climate change is a critical issue in today's world,
-            and one of its primary causes is the increase in global CO₂ emissions.</p>
-          <p class="text-center text-gray-600 mb-16">
+            and one of its primary causes is the increase in global CO₂ emissions.<br /><br />
             To better understand this phenomenon, we propose various visualizations
             to compare CO₂ emissions across countries, focusing on both per capita
             emissions and total emissions by country.</p>
         </div>
 
         <!-- Cards Section -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div class="flex flex-col sm:flex-row justify-center gap-12">
 
-          <div class="window">
-            <h3 class="hwindow">Data at a glance</h3>
-            <p class="pwindow">Compare per capita CO2 emissions.</p>
-            <a href="./src/html/plot1.html">
+          <a href="./src/html/plot1.html">
+            <div class="window">
+              <h3 class="hwindow">Data at a glance</h3>
+              <p class="pwindow">First look at per capita emissions.</p>
               <button class="btn-primary">View more</button>
-            </a>
-          </div>
+            </div>
+          </a>
 
-          
-          <div class="window">
-            <h3 class="hwindow">Country comparison</h3>
-            <p class="pwindow">Compare emissions between countries.</p>
-            <a href="./src/html/plot2.html">
+
+          <a href="./src/html/plot2.html">
+            <div class="window">
+              <h3 class="hwindow">Country comparison</h3>
+              <p class="pwindow">Compare total emissions between countries.</p>
               <button class="btn-primary">View more</button>
-            </a>
-          </div>
-
-          <div class="window">
-            <h3 class="hwindow">Emissions type</h3>
-            <p class="pwindow">Compare emissions by type (fossil fuels/land use).</p>
-            <a href="./src/html/plot3.html">
-              <button class="btn-primary">View more</button>
-            </a>
-          </div>
-
+            </div>
+          </a>
         </div>
       </div>
     </section>
 
     <!-- Sezione 2 -->
-    
-      <section id="campana2" class="bg-gray-100 py-16">
-        <div class="max-w-6xl mx-auto px-6">
-          <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">Section 2</h2>
 
+    <section id="campana2" class="bg-gray-100 py-10">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">Where do emissions come from?</h2>
+        <div class="flex flex-col sm:flex-row justify-center gap-12">
+          <a href="./src/html/plot3.html">
+            <div class="window">
+              <h3 class="hwindow">Emissions type</h3>
+              <p class="pwindow">Compare emissions by type (fossil fuels/land use).</p>
+              <button class="btn-primary">View more</button>
+            </div>
+          </a>
           <!-- Cards Section -->
           <a href="./src/html/alluvial.html">
-            <div class="flex flex-col sm:flex-row justify-center gap-12">
-              <div class="window">
-                <h3 class="hwindow">Global Distribution of Fossil/Land Use Emissions</h3>
-                <p class="pwindow">
-                  Visualize flows of fossil and land use emissions
-                  in the continents and respective countries.</p>
-                <a href="./src/html/alluvial.html">
-                  <button class="btn-primary">View more</button>
-                </a>
-              </div>
-            </div>
-        </a>
-        </div>
-      </section>
-    
-
-    
-      <section id="campana2" class="bg-gray-100 py-16">
-        <div class="max-w-6xl mx-auto px-6">
-          <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">Section 3</h2>
-
-          <!-- Cards Section -->
-          <a href="./src/html/map.html">
-            <div class="flex flex-col sm:flex-row justify-center gap-12">
-              <div class="window">
-                <h3 class="hwindow">Cholopelth</h3>
-                <p class="pwindow">
-                  Visualize flows of fossil and land use emissions
-                  in the continents and respective countries.</p>
-                <a href="./src/html/map.html">
-                  <button class="btn-primary">View more</button>
-                </a>
-              </div>
+            <div class="window">
+              <h3 class="hwindow">Global Distribution of Fossil/Land Use Emissions</h3>
+              <p class="pwindow">
+                Visualize flows of fossil and land use emissions
+                in the continents and respective countries.</p>
+              <a href="./src/html/alluvial.html">
+                <button class="btn-primary">View more</button>
+              </a>
             </div>
           </a>
         </div>
-      </section>
+
+      </div>
+    </section>
+
+
+
+    <section id="campana2" class="bg-gray-100 py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">Section 3</h2>
+
+        <!-- Cards Section -->
+        <a href="./src/html/map.html">
+          <div class="flex flex-col sm:flex-row justify-center gap-12">
+            <div class="window">
+              <h3 class="hwindow">Choropelth</h3>
+              <p class="pwindow">
+                Visualize flows of fossil and land use emissions
+                in the continents and respective countries.</p>
+              <a href="./src/html/map.html">
+                <button class="btn-primary">View more</button>
+              </a>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
 
   </main>
 
