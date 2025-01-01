@@ -50,7 +50,7 @@ function lineChart() {
 
         const filtered = data.filter(d => d.country == "Alabama" && +d.year === selectedYear);
 
-        const margin = { top: 20, right: 30, bottom: 80, left: 80 };
+        const margin = { top: 20, right: 30, bottom: 30, left: 80 };
         const width = 600;
         const height = 300;
 
@@ -64,7 +64,7 @@ function lineChart() {
           .padding(0.5);
 
         const y = d3.scaleLinear()
-          .domain([d3.min(data, d => d.min) - 20, d3.max(data, d => d.max) + 20])
+          .domain([d3.min(data, d => d.min), d3.max(data, d => d.max) + 20])
           .range([height - margin.bottom, margin.top]);
 
         // X axis
@@ -117,15 +117,14 @@ function lineChart() {
           );
 
         // Avg
-        svg.append("path")
-          .datum(filtered)
-          .attr("fill", "none")
-          .attr("stroke", "steelblue")
-          .attr("stroke-width", 2)
-          .attr("d", d3.line()
-            .x(d => x(d.month))
-            .y(d => y(d.avg))
-          );
+        svg.selectAll(".circle-avg")
+          .data(filtered)
+          .join("circle")
+          .attr("class", "circle-avg")
+          .attr("cx", d => x(d.month))
+          .attr("cy", d => y(d.avg))
+          .attr("r", 3)
+          .attr("fill", "steelblue");
 
         // Add the dots
         svg.selectAll(".circle-min")
