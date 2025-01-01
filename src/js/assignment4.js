@@ -43,12 +43,32 @@ function lineChart() {
       d3.select("#min-year-text").text(minYear);
       d3.select("#max-year-text").text(maxYear);
 
+
+      // set the state selector
+      const stateSelector = d3.select("#state-selector");
+
+      data.forEach(d => {
+        if (!d.country) {
+          console.log(d);
+        }
+      });
+
+      const states = Array.from(new Set(data.map(d => d.country)));
+      states.sort();
+      states.forEach(state => {
+        stateSelector.append("option")
+        .attr("value", state)
+        .text(state);
+      });
+      
+      const firstState = states[0];
+
       // Function to draw the chart
-      function drawChart(selectedYear) {
+      function drawChart(selectedState, selectedYear) {
         // Remove existing SVG
         d3.select("#line-chart").select("svg").remove();
 
-        const filtered = data.filter(d => d.country == "Alabama" && +d.year === selectedYear);
+        const filtered = data.filter(d => d.country == selectedState && +d.year === selectedYear);
 
         const margin = { top: 20, right: 30, bottom: 30, left: 80 };
         const width = 600;
@@ -156,12 +176,19 @@ function lineChart() {
       }
 
       // Initial draw
-      drawChart(maxYear);
+      drawChart(firstState, maxYear);
 
       // Update chart on slider input
       yearSlider.on("input", function () {
         const selectedYear = +this.value;
-        drawChart(selectedYear);
+        drawChart(firstState, selectedYear);
+      });
+
+      // Update chart on state selection
+      stateSelector.on("change", function () {
+        const selectedState = this.value;
+        console.log(selectedState);
+        drawChart(selectedState, +yearSlider.property("value"));
       });
     });
 }

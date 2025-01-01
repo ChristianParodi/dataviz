@@ -81,19 +81,36 @@
         </label>
       </div> -->
       <!-- end toggle C - F -->
-      <!-- year slider -->
-      <div>
-        <label for="year-slider" class="block text-sm font-medium text-white mb-2">
-          Select Year
-        </label>
-        <input type="range" id="year-slider" name="year-slider" min="2000" max="2024" value="2024"
-          class="w-full accent-blue-500">
-        <div class="flex justify-between text-sm text-gray-400">
-          <span id="min-year-text"></span>
-          <span id="max-year-text"></span>
+
+      <!-- Visualization options -->
+      <div class="flex flex-row gap-4">
+
+        <!-- Year slider -->
+        <div>
+          <label for="year-slider" class="block text-sm font-medium mb-2">
+            Select Year
+          </label>
+          <input type="range" id="year-slider" name="year-slider" min="2000" max="2024" value="2024"
+            class="w-full accent-blue-500">
+          <div class="flex justify-between text-sm text-gray-400">
+            <span id="min-year-text"></span>
+            <span id="max-year-text"></span>
+          </div>
         </div>
+        <!-- End year slider -->
+
+        <!-- State selector -->
+        <div>
+          <label for="state-selector" class="block text-sm font-medium mb-2">
+            Select State
+          </label>
+          <select id="state-selector" name="state-selector" class="w-full accent-blue-500"></select>
+        </div>
+        <!-- End state selector -->
+
       </div>
-      <!-- end year slider -->
+      <!-- End visualization options -->
+
       <div id="line-chart"></div>
       <script src="./../js/assignment4.js"></script>
     </main>
