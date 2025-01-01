@@ -50,7 +50,7 @@ function lineChart() {
 
         const filtered = data.filter(d => d.country == "Alabama" && +d.year === selectedYear);
 
-        const margin = { top: 20, right: 30, bottom: 30, left: 80 };
+        const margin = { top: 20, right: 30, bottom: 80, left: 80 };
         const width = 600;
         const height = 300;
 
@@ -85,6 +85,14 @@ function lineChart() {
           .style("text-anchor", "middle")
           .style("font-weight", "300")
           .text("Temperature [F]");
+
+        // X label
+        svg.append("text")
+          .attr("x", width / 2 + margin.right)
+          .attr("y", margin.top)
+          .style("text-anchor", "middle")
+          .style("font-weight", "300")
+          .text(selectedYear);
 
         // Min
         svg.append("path")
