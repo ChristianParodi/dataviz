@@ -9,7 +9,7 @@ function toCelsius(fahrenheit, decimals = 2) {
   if (typeof fahrenheit !== 'number' || isNaN(fahrenheit))
     throw new TypeError('Input must be a number');
 
-  return +((fahrenheit - 32) * 5 / 9).toFixed(decimals) || undefined;
+  return +((fahrenheit - 32) * 5 / 9).toFixed(decimals);
 }
 
 /**
@@ -23,7 +23,7 @@ function toFahrenheit(celsius, decimals = 2) {
   if (typeof celsius !== 'number' || isNaN(celsius))
     throw new TypeError('Input must be a number');
 
-  return +((celsius * 9 / 5) + 32).toFixed(decimals) || undefined;
+  return +((celsius * 9 / 5) + 32).toFixed(decimals);
 }
 
 
@@ -47,24 +47,24 @@ function lineChart() {
       // set the state selector
       const stateSelector = d3.select("#state-selector");
 
-      data.forEach(d => {
-        if (!d.country) {
-          console.log(d);
-        }
-      });
+      // data.forEach(d => {
+      //   if (!d.country) {
+      //     console.log(d);
+      //   }
+      // });
 
       const states = Array.from(new Set(data.map(d => d.country)));
       states.sort();
       states.forEach(state => {
         stateSelector.append("option")
-        .attr("value", state)
-        .text(state);
+          .attr("value", state)
+          .text(state);
       });
-      
+
       const firstState = states[0];
 
       // Function to draw the chart
-      function drawChart(selectedState, selectedYear) {
+      function drawChart(selectedState, selectedYear, isFahrenheit) {
         // Remove existing SVG
         d3.select("#line-chart").select("svg").remove();
 
@@ -83,8 +83,24 @@ function lineChart() {
           .range([margin.left, width - margin.right])
           .padding(0.5);
 
+        // set the right unit (C - F)
+        // apply the conversion only if the toggle changed
+        const convert = isFahrenheit ? toFahrenheit : toCelsius;
+
+        const selectedUnitData = filtered.map(d => ({ ...d })); // IMPORTANT
+        // apparently, if selectedUnitData = filtered; the referenced object
+        // is the original data because .filter() does not make a copy
+        selectedUnitData.forEach(d => {
+          d.min = convert(d.min);
+          d.max = convert(d.max);
+          d.avg = convert(d.avg);
+        });
+
+        const absMin = convert(d3.min(data, d => d.min));
+        const absMax = convert(d3.max(data, d => d.max));
+        console.log(absMin, absMax)
         const y = d3.scaleLinear()
-          .domain([d3.min(data, d => d.min), d3.max(data, d => d.max) + 20])
+          .domain([absMin, absMax + 20])
           .range([height - margin.bottom, margin.top]);
 
         // X axis
@@ -104,7 +120,7 @@ function lineChart() {
           .attr("transform", "rotate(-90)")
           .style("text-anchor", "middle")
           .style("font-weight", "300")
-          .text("Temperature [F]");
+          .text(isFahrenheit ? "Temperature [F]" : "Temperature [C]");
 
         // X label
         svg.append("text")
@@ -112,11 +128,11 @@ function lineChart() {
           .attr("y", margin.top)
           .style("text-anchor", "middle")
           .style("font-weight", "300")
-          .text(selectedYear);
+          .text(`${selectedState} - ${selectedYear}`);
 
         // Min
         svg.append("path")
-          .datum(filtered)
+          .datum(selectedUnitData)
           .attr("fill", "none")
           .attr("stroke", "darkblue")
           .attr("stroke-width", 2)
@@ -127,7 +143,7 @@ function lineChart() {
 
         // Max
         svg.append("path")
-          .datum(filtered)
+          .datum(selectedUnitData)
           .attr("fill", "none")
           .attr("stroke", "red")
           .attr("stroke-width", 2)
@@ -138,7 +154,7 @@ function lineChart() {
 
         // Avg
         svg.selectAll(".circle-avg")
-          .data(filtered)
+          .data(selectedUnitData)
           .join("circle")
           .attr("class", "circle-avg")
           .attr("cx", d => x(d.month))
@@ -148,7 +164,7 @@ function lineChart() {
 
         // Add the dots
         svg.selectAll(".circle-min")
-          .data(filtered)
+          .data(selectedUnitData)
           .join("circle")
           .attr("class", "circle-min")
           .attr("cx", d => x(d.month))
@@ -157,7 +173,7 @@ function lineChart() {
           .attr("fill", "darkblue");
 
         svg.selectAll(".circle-max")
-          .data(filtered)
+          .data(selectedUnitData)
           .join("circle")
           .attr("class", "circle-max")
           .attr("cx", d => x(d.month))
@@ -166,7 +182,7 @@ function lineChart() {
           .attr("fill", "red");
 
         svg.selectAll(".circle-avg")
-          .data(filtered)
+          .data(selectedUnitData)
           .join("circle")
           .attr("class", "circle-avg")
           .attr("cx", d => x(d.month))
@@ -176,20 +192,34 @@ function lineChart() {
       }
 
       // Initial draw
-      drawChart(firstState, maxYear);
+      drawChart(firstState, maxYear, toggleUnit.property("checked"));
 
       // Update chart on slider input
       yearSlider.on("input", function () {
+        const selectedState = stateSelector.property("value");
         const selectedYear = +this.value;
-        drawChart(firstState, selectedYear);
+        const isFahrenheit = toggleUnit.property("checked")
+
+        drawChart(selectedState, selectedYear, isFahrenheit);
       });
 
       // Update chart on state selection
       stateSelector.on("change", function () {
         const selectedState = this.value;
-        console.log(selectedState);
-        drawChart(selectedState, +yearSlider.property("value"));
+        const selectedYear = +yearSlider.property("value");
+        const isFahrenheit = toggleUnit.property("checked");
+
+        drawChart(selectedState, selectedYear, isFahrenheit);
       });
+
+      // update chart on toggle
+      toggleUnit.on("change", function () {
+        const selectedState = stateSelector.property("value");
+        const selectedYear = +yearSlider.property("value");
+        const isFahrenheit = toggleUnit.property("checked");
+
+        drawChart(selectedState, selectedYear, isFahrenheit)
+      })
     });
 }
 

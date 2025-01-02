@@ -83,7 +83,18 @@
       <!-- end toggle C - F -->
 
       <!-- Visualization options -->
-      <div class="flex flex-row gap-4">
+      <div class="flex flex-row gap-4 items-center justify-center">
+
+        <!-- Celsius selector -->
+        <div class="flex items-center justify-center">
+          <span class="mr-2 text-base text-gray-800">Celsius</span>
+          <label for="toggle-unit" class="relative cursor-pointer">
+            <input type="checkbox" id="toggle-unit" class="sr-only peer" />
+            <div class="switch"></div>
+          </label>
+          <span class="ml-2 text-base text-gray-800">Fahrenheit</span>
+        </div>
+        <!-- end Celsius selector -->
 
         <!-- Year slider -->
         <div>
