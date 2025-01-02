@@ -83,10 +83,10 @@
       <!-- end toggle C - F -->
 
       <!-- Visualization options -->
-      <div class="flex flex-row gap-4 items-center justify-center">
+      <div class="flex flex-row gap-32 items-center justify-center">
 
         <!-- Celsius selector -->
-        <div class="flex items-center justify-center">
+        <div class="flex flex-1 items-center justify-center">
           <span class="mr-2 text-base text-gray-800">Celsius</span>
           <label for="toggle-unit" class="relative cursor-pointer">
             <input type="checkbox" id="toggle-unit" class="sr-only peer" />
@@ -97,7 +97,7 @@
         <!-- end Celsius selector -->
 
         <!-- Year slider -->
-        <div>
+        <div class="flex-1">
           <label for="year-slider" class="block text-sm font-medium mb-2">
             Select Year
           </label>
@@ -111,11 +111,11 @@
         <!-- End year slider -->
 
         <!-- State selector -->
-        <div>
+        <div class="flex-col items-start flex-1">
           <label for="state-selector" class="block text-sm font-medium mb-2">
             Select State
           </label>
-          <select id="state-selector" name="state-selector" class="w-full accent-blue-500"></select>
+          <select id="state-selector" name="state-selector" class="w-full h-full accent-blue-500"></select>
         </div>
         <!-- End state selector -->
 
