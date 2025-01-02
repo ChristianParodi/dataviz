@@ -30,6 +30,8 @@ function toFahrenheit(celsius, decimals = 2) {
 function lineChart() {
   d3.csv("./../../dataset/assignment_4/min_max_avg_states.csv", d3.autoType)
     .then(data => {
+      const toggleUnit = d3.select("#toggle-unit");
+
       // set the year slider
       const yearSlider = d3.select("#year-slider");
       const minYear = d3.min(data, d => d.year);
@@ -84,7 +86,6 @@ function lineChart() {
           .padding(0.5);
 
         // set the right unit (C - F)
-        // apply the conversion only if the toggle changed
         const convert = isFahrenheit ? toFahrenheit : toCelsius;
 
         const selectedUnitData = filtered.map(d => ({ ...d })); // IMPORTANT
