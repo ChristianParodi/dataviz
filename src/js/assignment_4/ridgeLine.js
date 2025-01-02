@@ -8,16 +8,11 @@ function ridgelinePlot() {
       const stateSelector = d3.select("#state-selector");
 
       const states = Array.from(new Set(data.map(d => d.country))).sort();
+      const firstState = states[0];
+      
       const years = Array.from(new Set(data.map(d => d.year))).sort();
       const selectedYears = years.slice(-10);
-
-      states.forEach(state => {
-        stateSelector.append("option")
-          .attr("value", state)
-          .text(state);
-      });
-
-      const firstState = states[0];
+      
       const svgWidth = 700;
       const svgHeight = 600;
       const svg = d3.select("#ridge-line")

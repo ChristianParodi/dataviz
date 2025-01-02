@@ -18,16 +18,9 @@ function radarChart() {
       d3.select("#min-year-text").text(minYear);
       d3.select("#max-year-text").text(maxYear);
 
-      // Set up the state selector
       const stateSelector = d3.select("#state-selector");
-      const states = Array.from(new Set(data.map(d => d.country)));
-      states.sort();
-      states.forEach(state => {
-        stateSelector.append("option")
-          .attr("value", state)
-          .text(state);
-      });
 
+      const states = Array.from(new Set(data.map(d => d.country)));
       const firstState = states[0];
 
       // Function to draw the radar chart
