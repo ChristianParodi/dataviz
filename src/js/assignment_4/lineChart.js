@@ -1,34 +1,7 @@
-/**
- * Converts a temperature from Fahrenheit to Celsius.
- *
- * @param {number} fahrenheit - The temperature in Fahrenheit.
- * @param {number} [decimals=2] - The number of decimal places to round the result to.
- * @returns {number} The temperature in Celsius, rounded to the specified number of decimal places.
- */
-function toCelsius(fahrenheit, decimals = 2) {
-  if (typeof fahrenheit !== 'number' || isNaN(fahrenheit))
-    throw new TypeError('Input must be a number');
-
-  return +((fahrenheit - 32) * 5 / 9).toFixed(decimals);
-}
-
-/**
- * Converts a temperature from Celsius to Fahrenheit.
- *
- * @param {number} fahrenheit - The temperature in Fahrenheit.
- * @param {number} [decimals=2] - The number of decimal places to round the result to.
- * @returns {number} The temperature in Celsius, rounded to the specified number of decimal places.
- */
-function toFahrenheit(celsius, decimals = 2) {
-  if (typeof celsius !== 'number' || isNaN(celsius))
-    throw new TypeError('Input must be a number');
-
-  return +((celsius * 9 / 5) + 32).toFixed(decimals);
-}
-
+import { toFahrenheit, toCelsius } from './utils.js';
 
 function lineChart() {
-  d3.csv("./../../dataset/assignment_4/min_max_avg_states.csv", d3.autoType)
+  d3.csv("./../../../dataset/assignment_4/min_max_avg_states.csv", d3.autoType)
     .then(data => {
       const toggleUnit = d3.select("#toggle-unit");
 
@@ -45,15 +18,8 @@ function lineChart() {
       d3.select("#min-year-text").text(minYear);
       d3.select("#max-year-text").text(maxYear);
 
-
       // set the state selector
       const stateSelector = d3.select("#state-selector");
-
-      // data.forEach(d => {
-      //   if (!d.country) {
-      //     console.log(d);
-      //   }
-      // });
 
       const states = Array.from(new Set(data.map(d => d.country)));
       states.sort();
@@ -99,7 +65,6 @@ function lineChart() {
 
         const absMin = convert(d3.min(data, d => d.min));
         const absMax = convert(d3.max(data, d => d.max));
-        console.log(absMin, absMax)
         const y = d3.scaleLinear()
           .domain([absMin, absMax + 20])
           .range([height - margin.bottom, margin.top]);
@@ -121,7 +86,7 @@ function lineChart() {
           .attr("transform", "rotate(-90)")
           .style("text-anchor", "middle")
           .style("font-weight", "300")
-          .text(isFahrenheit ? "Temperature [F]" : "Temperature [C]");
+          .text(isFahrenheit ? "Temperature (°F)" : "Temperature (°C)");
 
         // X label
         svg.append("text")
@@ -196,16 +161,16 @@ function lineChart() {
       drawChart(firstState, maxYear, toggleUnit.property("checked"));
 
       // Update chart on slider input
-      yearSlider.on("input", function () {
+      yearSlider.node().addEventListener("input", function () {
         const selectedState = stateSelector.property("value");
         const selectedYear = +this.value;
-        const isFahrenheit = toggleUnit.property("checked")
+        const isFahrenheit = toggleUnit.property("checked");
 
         drawChart(selectedState, selectedYear, isFahrenheit);
       });
 
       // Update chart on state selection
-      stateSelector.on("change", function () {
+      stateSelector.node().addEventListener("change", function () {
         const selectedState = this.value;
         const selectedYear = +yearSlider.property("value");
         const isFahrenheit = toggleUnit.property("checked");
@@ -213,14 +178,14 @@ function lineChart() {
         drawChart(selectedState, selectedYear, isFahrenheit);
       });
 
-      // update chart on toggle
-      toggleUnit.on("change", function () {
+      // Update chart on toggle
+      toggleUnit.node().addEventListener("change", function () {
         const selectedState = stateSelector.property("value");
         const selectedYear = +yearSlider.property("value");
         const isFahrenheit = toggleUnit.property("checked");
 
-        drawChart(selectedState, selectedYear, isFahrenheit)
-      })
+        drawChart(selectedState, selectedYear, isFahrenheit);
+      });
     });
 }
 
