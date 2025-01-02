@@ -111,7 +111,7 @@ function ridgelinePlot() {
 
         svg.append("text")
           .attr("x", width / 2)
-          .attr("y", height - margin.bottom + 25)
+          .attr("y", height - margin.bottom + 30)
           .attr("text-anchor", "middle")
           .style("font-size", "12px")
           .text(isFahrenheit ? "Temperature (°F)" : "Temperature (°C)");
