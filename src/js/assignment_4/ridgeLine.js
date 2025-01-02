@@ -49,8 +49,8 @@ function ridgelinePlot() {
 
         const x = d3.scaleLinear()
           .domain([
-            d3.min(filteredData, d => d.min),
-            d3.max(filteredData, d => d.max)
+            d3.min(data, d => d.min),
+            d3.max(data, d => d.max)
           ])
           .range([margin.left, width - margin.right]);
 
