@@ -12,18 +12,18 @@ const tooltip = d3.select("body").append("div")
 
 
 const monthsMap = {
-  "jan": "January",
-  "feb": "February",
-  "mar": "March",
-  "apr": "April",
-  "may": "May",
-  "jun": "June",
-  "jul": "July",
-  "aug": "August",
-  "sep": "September",
-  "oct": "October",
-  "nov": "November",
-  "dec": "December"
+  "Jan": "January",
+  "Feb": "February",
+  "Mar": "March",
+  "Apr": "April",
+  "May": "May",
+  "Jun": "June",
+  "Jul": "July",
+  "Aug": "August",
+  "Sep": "September",
+  "Oct": "October",
+  "Nov": "November",
+  "Dec": "December"
 }
 
 function lineChart() {
@@ -97,14 +97,14 @@ function lineChart() {
 
         // Add a vertical line for mouse interactions
         const verticalLine = svg.append("line")
-        .attr("class", "vertical-line")
-        .attr("stroke", "black")
-        .attr("stroke-width", 1)
-        .attr("stroke-dasharray", "4")
-        .attr("y1", margin.top)
-        .attr("y2", height - margin.bottom)
-        .style("opacity", 0);
-        
+          .attr("class", "vertical-line")
+          .attr("stroke", "black")
+          .attr("stroke-width", 1)
+          .attr("stroke-dasharray", "4")
+          .attr("y1", margin.top)
+          .attr("y2", height - margin.bottom)
+          .style("opacity", 0);
+
 
         // X axis
         svg.append("g")
@@ -225,7 +225,7 @@ function lineChart() {
             if (monthData) {
               // Update the tooltip
               const unit = isFahrenheit ? "°F" : "°C";
-                tooltip.style("opacity", 1)
+              tooltip.style("opacity", 1)
                 .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY + 10}px`)
                 .html(`
