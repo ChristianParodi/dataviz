@@ -1,5 +1,31 @@
 import { toFahrenheit, toCelsius } from './utils.js';
 
+const tooltip = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("position", "absolute")
+  .style("padding", "6px")
+  .style("background", "rgba(0, 0, 0, 0.7)")
+  .style("color", "#fff")
+  .style("border-radius", "4px")
+  .style("pointer-events", "none")
+  .style("opacity", 0);
+
+
+const monthsMap = {
+  "jan": "January",
+  "feb": "February",
+  "mar": "March",
+  "apr": "April",
+  "may": "May",
+  "jun": "June",
+  "jul": "July",
+  "aug": "August",
+  "sep": "September",
+  "oct": "October",
+  "nov": "November",
+  "dec": "December"
+}
+
 function lineChart() {
   d3.csv("./../../../dataset/assignment_4/min_max_avg_states.csv", d3.autoType)
     .then(data => {
@@ -38,9 +64,9 @@ function lineChart() {
 
         const filtered = data.filter(d => d.country == selectedState && +d.year === selectedYear);
 
-        const margin = { top: 20, right: 30, bottom: 30, left: 80 };
+        const margin = { top: 30, right: 30, bottom: 60, left: 80 };
         const width = 600;
-        const height = 300;
+        const height = 330;
 
         const svg = d3.select("#line-chart").append("svg")
           .attr("width", width)
@@ -69,6 +95,17 @@ function lineChart() {
           .domain([absMin, absMax + 20])
           .range([height - margin.bottom, margin.top]);
 
+        // Add a vertical line for mouse interactions
+        const verticalLine = svg.append("line")
+        .attr("class", "vertical-line")
+        .attr("stroke", "black")
+        .attr("stroke-width", 1)
+        .attr("stroke-dasharray", "4")
+        .attr("y1", margin.top)
+        .attr("y2", height - margin.bottom)
+        .style("opacity", 0);
+        
+
         // X axis
         svg.append("g")
           .attr("transform", `translate(0,${height - margin.bottom})`)
@@ -88,10 +125,18 @@ function lineChart() {
           .style("font-weight", "300")
           .text(isFahrenheit ? "Temperature (°F)" : "Temperature (°C)");
 
-        // X label
+        // X Label
         svg.append("text")
           .attr("x", width / 2 + margin.right)
-          .attr("y", margin.top)
+          .attr("y", height - margin.bottom / 4)
+          .style("text-anchor", "middle")
+          .style("font-weight", "300")
+          .text("Month");
+
+        // Plot title
+        svg.append("text")
+          .attr("x", width / 2 + margin.right)
+          .attr("y", margin.top / 2)
           .style("text-anchor", "middle")
           .style("font-weight", "300")
           .text(`${selectedState} - ${selectedYear}`);
@@ -155,6 +200,53 @@ function lineChart() {
           .attr("cy", d => y(d.avg))
           .attr("r", 3)
           .attr("fill", "steelblue");
+
+        // Add a transparent overlay for mouse interactions
+        svg.append("rect")
+          .attr("width", width - margin.right - margin.left)
+          .attr("height", height - margin.top - margin.bottom)
+          .attr("transform", `translate(${margin.left},${margin.top})`)
+          .style("fill", "none")
+          .style("pointer-events", "all")
+          .on("mousemove", function (event) {
+            const [mouseX] = d3.pointer(event);
+
+            // Find the closest month
+            const closestMonth = x.domain().reduce((prev, curr) => {
+
+              const prevDist = Math.abs(x(prev) - mouseX - margin.left);
+              const currDist = Math.abs(x(curr) - mouseX - margin.left);
+              return currDist < prevDist ? curr : prev;
+            });
+
+            // Find the corresponding data for the month
+            const monthData = selectedUnitData.find(d => d.month === closestMonth);
+
+            if (monthData) {
+              // Update the tooltip
+              const unit = isFahrenheit ? "°F" : "°C";
+                tooltip.style("opacity", 1)
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY + 10}px`)
+                .html(`
+                  <strong style="text-decoration: underline;">${monthsMap[closestMonth]}</strong><br>
+                  <strong>Max:</strong> ${monthData.max.toFixed(1)}${unit}<br>
+                  <strong>Avg:</strong> ${monthData.avg.toFixed(1)}${unit}<br>
+                  <strong>Min:</strong> ${monthData.min.toFixed(1)}${unit}
+                `);
+
+              // Update the vertical line
+              verticalLine
+                .attr("x1", x(closestMonth))
+                .attr("x2", x(closestMonth))
+                .style("opacity", 1);
+            }
+          })
+          .on("mouseout", function () {
+            // Hide the tooltip
+            tooltip.style("opacity", 0);
+            verticalLine.style("opacity", 0);
+          });
       }
 
       // Initial draw
