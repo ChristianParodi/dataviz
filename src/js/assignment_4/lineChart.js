@@ -35,6 +35,9 @@ function lineChart() {
       const yearSlider = d3.select("#year-slider");
       const minYear = d3.min(data, d => d.year);
       const maxYear = d3.max(data, d => d.year);
+
+      let minimumAllowedYear = minYear;
+
       yearSlider
         .attr("min", minYear)
         .attr("max", maxYear)
@@ -264,7 +267,15 @@ function lineChart() {
       // Update chart on state selection
       stateSelector.node().addEventListener("change", function () {
         const selectedState = this.value;
+
+        const minYearForState = d3.min(data.filter(d => d.country === this.value), d => d.year);
+        minimumAllowedYear = minYearForState;
+        console.log(minimumAllowedYear);
+        
         const selectedYear = +yearSlider.property("value");
+        if(selectedYear < minimumAllowedYear) {
+          yearSlider.property("value", minimumAllowedYear);
+        }
         const isFahrenheit = toggleUnit.property("checked");
 
         drawChart(selectedState, selectedYear, isFahrenheit);
