@@ -1,5 +1,5 @@
 function mapOrthographic() {
-  const width = 1000;
+  const width = 1200;
   const height = 600;
 
   // Tooltip for showing information
@@ -83,7 +83,7 @@ function mapOrthographic() {
       5e9,
       6e9,
       8e9,
-      10e9,
+      11.40e9,
     ];
 
     const colors = (thresholds) => thresholds.map((d, i) => {
@@ -190,7 +190,7 @@ function mapOrthographic() {
       }
         
         function updateLegend() {
-          const isPerCapita = document.getElementById("toggle-mercator").checked;
+          const isPerCapita = document.getElementById("toggle-ortho").checked;
           const scale = isPerCapita ? colorScalePerCapita : colorScaleTotal;
     
           const selectedThreshold = isPerCapita ? perCapitaThresholds : thresholds;
@@ -378,7 +378,7 @@ function mapOrthographic() {
     updateLegend();
 
     document.getElementById("toggle-ortho").addEventListener("change", updateMap);
-    document.getElementById("toggle-mercator").addEventListener("change", updateLegend);
+    document.getElementById("toggle-ortho").addEventListener("change", updateLegend);
   });
 }
 
