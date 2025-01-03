@@ -2579,7 +2579,7 @@ code,country,year,month,min,max,avg
 020,Michigan,2021,Jan,19.00,30.90,25.00
 020,Michigan,2022,Jan,6.80,24.00,15.40
 020,Michigan,2023,Jan,23.60,32.90,28.20
-021,Minnesota,1895,Jan,11.20,10.00,-0.60
+021,Minnesota,1895,Jan,-11.20,10.00,-0.60
 021,Minnesota,1896,Jan,-2.10,18.90,8.40
 021,Minnesota,1897,Jan,-7.30,13.10,2.90
 021,Minnesota,1898,Jan,3.40,24.80,14.10
@@ -2589,39 +2589,39 @@ code,country,year,month,min,max,avg
 021,Minnesota,1902,Jan,1.60,22.30,12.00
 021,Minnesota,1903,Jan,-2.70,17.80,7.50
 021,Minnesota,1904,Jan,-9.00,11.40,1.20
-021,Minnesota,1905,Jan,10.20,11.00,0.40
+021,Minnesota,1905,Jan,-10.20,11.00,0.40
 021,Minnesota,1906,Jan,2.80,23.30,13.00
-021,Minnesota,1907,Jan,11.30,9.70,-0.80
+021,Minnesota,1907,Jan,-11.30,9.70,-0.80
 021,Minnesota,1908,Jan,1.80,24.60,13.20
 021,Minnesota,1909,Jan,-3.50,16.80,6.60
 021,Minnesota,1910,Jan,-0.50,18.40,9.00
 021,Minnesota,1911,Jan,-9.80,13.30,1.80
-021,Minnesota,1912,Jan,19.80,1.00,-9.40
+021,Minnesota,1912,Jan,-19.80,1.00,-9.40
 021,Minnesota,1913,Jan,-7.30,16.00,4.40
 021,Minnesota,1914,Jan,4.40,23.70,14.00
 021,Minnesota,1915,Jan,-4.20,15.30,5.50
-021,Minnesota,1916,Jan,10.60,11.50,0.40
-021,Minnesota,1917,Jan,11.50,11.30,-0.10
-021,Minnesota,1918,Jan,11.80,7.20,-2.30
+021,Minnesota,1916,Jan,-10.60,11.50,0.40
+021,Minnesota,1917,Jan,-11.50,11.30,-0.10
+021,Minnesota,1918,Jan,-11.80,7.20,-2.30
 021,Minnesota,1919,Jan,6.60,24.80,15.70
 021,Minnesota,1920,Jan,-8.60,10.40,0.90
 021,Minnesota,1921,Jan,5.20,23.80,14.50
 021,Minnesota,1922,Jan,-3.60,17.00,6.70
 021,Minnesota,1923,Jan,-0.70,19.80,9.50
-021,Minnesota,1924,Jan,11.20,11.50,0.20
+021,Minnesota,1924,Jan,-11.20,11.50,0.20
 021,Minnesota,1925,Jan,-3.90,16.60,6.30
 021,Minnesota,1926,Jan,0.00,21.40,10.70
 021,Minnesota,1927,Jan,-2.60,16.70,7.10
 021,Minnesota,1928,Jan,0.70,19.80,10.20
-021,Minnesota,1929,Jan,16.00,5.40,-5.30
-021,Minnesota,1930,Jan,11.70,9.00,-1.40
+021,Minnesota,1929,Jan,-16.00,5.40,-5.30
+021,Minnesota,1930,Jan,-11.70,9.00,-1.40
 021,Minnesota,1931,Jan,8.50,27.40,18.00
 021,Minnesota,1932,Jan,3.50,20.70,12.10
 021,Minnesota,1933,Jan,3.50,25.40,14.50
 021,Minnesota,1934,Jan,3.80,22.90,13.30
 021,Minnesota,1935,Jan,-7.70,12.60,2.40
-021,Minnesota,1936,Jan,13.50,5.80,-3.80
-021,Minnesota,1937,Jan,15.20,8.10,-3.60
+021,Minnesota,1936,Jan,-13.50,5.80,-3.80
+021,Minnesota,1937,Jan,-15.20,8.10,-3.60
 021,Minnesota,1938,Jan,-3.40,15.00,5.80
 021,Minnesota,1939,Jan,2.80,21.70,12.20
 021,Minnesota,1940,Jan,-7.10,12.10,2.50
@@ -2634,7 +2634,7 @@ code,country,year,month,min,max,avg
 021,Minnesota,1947,Jan,3.00,24.50,13.80
 021,Minnesota,1948,Jan,-8.10,14.50,3.20
 021,Minnesota,1949,Jan,-2.20,16.60,7.20
-021,Minnesota,1950,Jan,13.10,9.10,-2.00
+021,Minnesota,1950,Jan,-13.10,9.10,-2.00
 021,Minnesota,1951,Jan,-7.40,13.40,3.00
 021,Minnesota,1952,Jan,-5.70,16.20,5.20
 021,Minnesota,1953,Jan,1.50,19.40,10.40
@@ -2650,23 +2650,23 @@ code,country,year,month,min,max,avg
 021,Minnesota,1963,Jan,-9.30,8.80,-0.20
 021,Minnesota,1964,Jan,4.80,25.10,15.00
 021,Minnesota,1965,Jan,-8.60,13.90,2.70
-021,Minnesota,1966,Jan,14.00,6.60,-3.70
+021,Minnesota,1966,Jan,-14.00,6.60,-3.70
 021,Minnesota,1967,Jan,-1.00,19.40,9.20
 021,Minnesota,1968,Jan,-2.20,18.10,7.90
 021,Minnesota,1969,Jan,-6.20,11.50,2.70
 021,Minnesota,1970,Jan,-8.90,10.40,0.70
-021,Minnesota,1971,Jan,10.10,9.50,-0.30
-021,Minnesota,1972,Jan,10.00,11.40,0.70
+021,Minnesota,1971,Jan,-10.10,9.50,-0.30
+021,Minnesota,1972,Jan,-10.00,11.40,0.70
 021,Minnesota,1973,Jan,2.60,21.80,12.20
 021,Minnesota,1974,Jan,-4.90,15.30,5.20
 021,Minnesota,1975,Jan,0.40,19.80,10.10
 021,Minnesota,1976,Jan,-4.70,17.10,6.20
-021,Minnesota,1977,Jan,13.20,6.60,-3.30
+021,Minnesota,1977,Jan,-13.20,6.60,-3.30
 021,Minnesota,1978,Jan,-8.90,10.10,0.60
-021,Minnesota,1979,Jan,13.80,5.90,-4.00
+021,Minnesota,1979,Jan,-13.80,5.90,-4.00
 021,Minnesota,1980,Jan,-1.00,18.10,8.60
 021,Minnesota,1981,Jan,1.50,24.10,12.80
-021,Minnesota,1982,Jan,16.00,6.60,-4.70
+021,Minnesota,1982,Jan,-16.00,6.60,-4.70
 021,Minnesota,1983,Jan,5.90,22.90,14.40
 021,Minnesota,1984,Jan,-1.80,17.70,8.00
 021,Minnesota,1985,Jan,-4.60,16.60,6.00
@@ -2678,9 +2678,9 @@ code,country,year,month,min,max,avg
 021,Minnesota,1991,Jan,-4.90,16.50,5.80
 021,Minnesota,1992,Jan,8.40,25.80,17.10
 021,Minnesota,1993,Jan,-2.50,18.60,8.00
-021,Minnesota,1994,Jan,12.20,7.20,-2.50
+021,Minnesota,1994,Jan,-12.20,7.20,-2.50
 021,Minnesota,1995,Jan,3.30,20.20,11.80
-021,Minnesota,1996,Jan,10.20,12.20,1.00
+021,Minnesota,1996,Jan,-10.20,12.20,1.00
 021,Minnesota,1997,Jan,-4.70,13.80,4.50
 021,Minnesota,1998,Jan,6.60,21.30,14.00
 021,Minnesota,1999,Jan,-1.20,16.40,7.60
@@ -2987,7 +2987,7 @@ code,country,year,month,min,max,avg
 024,Montana,1913,Jan,1.60,23.10,12.30
 024,Montana,1914,Jan,13.60,33.50,23.50
 024,Montana,1915,Jan,6.80,26.50,16.60
-024,Montana,1916,Jan,14.20,6.70,-3.80
+024,Montana,1916,Jan,-14.20,6.70,-3.80
 024,Montana,1917,Jan,3.60,22.90,13.20
 024,Montana,1918,Jan,4.60,22.00,13.30
 024,Montana,1919,Jan,17.90,37.40,27.70
@@ -3008,7 +3008,7 @@ code,country,year,month,min,max,avg
 024,Montana,1934,Jan,17.70,36.20,27.00
 024,Montana,1935,Jan,4.50,25.90,15.20
 024,Montana,1936,Jan,4.30,22.80,13.60
-024,Montana,1937,Jan,12.90,8.00,-2.40
+024,Montana,1937,Jan,-12.90,8.00,-2.40
 024,Montana,1938,Jan,13.30,31.40,22.30
 024,Montana,1939,Jan,17.00,34.80,25.90
 024,Montana,1940,Jan,1.10,20.20,10.70
@@ -3021,7 +3021,7 @@ code,country,year,month,min,max,avg
 024,Montana,1947,Jan,10.50,29.10,19.80
 024,Montana,1948,Jan,11.90,31.80,21.80
 024,Montana,1949,Jan,-8.30,14.60,3.20
-024,Montana,1950,Jan,12.60,8.00,-2.30
+024,Montana,1950,Jan,-12.60,8.00,-2.30
 024,Montana,1951,Jan,3.50,23.10,13.30
 024,Montana,1952,Jan,2.00,21.50,11.80
 024,Montana,1953,Jan,18.20,36.60,27.40
@@ -3998,7 +3998,7 @@ code,country,year,month,min,max,avg
 031,North Carolina,2021,Jan,31.50,50.10,40.80
 031,North Carolina,2022,Jan,28.00,49.40,38.70
 031,North Carolina,2023,Jan,36.20,57.20,46.70
-032,North Dakota,1895,Jan,13.20,6.80,-3.20
+032,North Dakota,1895,Jan,-13.20,6.80,-3.20
 032,North Dakota,1896,Jan,-4.10,13.90,4.90
 032,North Dakota,1897,Jan,-5.50,11.90,3.20
 032,North Dakota,1898,Jan,2.70,24.10,13.40
@@ -4010,18 +4010,18 @@ code,country,year,month,min,max,avg
 032,North Dakota,1904,Jan,-6.10,12.40,3.10
 032,North Dakota,1905,Jan,-9.40,10.20,0.40
 032,North Dakota,1906,Jan,2.00,20.50,11.20
-032,North Dakota,1907,Jan,15.50,2.50,-6.50
+032,North Dakota,1907,Jan,-15.50,2.50,-6.50
 032,North Dakota,1908,Jan,4.80,28.10,16.40
 032,North Dakota,1909,Jan,-6.50,12.80,3.20
 032,North Dakota,1910,Jan,-1.00,17.70,8.30
-032,North Dakota,1911,Jan,12.10,9.60,-1.20
-032,North Dakota,1912,Jan,14.80,4.20,-5.30
+032,North Dakota,1911,Jan,-12.10,9.60,-1.20
+032,North Dakota,1912,Jan,-14.80,4.20,-5.30
 032,North Dakota,1913,Jan,-9.20,13.30,2.00
 032,North Dakota,1914,Jan,3.30,24.80,14.00
 032,North Dakota,1915,Jan,-4.30,14.70,5.20
-032,North Dakota,1916,Jan,17.90,2.30,-7.80
+032,North Dakota,1916,Jan,-17.90,2.30,-7.80
 032,North Dakota,1917,Jan,-9.40,11.60,1.10
-032,North Dakota,1918,Jan,10.80,6.80,-2.00
+032,North Dakota,1918,Jan,-10.80,6.80,-2.00
 032,North Dakota,1919,Jan,8.40,28.10,18.30
 032,North Dakota,1920,Jan,-7.00,11.40,2.20
 032,North Dakota,1921,Jan,4.70,25.20,15.00
@@ -4032,32 +4032,32 @@ code,country,year,month,min,max,avg
 032,North Dakota,1926,Jan,4.90,25.80,15.40
 032,North Dakota,1927,Jan,0.10,18.00,9.00
 032,North Dakota,1928,Jan,2.30,21.00,11.70
-032,North Dakota,1929,Jan,16.60,4.60,-6.00
-032,North Dakota,1930,Jan,11.80,5.20,-3.30
+032,North Dakota,1929,Jan,-16.60,4.60,-6.00
+032,North Dakota,1930,Jan,-11.80,5.20,-3.30
 032,North Dakota,1931,Jan,10.40,29.20,19.80
 032,North Dakota,1932,Jan,-1.20,17.50,8.20
 032,North Dakota,1933,Jan,0.60,21.30,10.90
 032,North Dakota,1934,Jan,3.90,26.10,15.00
 032,North Dakota,1935,Jan,-8.00,12.90,2.40
-032,North Dakota,1936,Jan,16.40,2.60,-6.90
-032,North Dakota,1937,Jan,18.70,-0.70,-9.70
+032,North Dakota,1936,Jan,-16.40,2.60,-6.90
+032,North Dakota,1937,Jan,-18.70,-0.70,-9.70
 032,North Dakota,1938,Jan,-1.20,17.80,8.30
 032,North Dakota,1939,Jan,3.80,23.30,13.60
 032,North Dakota,1940,Jan,-8.20,11.90,1.80
 032,North Dakota,1941,Jan,0.00,19.10,9.60
 032,North Dakota,1942,Jan,5.90,28.30,17.10
-032,North Dakota,1943,Jan,12.10,6.40,-2.80
+032,North Dakota,1943,Jan,-12.10,6.40,-2.80
 032,North Dakota,1944,Jan,9.20,31.60,20.40
 032,North Dakota,1945,Jan,3.30,19.40,11.40
 032,North Dakota,1946,Jan,-1.30,21.40,10.00
 032,North Dakota,1947,Jan,4.30,25.60,14.90
 032,North Dakota,1948,Jan,-2.80,19.40,8.30
 032,North Dakota,1949,Jan,-9.20,10.00,0.40
-032,North Dakota,1950,Jan,21.00,-2.80,11.90
+032,North Dakota,1950,Jan,-21.00,-2.80,-11.90
 032,North Dakota,1951,Jan,-7.80,11.80,2.00
 032,North Dakota,1952,Jan,-7.60,11.10,1.70
 032,North Dakota,1953,Jan,2.80,23.40,13.10
-032,North Dakota,1954,Jan,12.70,8.80,-2.00
+032,North Dakota,1954,Jan,-12.70,8.80,-2.00
 032,North Dakota,1955,Jan,0.30,20.10,10.20
 032,North Dakota,1956,Jan,-4.20,14.90,5.30
 032,North Dakota,1957,Jan,-8.80,10.80,1.00
@@ -4069,10 +4069,10 @@ code,country,year,month,min,max,avg
 032,North Dakota,1963,Jan,-9.00,11.90,1.40
 032,North Dakota,1964,Jan,4.10,25.50,14.80
 032,North Dakota,1965,Jan,-8.80,11.20,1.20
-032,North Dakota,1966,Jan,15.40,3.80,-5.80
+032,North Dakota,1966,Jan,-15.40,3.80,-5.80
 032,North Dakota,1967,Jan,0.20,20.90,10.60
 032,North Dakota,1968,Jan,-3.30,16.60,6.70
-032,North Dakota,1969,Jan,12.10,5.10,-3.50
+032,North Dakota,1969,Jan,-12.10,5.10,-3.50
 032,North Dakota,1970,Jan,-7.30,10.00,1.40
 032,North Dakota,1971,Jan,-8.90,8.60,-0.20
 032,North Dakota,1972,Jan,-8.60,12.40,1.90
@@ -4080,12 +4080,12 @@ code,country,year,month,min,max,avg
 032,North Dakota,1974,Jan,-6.20,15.10,4.40
 032,North Dakota,1975,Jan,0.90,22.60,11.70
 032,North Dakota,1976,Jan,-0.40,19.60,9.60
-032,North Dakota,1977,Jan,11.80,7.80,-2.00
-032,North Dakota,1978,Jan,12.50,5.20,-3.60
-032,North Dakota,1979,Jan,13.80,4.60,-4.60
+032,North Dakota,1977,Jan,-11.80,7.80,-2.00
+032,North Dakota,1978,Jan,-12.50,5.20,-3.60
+032,North Dakota,1979,Jan,-13.80,4.60,-4.60
 032,North Dakota,1980,Jan,-3.80,16.80,6.50
 032,North Dakota,1981,Jan,6.30,27.10,16.70
-032,North Dakota,1982,Jan,18.20,3.50,-7.40
+032,North Dakota,1982,Jan,-18.20,3.50,-7.40
 032,North Dakota,1983,Jan,9.80,27.90,18.90
 032,North Dakota,1984,Jan,3.50,22.20,12.90
 032,North Dakota,1985,Jan,-4.20,17.40,6.60
@@ -4097,7 +4097,7 @@ code,country,year,month,min,max,avg
 032,North Dakota,1991,Jan,-3.80,17.10,6.70
 032,North Dakota,1992,Jan,10.00,30.70,20.30
 032,North Dakota,1993,Jan,-4.00,15.80,5.90
-032,North Dakota,1994,Jan,10.70,6.90,-1.90
+032,North Dakota,1994,Jan,-10.70,6.90,-1.90
 032,North Dakota,1995,Jan,1.50,17.80,9.70
 032,North Dakota,1996,Jan,-9.40,10.00,0.30
 032,North Dakota,1997,Jan,-8.00,11.20,1.60
@@ -4943,7 +4943,7 @@ code,country,year,month,min,max,avg
 039,South Dakota,1934,Jan,12.50,36.20,24.40
 039,South Dakota,1935,Jan,4.10,27.20,15.60
 039,South Dakota,1936,Jan,-6.60,14.70,4.10
-039,South Dakota,1937,Jan,10.90,8.90,-1.00
+039,South Dakota,1937,Jan,-10.90,8.90,-1.00
 039,South Dakota,1938,Jan,7.80,27.20,17.50
 039,South Dakota,1939,Jan,14.00,34.30,24.10
 039,South Dakota,1940,Jan,-4.70,15.80,5.60
@@ -5950,7 +5950,7 @@ code,country,year,month,min,max,avg
 047,Wisconsin,1909,Jan,5.80,24.30,15.00
 047,Wisconsin,1910,Jan,2.70,22.90,12.80
 047,Wisconsin,1911,Jan,1.70,23.00,12.30
-047,Wisconsin,1912,Jan,15.20,5.00,-5.10
+047,Wisconsin,1912,Jan,-15.20,5.00,-5.10
 047,Wisconsin,1913,Jan,3.40,23.80,13.60
 047,Wisconsin,1914,Jan,12.50,28.30,20.40
 047,Wisconsin,1915,Jan,1.20,20.40,10.80
@@ -5967,7 +5967,7 @@ code,country,year,month,min,max,avg
 047,Wisconsin,1926,Jan,3.20,24.10,13.70
 047,Wisconsin,1927,Jan,0.30,20.20,10.30
 047,Wisconsin,1928,Jan,6.20,23.80,15.00
-047,Wisconsin,1929,Jan,10.30,12.20,0.90
+047,Wisconsin,1929,Jan,-10.30,12.20,0.90
 047,Wisconsin,1930,Jan,-3.80,16.00,6.10
 047,Wisconsin,1931,Jan,13.60,29.20,21.40
 047,Wisconsin,1932,Jan,13.10,27.70,20.40
@@ -6224,38 +6224,38 @@ code,country,year,month,min,max,avg
 049,Hawaii,2021,Jan,57.90,71.70,64.80
 049,Hawaii,2022,Jan,56.30,72.60,64.40
 049,Hawaii,2023,Jan,56.80,72.70,64.70
-050,Alaska,1925,Jan,18.30,-3.50,10.90
+050,Alaska,1925,Jan,-18.30,-3.50,-10.90
 050,Alaska,1926,Jan,9.00,21.00,15.00
 050,Alaska,1927,Jan,-2.20,13.10,5.50
 050,Alaska,1928,Jan,0.60,15.30,8.00
 050,Alaska,1929,Jan,5.50,18.60,12.10
 050,Alaska,1930,Jan,2.00,17.00,9.50
 050,Alaska,1931,Jan,1.40,15.80,8.60
-050,Alaska,1932,Jan,14.60,1.80,-6.40
-050,Alaska,1933,Jan,17.00,-0.80,-9.00
-050,Alaska,1934,Jan,19.40,-4.70,12.10
+050,Alaska,1932,Jan,-14.60,1.80,-6.40
+050,Alaska,1933,Jan,-17.00,-0.80,-9.00
+050,Alaska,1934,Jan,-19.40,-4.70,-12.10
 050,Alaska,1935,Jan,-6.40,8.00,0.80
 050,Alaska,1936,Jan,-1.50,11.40,5.00
 050,Alaska,1937,Jan,7.30,23.90,15.60
-050,Alaska,1938,Jan,11.30,4.30,-3.50
+050,Alaska,1938,Jan,-11.30,4.30,-3.50
 050,Alaska,1939,Jan,-8.50,5.00,-1.70
 050,Alaska,1940,Jan,1.30,17.00,9.20
 050,Alaska,1941,Jan,-8.20,6.50,-0.80
 050,Alaska,1942,Jan,4.60,18.10,11.40
-050,Alaska,1943,Jan,15.20,-1.60,-8.40
+050,Alaska,1943,Jan,-15.20,-1.60,-8.40
 050,Alaska,1944,Jan,-3.90,10.90,3.50
 050,Alaska,1945,Jan,7.60,20.70,14.10
 050,Alaska,1946,Jan,0.00,12.80,6.40
-050,Alaska,1947,Jan,17.80,-2.10,-9.90
+050,Alaska,1947,Jan,-17.80,-2.10,-9.90
 050,Alaska,1948,Jan,-3.40,11.40,4.00
 050,Alaska,1949,Jan,-5.10,10.70,2.80
 050,Alaska,1950,Jan,-2.10,15.20,6.60
-050,Alaska,1951,Jan,13.80,-0.40,-7.10
-050,Alaska,1952,Jan,12.10,3.90,-4.10
-050,Alaska,1953,Jan,11.70,1.60,-5.00
-050,Alaska,1954,Jan,11.20,4.50,-3.30
+050,Alaska,1951,Jan,-13.80,-0.40,-7.10
+050,Alaska,1952,Jan,-12.10,3.90,-4.10
+050,Alaska,1953,Jan,-11.70,1.60,-5.00
+050,Alaska,1954,Jan,-11.20,4.50,-3.30
 050,Alaska,1955,Jan,1.70,15.10,8.40
-050,Alaska,1956,Jan,13.70,1.10,-6.30
+050,Alaska,1956,Jan,-13.70,1.10,-6.30
 050,Alaska,1957,Jan,2.60,17.10,9.90
 050,Alaska,1958,Jan,-2.60,10.60,4.00
 050,Alaska,1959,Jan,-9.30,4.10,-2.60
@@ -6268,13 +6268,13 @@ code,country,year,month,min,max,avg
 050,Alaska,1966,Jan,-8.80,4.30,-2.20
 050,Alaska,1967,Jan,-6.80,8.80,1.00
 050,Alaska,1968,Jan,-4.70,9.50,2.40
-050,Alaska,1969,Jan,10.90,1.10,-4.90
-050,Alaska,1970,Jan,13.00,0.60,-6.20
-050,Alaska,1971,Jan,19.60,-4.00,11.80
-050,Alaska,1972,Jan,11.40,2.40,-4.50
-050,Alaska,1973,Jan,13.60,0.90,-6.30
+050,Alaska,1969,Jan,-10.90,1.10,-4.90
+050,Alaska,1970,Jan,-13.00,0.60,-6.20
+050,Alaska,1971,Jan,-19.60,-4.00,-11.80
+050,Alaska,1972,Jan,-11.40,2.40,-4.50
+050,Alaska,1973,Jan,-13.60,0.90,-6.30
 050,Alaska,1974,Jan,-9.30,4.50,-2.40
-050,Alaska,1975,Jan,11.40,2.40,-4.50
+050,Alaska,1975,Jan,-11.40,2.40,-4.50
 050,Alaska,1976,Jan,-5.60,7.40,1.00
 050,Alaska,1977,Jan,11.80,23.00,17.40
 050,Alaska,1978,Jan,6.70,18.80,12.80
@@ -6288,7 +6288,7 @@ code,country,year,month,min,max,avg
 050,Alaska,1986,Jan,-0.20,11.90,5.80
 050,Alaska,1987,Jan,1.70,15.50,8.60
 050,Alaska,1988,Jan,1.30,14.00,7.60
-050,Alaska,1989,Jan,18.80,-5.00,11.90
+050,Alaska,1989,Jan,-18.80,-5.00,-11.90
 050,Alaska,1990,Jan,-8.20,5.20,-1.50
 050,Alaska,1991,Jan,-3.20,11.20,4.00
 050,Alaska,1992,Jan,0.70,12.20,6.50
@@ -6298,20 +6298,20 @@ code,country,year,month,min,max,avg
 050,Alaska,1996,Jan,-8.90,4.00,-2.40
 050,Alaska,1997,Jan,-7.20,6.70,-0.30
 050,Alaska,1998,Jan,-5.80,7.00,0.60
-050,Alaska,1999,Jan,11.00,4.40,-3.30
+050,Alaska,1999,Jan,-11.00,4.40,-3.30
 050,Alaska,2000,Jan,-6.10,7.50,0.70
 050,Alaska,2001,Jan,9.80,21.60,15.70
 050,Alaska,2002,Jan,3.00,16.10,9.50
 050,Alaska,2003,Jan,3.30,17.10,10.20
 050,Alaska,2004,Jan,-7.50,6.80,-0.40
 050,Alaska,2005,Jan,-0.10,13.40,6.70
-050,Alaska,2006,Jan,10.90,1.40,-4.70
+050,Alaska,2006,Jan,-10.90,1.40,-4.70
 050,Alaska,2007,Jan,-1.10,12.10,5.50
 050,Alaska,2008,Jan,-6.80,7.50,0.40
 050,Alaska,2009,Jan,-7.20,6.70,-0.20
 050,Alaska,2010,Jan,-4.50,7.50,1.50
 050,Alaska,2011,Jan,0.20,13.90,7.00
-050,Alaska,2012,Jan,20.20,-5.40,12.80
+050,Alaska,2012,Jan,-20.20,-5.40,-12.80
 050,Alaska,2013,Jan,3.90,15.80,9.80
 050,Alaska,2014,Jan,12.80,24.00,18.40
 050,Alaska,2015,Jan,0.80,13.50,7.10
@@ -6319,7 +6319,7 @@ code,country,year,month,min,max,avg
 050,Alaska,2017,Jan,-2.70,11.80,4.50
 050,Alaska,2018,Jan,0.50,12.90,6.70
 050,Alaska,2019,Jan,1.00,14.10,7.50
-050,Alaska,2020,Jan,12.60,-0.10,-6.40
+050,Alaska,2020,Jan,-12.60,-0.10,-6.40
 050,Alaska,2021,Jan,4.60,16.70,10.60
 050,Alaska,2022,Jan,-4.00,9.20,2.60
 050,Alaska,2023,Jan,5.10,16.70,10.90
@@ -9036,12 +9036,12 @@ code,country,year,month,min,max,avg
 021,Minnesota,1896,Feb,3.00,26.60,14.80
 021,Minnesota,1897,Feb,1.10,22.60,11.80
 021,Minnesota,1898,Feb,0.80,25.40,13.10
-021,Minnesota,1899,Feb,10.00,11.50,0.80
+021,Minnesota,1899,Feb,-10.00,11.50,0.80
 021,Minnesota,1900,Feb,-9.40,15.50,3.00
 021,Minnesota,1901,Feb,-4.40,17.90,6.80
 021,Minnesota,1902,Feb,1.60,23.70,12.60
 021,Minnesota,1903,Feb,-4.50,19.90,7.70
-021,Minnesota,1904,Feb,12.90,10.80,-1.10
+021,Minnesota,1904,Feb,-12.90,10.80,-1.10
 021,Minnesota,1905,Feb,-5.50,18.10,6.30
 021,Minnesota,1906,Feb,-2.50,22.30,9.90
 021,Minnesota,1907,Feb,0.20,23.10,11.60
@@ -9051,10 +9051,10 @@ code,country,year,month,min,max,avg
 021,Minnesota,1911,Feb,2.90,24.70,13.80
 021,Minnesota,1912,Feb,-1.90,19.00,8.60
 021,Minnesota,1913,Feb,-5.50,18.40,6.40
-021,Minnesota,1914,Feb,12.00,13.20,0.60
+021,Minnesota,1914,Feb,-12.00,13.20,0.60
 021,Minnesota,1915,Feb,10.50,28.50,19.50
 021,Minnesota,1916,Feb,-6.40,16.30,5.00
-021,Minnesota,1917,Feb,12.40,11.70,-0.30
+021,Minnesota,1917,Feb,-12.40,11.70,-0.30
 021,Minnesota,1918,Feb,-1.80,22.90,10.50
 021,Minnesota,1919,Feb,1.90,20.10,11.00
 021,Minnesota,1920,Feb,0.60,21.00,10.80
@@ -9073,7 +9073,7 @@ code,country,year,month,min,max,avg
 021,Minnesota,1933,Feb,-4.80,18.20,6.70
 021,Minnesota,1934,Feb,0.30,23.10,11.70
 021,Minnesota,1935,Feb,11.60,30.00,20.80
-021,Minnesota,1936,Feb,18.40,4.00,-7.20
+021,Minnesota,1936,Feb,-18.40,4.00,-7.20
 021,Minnesota,1937,Feb,-3.60,18.90,7.70
 021,Minnesota,1938,Feb,3.70,24.50,14.10
 021,Minnesota,1939,Feb,-9.90,15.50,2.80
@@ -9460,7 +9460,7 @@ code,country,year,month,min,max,avg
 024,Montana,1933,Feb,3.60,24.80,14.20
 024,Montana,1934,Feb,18.20,40.20,29.20
 024,Montana,1935,Feb,16.40,38.20,27.30
-024,Montana,1936,Feb,15.10,7.40,-3.90
+024,Montana,1936,Feb,-15.10,7.40,-3.90
 024,Montana,1937,Feb,4.20,25.40,14.80
 024,Montana,1938,Feb,4.80,26.70,15.80
 024,Montana,1939,Feb,1.50,23.70,12.60
@@ -10455,12 +10455,12 @@ code,country,year,month,min,max,avg
 032,North Dakota,1896,Feb,3.00,24.80,13.90
 032,North Dakota,1897,Feb,-3.50,16.80,6.70
 032,North Dakota,1898,Feb,1.20,25.60,13.40
-032,North Dakota,1899,Feb,11.20,8.20,-1.50
+032,North Dakota,1899,Feb,-11.20,8.20,-1.50
 032,North Dakota,1900,Feb,-9.20,14.00,2.40
 032,North Dakota,1901,Feb,-3.30,16.70,6.70
 032,North Dakota,1902,Feb,1.40,19.40,10.40
-032,North Dakota,1903,Feb,10.00,14.60,2.30
-032,North Dakota,1904,Feb,13.30,8.40,-2.50
+032,North Dakota,1903,Feb,-10.00,14.60,2.30
+032,North Dakota,1904,Feb,-13.30,8.40,-2.50
 032,North Dakota,1905,Feb,-3.20,19.40,8.10
 032,North Dakota,1906,Feb,-0.20,20.20,10.00
 032,North Dakota,1907,Feb,0.60,20.60,10.60
@@ -10470,15 +10470,15 @@ code,country,year,month,min,max,avg
 032,North Dakota,1911,Feb,-4.70,18.00,6.70
 032,North Dakota,1912,Feb,2.00,19.60,10.80
 032,North Dakota,1913,Feb,-3.20,17.90,7.40
-032,North Dakota,1914,Feb,10.10,11.40,0.60
+032,North Dakota,1914,Feb,-10.10,11.40,0.60
 032,North Dakota,1915,Feb,8.30,25.10,16.70
 032,North Dakota,1916,Feb,-3.10,16.00,6.40
-032,North Dakota,1917,Feb,11.40,9.00,-1.20
+032,North Dakota,1917,Feb,-11.40,9.00,-1.20
 032,North Dakota,1918,Feb,-1.40,21.60,10.10
 032,North Dakota,1919,Feb,-1.70,15.60,7.00
 032,North Dakota,1920,Feb,2.70,22.60,12.70
 032,North Dakota,1921,Feb,8.30,30.20,19.30
-032,North Dakota,1922,Feb,10.80,10.20,-0.30
+032,North Dakota,1922,Feb,-10.80,10.20,-0.30
 032,North Dakota,1923,Feb,-7.60,14.80,3.60
 032,North Dakota,1924,Feb,9.50,30.40,20.00
 032,North Dakota,1925,Feb,5.80,25.80,15.80
@@ -10492,10 +10492,10 @@ code,country,year,month,min,max,avg
 032,North Dakota,1933,Feb,-3.30,18.30,7.50
 032,North Dakota,1934,Feb,8.70,28.80,18.80
 032,North Dakota,1935,Feb,13.60,33.00,23.30
-032,North Dakota,1936,Feb,23.40,-4.70,14.10
+032,North Dakota,1936,Feb,-23.40,-4.70,-14.10
 032,North Dakota,1937,Feb,-4.40,15.90,5.70
 032,North Dakota,1938,Feb,-3.40,16.10,6.30
-032,North Dakota,1939,Feb,13.20,9.90,-1.70
+032,North Dakota,1939,Feb,-13.20,9.90,-1.70
 032,North Dakota,1940,Feb,5.80,22.20,14.00
 032,North Dakota,1941,Feb,1.00,21.70,11.30
 032,North Dakota,1942,Feb,3.90,22.80,13.40
@@ -10505,7 +10505,7 @@ code,country,year,month,min,max,avg
 032,North Dakota,1946,Feb,-2.00,21.30,9.70
 032,North Dakota,1947,Feb,-2.40,18.40,8.00
 032,North Dakota,1948,Feb,-4.30,16.80,6.30
-032,North Dakota,1949,Feb,10.20,12.60,1.20
+032,North Dakota,1949,Feb,-10.20,12.60,1.20
 032,North Dakota,1950,Feb,-3.20,18.90,7.80
 032,North Dakota,1951,Feb,0.80,20.70,10.70
 032,North Dakota,1952,Feb,7.80,25.20,16.50
@@ -10535,7 +10535,7 @@ code,country,year,month,min,max,avg
 032,North Dakota,1976,Feb,12.50,32.90,22.70
 032,North Dakota,1977,Feb,12.20,30.90,21.50
 032,North Dakota,1978,Feb,-3.80,13.80,5.00
-032,North Dakota,1979,Feb,11.00,9.10,-1.00
+032,North Dakota,1979,Feb,-11.00,9.10,-1.00
 032,North Dakota,1980,Feb,2.90,22.00,12.50
 032,North Dakota,1981,Feb,10.40,29.80,20.10
 032,North Dakota,1982,Feb,-0.80,19.70,9.40
@@ -10575,7 +10575,7 @@ code,country,year,month,min,max,avg
 032,North Dakota,2016,Feb,16.60,34.60,25.60
 032,North Dakota,2017,Feb,11.80,29.20,20.50
 032,North Dakota,2018,Feb,-5.40,16.30,5.40
-032,North Dakota,2019,Feb,11.40,6.00,-2.70
+032,North Dakota,2019,Feb,-11.40,6.00,-2.70
 032,North Dakota,2020,Feb,7.40,28.10,17.80
 032,North Dakota,2021,Feb,-4.50,16.00,5.80
 032,North Dakota,2022,Feb,-2.50,21.40,9.40
@@ -11395,7 +11395,7 @@ code,country,year,month,min,max,avg
 039,South Dakota,1933,Feb,2.70,28.60,15.60
 039,South Dakota,1934,Feb,12.30,38.90,25.60
 039,South Dakota,1935,Feb,19.30,40.40,29.80
-039,South Dakota,1936,Feb,15.50,5.10,-5.20
+039,South Dakota,1936,Feb,-15.50,5.10,-5.20
 039,South Dakota,1937,Feb,3.40,25.90,14.60
 039,South Dakota,1938,Feb,5.90,28.70,17.30
 039,South Dakota,1939,Feb,-2.30,21.70,9.70
@@ -11909,7 +11909,7 @@ code,country,year,month,min,max,avg
 043,Vermont,1931,Feb,4.90,28.50,16.70
 043,Vermont,1932,Feb,8.90,28.90,18.90
 043,Vermont,1933,Feb,12.00,31.30,21.60
-043,Vermont,1934,Feb,10.90,17.80,3.40
+043,Vermont,1934,Feb,-10.90,17.80,3.40
 043,Vermont,1935,Feb,3.10,27.00,15.00
 043,Vermont,1936,Feb,-1.60,21.70,10.10
 043,Vermont,1937,Feb,12.30,31.90,22.10
@@ -12427,7 +12427,7 @@ code,country,year,month,min,max,avg
 047,Wisconsin,1933,Feb,0.90,23.50,12.20
 047,Wisconsin,1934,Feb,2.60,23.50,13.00
 047,Wisconsin,1935,Feb,10.80,28.30,19.60
-047,Wisconsin,1936,Feb,10.80,11.60,0.40
+047,Wisconsin,1936,Feb,-10.80,11.60,0.40
 047,Wisconsin,1937,Feb,3.90,24.30,14.10
 047,Wisconsin,1938,Feb,12.60,29.60,21.10
 047,Wisconsin,1939,Feb,-0.20,23.70,11.80
@@ -12677,14 +12677,14 @@ code,country,year,month,min,max,avg
 049,Hawaii,2021,Feb,56.00,70.60,63.30
 049,Hawaii,2022,Feb,56.10,73.10,64.60
 049,Hawaii,2023,Feb,58.00,69.30,63.60
-050,Alaska,1925,Feb,12.20,5.30,-3.50
+050,Alaska,1925,Feb,-12.20,5.30,-3.50
 050,Alaska,1926,Feb,-4.60,10.90,3.10
 050,Alaska,1927,Feb,-1.00,15.10,7.00
 050,Alaska,1928,Feb,5.40,20.90,13.10
 050,Alaska,1929,Feb,5.80,19.10,12.40
-050,Alaska,1930,Feb,14.20,1.70,-6.20
+050,Alaska,1930,Feb,-14.20,1.70,-6.20
 050,Alaska,1931,Feb,1.90,17.50,9.70
-050,Alaska,1932,Feb,14.70,4.20,-5.20
+050,Alaska,1932,Feb,-14.70,4.20,-5.20
 050,Alaska,1933,Feb,-5.80,10.50,2.40
 050,Alaska,1934,Feb,5.90,21.10,13.50
 050,Alaska,1935,Feb,3.30,18.80,11.00
@@ -12701,14 +12701,14 @@ code,country,year,month,min,max,avg
 050,Alaska,1946,Feb,-3.00,11.00,4.00
 050,Alaska,1947,Feb,-0.50,14.80,7.20
 050,Alaska,1948,Feb,-7.10,11.40,2.20
-050,Alaska,1949,Feb,10.60,7.00,-1.80
-050,Alaska,1950,Feb,16.00,1.50,-7.30
+050,Alaska,1949,Feb,-10.60,7.00,-1.80
+050,Alaska,1950,Feb,-16.00,1.50,-7.30
 050,Alaska,1951,Feb,-6.80,11.10,2.20
 050,Alaska,1952,Feb,-3.50,10.50,3.50
 050,Alaska,1953,Feb,-1.90,13.50,5.80
-050,Alaska,1954,Feb,15.20,2.80,-6.20
-050,Alaska,1955,Feb,10.30,5.70,-2.30
-050,Alaska,1956,Feb,10.70,5.10,-2.80
+050,Alaska,1954,Feb,-15.20,2.80,-6.20
+050,Alaska,1955,Feb,-10.30,5.70,-2.30
+050,Alaska,1956,Feb,-10.70,5.10,-2.80
 050,Alaska,1957,Feb,-5.20,11.20,3.00
 050,Alaska,1958,Feb,0.20,14.60,7.40
 050,Alaska,1959,Feb,6.30,20.70,13.50
@@ -12717,32 +12717,32 @@ code,country,year,month,min,max,avg
 050,Alaska,1962,Feb,6.10,19.90,13.00
 050,Alaska,1963,Feb,1.50,15.50,8.50
 050,Alaska,1964,Feb,-4.90,10.20,2.60
-050,Alaska,1965,Feb,12.40,3.50,-4.40
+050,Alaska,1965,Feb,-12.40,3.50,-4.40
 050,Alaska,1966,Feb,-3.10,12.20,4.60
 050,Alaska,1967,Feb,-3.00,11.70,4.30
 050,Alaska,1968,Feb,-4.80,9.80,2.50
 050,Alaska,1969,Feb,-4.40,10.70,3.20
 050,Alaska,1970,Feb,5.30,19.90,12.60
 050,Alaska,1971,Feb,-8.80,6.80,-1.00
-050,Alaska,1972,Feb,10.50,6.50,-2.00
+050,Alaska,1972,Feb,-10.50,6.50,-2.00
 050,Alaska,1973,Feb,-2.80,14.40,5.80
-050,Alaska,1974,Feb,15.40,-0.60,-8.00
+050,Alaska,1974,Feb,-15.40,-0.60,-8.00
 050,Alaska,1975,Feb,-7.60,9.50,1.00
-050,Alaska,1976,Feb,12.90,4.80,-4.00
+050,Alaska,1976,Feb,-12.90,4.80,-4.00
 050,Alaska,1977,Feb,8.50,21.60,15.10
 050,Alaska,1978,Feb,3.20,17.30,10.20
-050,Alaska,1979,Feb,17.00,1.80,-7.60
+050,Alaska,1979,Feb,-17.00,1.80,-7.60
 050,Alaska,1980,Feb,4.60,20.80,12.70
 050,Alaska,1981,Feb,1.80,16.30,9.00
 050,Alaska,1982,Feb,-2.70,12.90,5.10
 050,Alaska,1983,Feb,0.80,14.40,7.60
-050,Alaska,1984,Feb,14.00,0.00,-7.00
+050,Alaska,1984,Feb,-14.00,0.00,-7.00
 050,Alaska,1985,Feb,-7.90,7.40,-0.20
 050,Alaska,1986,Feb,2.90,18.50,10.70
 050,Alaska,1987,Feb,0.80,15.80,8.30
 050,Alaska,1988,Feb,1.20,16.60,8.90
 050,Alaska,1989,Feb,6.60,23.10,14.80
-050,Alaska,1990,Feb,20.60,-2.20,11.40
+050,Alaska,1990,Feb,-20.60,-2.20,-11.40
 050,Alaska,1991,Feb,-3.10,12.10,4.50
 050,Alaska,1992,Feb,-7.00,7.50,0.30
 050,Alaska,1993,Feb,3.10,18.10,10.60
@@ -12751,7 +12751,7 @@ code,country,year,month,min,max,avg
 050,Alaska,1996,Feb,-4.40,12.50,4.00
 050,Alaska,1997,Feb,8.50,21.70,15.10
 050,Alaska,1998,Feb,3.20,17.70,10.40
-050,Alaska,1999,Feb,11.60,4.30,-3.70
+050,Alaska,1999,Feb,-11.60,4.30,-3.70
 050,Alaska,2000,Feb,9.50,23.00,16.20
 050,Alaska,2001,Feb,7.00,22.30,14.70
 050,Alaska,2002,Feb,1.50,16.00,8.70
@@ -19164,7 +19164,7 @@ code,country,year,month,min,max,avg
 050,Alaska,1956,Mar,-1.60,17.10,7.80
 050,Alaska,1957,Mar,6.60,23.30,14.90
 050,Alaska,1958,Mar,8.50,25.50,17.00
-050,Alaska,1959,Mar,11.80,9.30,-1.20
+050,Alaska,1959,Mar,-11.80,9.30,-1.20
 050,Alaska,1960,Mar,-0.50,17.90,8.70
 050,Alaska,1961,Mar,-6.00,12.70,3.40
 050,Alaska,1962,Mar,1.20,19.70,10.40
@@ -19177,7 +19177,7 @@ code,country,year,month,min,max,avg
 050,Alaska,1969,Mar,5.20,21.90,13.60
 050,Alaska,1970,Mar,9.20,24.50,16.90
 050,Alaska,1971,Mar,-8.50,10.50,1.00
-050,Alaska,1972,Mar,11.10,8.90,-1.10
+050,Alaska,1972,Mar,-11.10,8.90,-1.10
 050,Alaska,1973,Mar,0.50,16.90,8.70
 050,Alaska,1974,Mar,-0.60,18.00,8.70
 050,Alaska,1975,Mar,1.40,19.90,10.60
@@ -38974,7 +38974,7 @@ code,country,year,month,min,max,avg
 002,Arizona,2020,Jul,67.80,97.80,82.80
 002,Arizona,2021,Jul,68.70,94.20,81.40
 002,Arizona,2022,Jul,68.90,95.50,82.20
-002,Arizona,2023,Jul,69.70,01.00,85.40
+002,Arizona,2023,Jul,69.70,101.00,85.40
 003,Arkansas,1895,Jul,69.40,87.90,78.70
 003,Arkansas,1896,Jul,71.30,95.30,83.30
 003,Arkansas,1897,Jul,70.20,94.30,82.20
@@ -40400,7 +40400,7 @@ code,country,year,month,min,max,avg
 014,Kansas,1898,Jul,64.20,89.80,77.00
 014,Kansas,1899,Jul,64.00,87.60,75.80
 014,Kansas,1900,Jul,64.60,90.40,77.50
-014,Kansas,1901,Jul,68.70,00.00,84.40
+014,Kansas,1901,Jul,68.70,100.00,84.40
 014,Kansas,1902,Jul,64.30,88.60,76.40
 014,Kansas,1903,Jul,65.30,90.60,77.90
 014,Kansas,1904,Jul,63.70,86.70,75.20
@@ -40433,9 +40433,9 @@ code,country,year,month,min,max,avg
 014,Kansas,1931,Jul,66.10,93.80,80.00
 014,Kansas,1932,Jul,68.20,94.20,81.20
 014,Kansas,1933,Jul,67.30,94.80,81.00
-014,Kansas,1934,Jul,71.30,02.20,86.80
+014,Kansas,1934,Jul,71.30,102.20,86.80
 014,Kansas,1935,Jul,69.90,97.30,83.60
-014,Kansas,1936,Jul,69.60,00.50,85.00
+014,Kansas,1936,Jul,69.60,100.50,85.00
 014,Kansas,1937,Jul,67.30,95.00,81.20
 014,Kansas,1938,Jul,66.70,94.00,80.40
 014,Kansas,1939,Jul,68.30,97.70,83.00
@@ -40479,7 +40479,7 @@ code,country,year,month,min,max,avg
 014,Kansas,1977,Jul,68.00,93.80,80.90
 014,Kansas,1978,Jul,66.90,95.50,81.20
 014,Kansas,1979,Jul,66.20,89.40,77.80
-014,Kansas,1980,Jul,70.20,00.80,85.50
+014,Kansas,1980,Jul,70.20,100.80,85.50
 014,Kansas,1981,Jul,68.00,90.50,79.20
 014,Kansas,1982,Jul,66.40,91.30,78.80
 014,Kansas,1983,Jul,67.40,95.20,81.30
@@ -41594,7 +41594,7 @@ code,country,year,month,min,max,avg
 023,Missouri,1931,Jul,67.50,92.30,79.90
 023,Missouri,1932,Jul,67.80,91.00,79.40
 023,Missouri,1933,Jul,67.10,90.60,78.90
-023,Missouri,1934,Jul,71.00,00.30,85.70
+023,Missouri,1934,Jul,71.00,100.30,85.70
 023,Missouri,1935,Jul,69.20,91.60,80.40
 023,Missouri,1936,Jul,70.40,99.20,84.80
 023,Missouri,1937,Jul,65.60,89.40,77.50
@@ -42980,7 +42980,7 @@ code,country,year,month,min,max,avg
 034,Oklahoma,1898,Jul,68.40,92.10,80.20
 034,Oklahoma,1899,Jul,68.20,90.80,79.60
 034,Oklahoma,1900,Jul,68.40,91.30,79.80
-034,Oklahoma,1901,Jul,71.60,00.70,86.10
+034,Oklahoma,1901,Jul,71.60,100.70,86.10
 034,Oklahoma,1902,Jul,68.50,90.90,79.70
 034,Oklahoma,1903,Jul,69.00,93.50,81.20
 034,Oklahoma,1904,Jul,68.00,91.00,79.50
@@ -43013,9 +43013,9 @@ code,country,year,month,min,max,avg
 034,Oklahoma,1931,Jul,69.90,95.30,82.60
 034,Oklahoma,1932,Jul,71.30,94.80,83.00
 034,Oklahoma,1933,Jul,71.50,95.90,83.70
-034,Oklahoma,1934,Jul,73.10,02.30,87.70
+034,Oklahoma,1934,Jul,73.10,102.30,87.70
 034,Oklahoma,1935,Jul,71.20,95.80,83.50
-034,Oklahoma,1936,Jul,71.90,00.20,86.00
+034,Oklahoma,1936,Jul,71.90,100.20,86.00
 034,Oklahoma,1937,Jul,71.20,96.30,83.70
 034,Oklahoma,1938,Jul,69.50,94.60,82.10
 034,Oklahoma,1939,Jul,70.70,97.60,84.20
@@ -43033,7 +43033,7 @@ code,country,year,month,min,max,avg
 034,Oklahoma,1951,Jul,70.60,93.30,81.90
 034,Oklahoma,1952,Jul,69.20,95.10,82.20
 034,Oklahoma,1953,Jul,69.10,91.60,80.40
-034,Oklahoma,1954,Jul,73.80,02.40,88.10
+034,Oklahoma,1954,Jul,73.80,102.40,88.10
 034,Oklahoma,1955,Jul,71.50,95.60,83.60
 034,Oklahoma,1956,Jul,70.60,97.00,83.80
 034,Oklahoma,1957,Jul,71.70,96.90,84.30
@@ -43059,7 +43059,7 @@ code,country,year,month,min,max,avg
 034,Oklahoma,1977,Jul,70.90,96.00,83.50
 034,Oklahoma,1978,Jul,71.80,99.50,85.60
 034,Oklahoma,1979,Jul,69.50,91.80,80.70
-034,Oklahoma,1980,Jul,72.80,02.00,87.40
+034,Oklahoma,1980,Jul,72.80,102.00,87.40
 034,Oklahoma,1981,Jul,71.90,94.80,83.30
 034,Oklahoma,1982,Jul,70.00,92.40,81.20
 034,Oklahoma,1983,Jul,69.40,94.40,81.90
@@ -43090,7 +43090,7 @@ code,country,year,month,min,max,avg
 034,Oklahoma,2008,Jul,69.70,93.60,81.70
 034,Oklahoma,2009,Jul,68.20,93.40,80.80
 034,Oklahoma,2010,Jul,71.90,91.90,81.90
-034,Oklahoma,2011,Jul,75.40,02.90,89.20
+034,Oklahoma,2011,Jul,75.40,102.90,89.20
 034,Oklahoma,2012,Jul,72.30,99.50,85.90
 034,Oklahoma,2013,Jul,68.00,91.20,79.60
 034,Oklahoma,2014,Jul,66.70,89.00,77.80
@@ -43101,7 +43101,7 @@ code,country,year,month,min,max,avg
 034,Oklahoma,2019,Jul,69.00,92.60,80.80
 034,Oklahoma,2020,Jul,71.60,93.60,82.60
 034,Oklahoma,2021,Jul,68.80,91.10,80.00
-034,Oklahoma,2022,Jul,72.80,00.30,86.60
+034,Oklahoma,2022,Jul,72.80,100.30,86.60
 034,Oklahoma,2023,Jul,70.00,93.70,81.90
 035,Oregon,1895,Jul,47.60,76.10,61.90
 035,Oregon,1896,Jul,51.20,82.60,66.90
@@ -43660,7 +43660,7 @@ code,country,year,month,min,max,avg
 039,South Dakota,1933,Jul,61.40,92.20,76.80
 039,South Dakota,1934,Jul,61.20,92.40,76.80
 039,South Dakota,1935,Jul,63.90,93.20,78.50
-039,South Dakota,1936,Jul,66.20,00.50,83.30
+039,South Dakota,1936,Jul,66.20,100.50,83.30
 039,South Dakota,1937,Jul,60.90,89.70,75.30
 039,South Dakota,1938,Jul,59.60,88.20,73.90
 039,South Dakota,1939,Jul,61.50,91.70,76.60
@@ -44004,7 +44004,7 @@ code,country,year,month,min,max,avg
 041,Texas,2019,Jul,70.80,94.80,82.80
 041,Texas,2020,Jul,73.40,97.00,85.20
 041,Texas,2021,Jul,70.60,91.20,80.90
-041,Texas,2022,Jul,74.30,00.00,87.20
+041,Texas,2022,Jul,74.30,100.00,87.20
 041,Texas,2023,Jul,73.70,98.80,86.30
 042,Utah,1895,Jul,54.70,82.90,68.80
 042,Utah,1896,Jul,57.50,83.70,70.60
@@ -49468,14 +49468,14 @@ code,country,year,month,min,max,avg
 034,Oklahoma,1933,Aug,68.70,89.80,79.30
 034,Oklahoma,1934,Aug,73.40,99.50,86.40
 034,Oklahoma,1935,Aug,70.40,96.20,83.30
-034,Oklahoma,1936,Aug,72.40,02.20,87.40
+034,Oklahoma,1936,Aug,72.40,102.20,87.40
 034,Oklahoma,1937,Aug,72.30,96.80,84.60
 034,Oklahoma,1938,Aug,70.90,97.00,84.00
 034,Oklahoma,1939,Aug,67.90,95.50,81.70
 034,Oklahoma,1940,Aug,66.80,90.10,78.40
 034,Oklahoma,1941,Aug,68.80,92.60,80.70
 034,Oklahoma,1942,Aug,68.50,90.20,79.40
-034,Oklahoma,1943,Aug,72.30,00.60,86.40
+034,Oklahoma,1943,Aug,72.30,100.60,86.40
 034,Oklahoma,1944,Aug,69.60,94.60,82.10
 034,Oklahoma,1945,Aug,67.70,91.80,79.70
 034,Oklahoma,1946,Aug,69.10,94.50,81.80
@@ -49543,7 +49543,7 @@ code,country,year,month,min,max,avg
 034,Oklahoma,2008,Aug,68.40,89.80,79.10
 034,Oklahoma,2009,Aug,67.00,90.90,78.90
 034,Oklahoma,2010,Aug,70.80,97.00,83.90
-034,Oklahoma,2011,Aug,73.80,01.60,87.70
+034,Oklahoma,2011,Aug,73.80,101.60,87.70
 034,Oklahoma,2012,Aug,67.50,95.50,81.50
 034,Oklahoma,2013,Aug,68.90,91.60,80.30
 034,Oklahoma,2014,Aug,68.40,93.00,80.70
@@ -50446,7 +50446,7 @@ code,country,year,month,min,max,avg
 041,Texas,2008,Aug,69.80,91.80,80.80
 041,Texas,2009,Aug,70.60,95.90,83.30
 041,Texas,2010,Aug,71.70,97.00,84.40
-041,Texas,2011,Aug,74.70,01.60,88.20
+041,Texas,2011,Aug,74.70,101.60,88.20
 041,Texas,2012,Aug,71.00,96.40,83.70
 041,Texas,2013,Aug,70.80,95.80,83.30
 041,Texas,2014,Aug,70.60,94.70,82.60
@@ -50458,7 +50458,7 @@ code,country,year,month,min,max,avg
 041,Texas,2020,Aug,71.40,97.50,84.40
 041,Texas,2021,Aug,71.00,92.80,81.90
 041,Texas,2022,Aug,72.30,94.40,83.40
-041,Texas,2023,Aug,73.90,01.10,87.50
+041,Texas,2023,Aug,73.90,101.10,87.50
 042,Utah,1895,Aug,54.70,84.10,69.40
 042,Utah,1896,Aug,55.40,81.50,68.40
 042,Utah,1897,Aug,54.90,83.20,69.10
@@ -75013,7 +75013,7 @@ code,country,year,month,min,max,avg
 032,North Dakota,1924,Dec,-7.60,11.40,1.90
 032,North Dakota,1925,Dec,7.00,23.90,15.40
 032,North Dakota,1926,Dec,-1.60,17.80,8.10
-032,North Dakota,1927,Dec,12.20,5.80,-3.20
+032,North Dakota,1927,Dec,-12.20,5.80,-3.20
 032,North Dakota,1928,Dec,10.40,29.60,20.00
 032,North Dakota,1929,Dec,1.20,18.30,9.70
 032,North Dakota,1930,Dec,10.40,27.10,18.80
@@ -75069,7 +75069,7 @@ code,country,year,month,min,max,avg
 032,North Dakota,1980,Dec,4.80,24.70,14.70
 032,North Dakota,1981,Dec,3.70,20.80,12.20
 032,North Dakota,1982,Dec,10.50,27.80,19.20
-032,North Dakota,1983,Dec,11.10,5.90,-2.60
+032,North Dakota,1983,Dec,-11.10,5.90,-2.60
 032,North Dakota,1984,Dec,-2.60,17.30,7.30
 032,North Dakota,1985,Dec,-3.70,17.70,7.00
 032,North Dakota,1986,Dec,11.20,30.40,20.80
@@ -77215,7 +77215,7 @@ code,country,year,month,min,max,avg
 050,Alaska,1930,Dec,4.40,18.30,11.30
 050,Alaska,1931,Dec,-2.50,11.60,4.60
 050,Alaska,1932,Dec,-1.00,11.60,5.30
-050,Alaska,1933,Dec,15.40,-0.80,-8.10
+050,Alaska,1933,Dec,-15.40,-0.80,-8.10
 050,Alaska,1934,Dec,2.20,16.60,9.40
 050,Alaska,1935,Dec,-7.10,5.90,-0.60
 050,Alaska,1936,Dec,-7.60,6.80,-0.40
@@ -77224,29 +77224,29 @@ code,country,year,month,min,max,avg
 050,Alaska,1939,Dec,2.00,15.50,8.80
 050,Alaska,1940,Dec,0.10,14.60,7.30
 050,Alaska,1941,Dec,-2.30,11.90,4.80
-050,Alaska,1942,Dec,16.10,-3.20,-9.60
+050,Alaska,1942,Dec,-16.10,-3.20,-9.60
 050,Alaska,1943,Dec,2.00,15.30,8.60
 050,Alaska,1944,Dec,2.20,15.40,8.80
 050,Alaska,1945,Dec,-1.70,10.80,4.50
-050,Alaska,1946,Dec,13.80,1.00,-6.40
+050,Alaska,1946,Dec,-13.80,1.00,-6.40
 050,Alaska,1947,Dec,4.70,15.80,10.30
-050,Alaska,1948,Dec,11.30,3.50,-3.90
+050,Alaska,1948,Dec,-11.30,3.50,-3.90
 050,Alaska,1949,Dec,-6.80,6.90,0.00
 050,Alaska,1950,Dec,-1.50,11.60,5.00
 050,Alaska,1951,Dec,-4.10,10.40,3.20
 050,Alaska,1952,Dec,-0.10,11.80,5.80
 050,Alaska,1953,Dec,-0.10,11.40,5.60
-050,Alaska,1954,Dec,14.00,-0.40,-7.30
+050,Alaska,1954,Dec,-14.00,-0.40,-7.30
 050,Alaska,1955,Dec,-8.00,7.60,-0.20
-050,Alaska,1956,Dec,13.80,-1.70,-7.70
+050,Alaska,1956,Dec,-13.80,-1.70,-7.70
 050,Alaska,1957,Dec,-9.50,2.30,-3.60
 050,Alaska,1958,Dec,-0.70,11.30,5.30
 050,Alaska,1959,Dec,-7.50,5.20,-1.20
 050,Alaska,1960,Dec,8.80,21.10,14.90
-050,Alaska,1961,Dec,14.00,-1.80,-7.90
+050,Alaska,1961,Dec,-14.00,-1.80,-7.90
 050,Alaska,1962,Dec,-1.60,11.00,4.80
 050,Alaska,1963,Dec,6.10,19.30,12.70
-050,Alaska,1964,Dec,16.00,-1.70,-8.90
+050,Alaska,1964,Dec,-16.00,-1.70,-8.90
 050,Alaska,1965,Dec,-7.30,6.90,-0.20
 050,Alaska,1966,Dec,-7.30,6.30,-0.50
 050,Alaska,1967,Dec,-0.10,12.30,6.10
@@ -77262,7 +77262,7 @@ code,country,year,month,min,max,avg
 050,Alaska,1977,Dec,-6.40,6.20,-0.10
 050,Alaska,1978,Dec,3.40,17.10,10.20
 050,Alaska,1979,Dec,-9.70,4.20,-2.70
-050,Alaska,1980,Dec,13.60,-1.40,-7.50
+050,Alaska,1980,Dec,-13.60,-1.40,-7.50
 050,Alaska,1981,Dec,-1.80,10.80,4.50
 050,Alaska,1982,Dec,3.90,15.20,9.50
 050,Alaska,1983,Dec,4.60,15.40,10.00
