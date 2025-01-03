@@ -41,6 +41,7 @@ function lineChart() {
       yearSlider
         .attr("min", minYear)
         .attr("max", maxYear)
+        .attr("value", maxYear)
         .property("value", maxYear);
 
       // correct the two values of the slider text
@@ -258,23 +259,53 @@ function lineChart() {
       // Update chart on slider input
       yearSlider.node().addEventListener("input", function () {
         const selectedState = stateSelector.property("value");
-        const selectedYear = +this.value;
+        let selectedYear = +this.value;
         const isFahrenheit = toggleUnit.property("checked");
+
+        if (selectedYear < minimumAllowedYear) {
+          // Set tooltip text, hence width
+          tooltip.html(`No data available for ${selectedState} before ${minimumAllowedYear}.`);
+
+          const sliderRect = yearSlider.node().getBoundingClientRect();
+          const sliderValue = +this.value;
+          const sliderPositionX = 0.5 * sliderRect.width + sliderRect.left - 0.5 * tooltip.node().offsetWidth;
+          const sliderPositionY = sliderRect.top + sliderRect.height;
+
+          // Reset slider value to minimumAllowedYear
+          this.value = minimumAllowedYear;
+          selectedYear = minimumAllowedYear;
+
+          yearSlider.classed("accent-blue-500", false).classed("accent-red-500", true);
+
+          // Show a tooltip
+          tooltip.style("opacity", 1)
+            .style("left", `${sliderPositionX}px`) // Position the tooltip near the slider
+            .style("top", `${sliderPositionY - 55}px`);
+
+          // Hide the tooltip after a delay
+          setTimeout(() => {
+            tooltip.style("opacity", 0);
+            yearSlider.classed("accent-red-500", false).classed("accent-blue-500", true);
+          }, 2000);
+
+        }
+        else {
+          tooltip.style("opacity", 0);
+        }
 
         drawChart(selectedState, selectedYear, isFahrenheit);
       });
 
       // Update chart on state selection
       stateSelector.node().addEventListener("change", function () {
-        const selectedState = this.value;
 
-        const minYearForState = d3.min(data.filter(d => d.country === this.value), d => d.year);
-        minimumAllowedYear = minYearForState;
-        console.log(minimumAllowedYear);
-        
-        const selectedYear = +yearSlider.property("value");
-        if(selectedYear < minimumAllowedYear) {
+        const selectedState = this.value;
+        minimumAllowedYear = d3.min(data.filter(d => d.country === this.value), d => d.year);
+        let selectedYear = +yearSlider.property("value");
+
+        if (selectedYear < minimumAllowedYear) {
           yearSlider.property("value", minimumAllowedYear);
+          selectedYear = minimumAllowedYear;
         }
         const isFahrenheit = toggleUnit.property("checked");
 

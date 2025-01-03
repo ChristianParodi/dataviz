@@ -1081,6 +1081,10 @@ video {
   accent-color: #3b82f6;
 }
 
+.accent-red-500 {
+  accent-color: #ef4444;
+}
+
 .opacity-0 {
   opacity: 0;
 }
