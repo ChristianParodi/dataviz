@@ -63,11 +63,11 @@ function lineChart() {
 
       // Function to draw the chart
       function drawChart(selectedState, selectedYear, isFahrenheit) {
-
+        console.log("using", { selectedState, selectedYear, isFahrenheit })
         // Remove existing SVG
         d3.select("#line-chart").select("svg").remove();
 
-        const filtered = data.filter(d => d.country == selectedState && +d.year === selectedYear);
+        const filtered = data.filter(d => d.country == selectedState && +d.year === selectedYear).map(d => ({ ...d }))
 
         const margin = { top: 30, right: 30, bottom: 60, left: 80 };
         const width = 600;
@@ -83,16 +83,17 @@ function lineChart() {
           .padding(0.5);
 
         // set the right unit (C - F)
-        const convert = isFahrenheit ? toFahrenheit : toCelsius;
+        const convert = (v) => isFahrenheit ? v : toCelsius(v);
 
-        const selectedUnitData = filtered.map(d => ({ ...d })); // IMPORTANT
+        // IMPORTANT
         // apparently, if selectedUnitData = filtered; the referenced object
         // is the original data because .filter() does not make a copy
-        selectedUnitData.forEach(d => {
-          d.min = convert(d.min);
-          d.max = convert(d.max);
-          d.avg = convert(d.avg);
-        });
+        const selectedUnitData = filtered.map(d => ({
+          ...d,
+          min: convert(d.min),
+          max: convert(d.max),
+          avg: convert(d.avg)
+        }));
 
         const absMin = convert(d3.min(data, d => d.min));
         const absMax = convert(d3.max(data, d => d.max));

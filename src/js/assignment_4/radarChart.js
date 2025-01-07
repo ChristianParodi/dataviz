@@ -72,7 +72,7 @@ function radarChart() {
           .domain([...months, ""]) // add another element, otherwise dec overlaps jan on the circumference
           .range([0, 2 * Math.PI]);
 
-        const convert = isFahrenheit ? toFahrenheit : toCelsius;
+        const convert = (v) => isFahrenheit ? v : toCelsius(v);
 
         const selectedUnitData = filtered.map(d => ({ ...d })); // Deep copy
         selectedUnitData.forEach(d => {

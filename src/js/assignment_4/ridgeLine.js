@@ -48,12 +48,14 @@ function ridgelinePlot() {
         svg.selectAll("*").remove()
 
         const filteredData = data
-          .filter(d => d.country === selectedState && (decade.start <= d.year && decade.end >= d.year))
+          .filter(d => d.country === selectedState && (decade.start <= d.year && decade.end >= d.year)).map(d => ({ ...d }))
           .map(d => ({ ...d }));
 
+        const convert = isFahrenheit ? toFahrenheit : toCelsius;
+
         filteredData.forEach(d => {
-          d.min = isFahrenheit ? toFahrenheit(d.min) : toCelsius(d.min);
-          d.max = isFahrenheit ? toFahrenheit(d.max) : toCelsius(d.max);
+          d.min = convert(d.min);
+          d.max = convert(d.max);
         });
 
         const grouped = d3.groups(filteredData, d => d.year)
@@ -72,8 +74,8 @@ function ridgelinePlot() {
 
         const x = d3.scaleLinear()
           .domain([
-            d3.min(data, d => d.min),
-            d3.max(data, d => d.max)
+            convert(d3.min(data, d => d.min)),
+            convert(d3.max(data, d => d.max))
           ])
           .range([margin.left, width - margin.right]);
 
