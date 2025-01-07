@@ -97,6 +97,71 @@
           </p>
         </div>
       </div>
+
+      <!-- Visualization options randmeandecade -->
+      <div class="flex flex-row gap-32 items-center justify-center">
+
+        <!-- Celsius selector -->
+        <div class="flex flex-1 items-center justify-center">
+          <span class="mr-2 text-base text-gray-800">Celsius</span>
+          <label for="toggle-unit-randmean" class="relative cursor-pointer">
+            <input type="checkbox" id="toggle-unit-randmean" class="sr-only peer" />
+            <div class="switch"></div>
+          </label>
+          <span class="ml-2 text-base text-gray-800">Fahrenheit</span>
+        </div>
+        <!-- end Celsius selector -->
+
+
+        <!-- State selector -->
+        <div class="flex-col items-start flex-1">
+          <label for="state-selector-randmean" class="block text-sm font-medium mb-2">
+            Select State
+          </label>
+          <select id="state-selector-randmean" name="state-selector" class="w-full h-full"></select>
+        </div>
+        <!-- End state selector -->
+
+      </div>
+      <p>range of decades</p>
+      <span id="randmean-chart"></span>
+      
+      <!-- End visualization options randmean -->
+
+
+
+    <!-- Visualization options randmean -->
+    <div class="flex flex-row gap-32 items-center justify-center">
+
+      <!-- Celsius selector -->
+      <div class="flex flex-1 items-center justify-center">
+        <span class="mr-2 text-base text-gray-800">Celsius</span>
+        <label for="toggle-unit-radardecade" class="relative cursor-pointer">
+          <input type="checkbox" id="toggle-unit-radardecade" class="sr-only peer" />
+          <div class="switch"></div>
+        </label>
+        <span class="ml-2 text-base text-gray-800">Fahrenheit</span>
+      </div>
+      <!-- end Celsius selector -->
+
+
+      <!-- State selector -->
+      <div class="flex-col items-start flex-1">
+        <label for="state-selector-radardecade" class="block text-sm font-medium mb-2">
+          Select State
+        </label>
+        <select id="state-selector-radardecade" name="state-selector" class="w-full h-full"></select>
+      </div>
+      <!-- End state selector -->
+
+    </div>
+    <p>range of years 2013-2023</p>
+    <span id="radardecade-chart"></span>
+    
+    <!-- End visualization options randmeandecade -->
+
+
+
       <!-- Visualization options ridge -->
       <div class="flex flex-row gap-32 items-center justify-center">
         <!-- Celsius selector -->
@@ -137,6 +202,7 @@
       </div>
       <!-- End visualization options ridge -->
       <div id="ridge-line"></div>
+      
       <p>
         Thanks to the ridgeline it is possible to observe the trends and the
         temperature values of the 2014-2023 year range in the American states.
@@ -148,6 +214,8 @@
       <script type="module" src="./../js/assignment_4/lineChart.js"></script>
       <script type="module" src="./../js/assignment_4/radarChart.js"></script>
       <script type="module" src="./../js/assignment_4/ridgeLine.js"></script>
+      <script type="module" src="./../js/assignment_4/radarmeanChart.js"></script>
+      <script type="module" src="./../js/assignment_4/radarmeandecadeChart.js"></script>
     </main>
     <footer class="bg-gray-900 text-white py-8">
       <div class="container mx-auto px-6">
@@ -161,6 +229,7 @@
         </div>
       </div>
     </footer>
+    
   </body>
 
 
