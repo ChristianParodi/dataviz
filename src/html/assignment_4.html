@@ -122,9 +122,9 @@
       </div>
       <!-- End visualization options -->
 
-  
-      
-      
+
+
+
       <div class="flex items-center justify-center gap-10">
         <div id="line-chart"></div>
         <div id="radar-chart"></div>
@@ -133,8 +133,9 @@
         <div class="flex flex-col items-center basis-1/2">
           <p style="margin-left: 150px;">
             From the line chart in the top-left, you can observe the changes in temperature
-            maximum, average and minimum in a year in different months with respect to a single country. Using the silder of years 
-            it is possible to observe how these temperatures have changed over time. 
+            maximum, average and minimum in a year in different months with respect to a single country. Using the
+            silder of years
+            it is possible to observe how these temperatures have changed over time.
             Thanks to these graphs, a general trend of increasing temperatures is observed in all months of the year,
             indicating a possible effect of global warming.
           </p>
@@ -142,29 +143,68 @@
         <div class="flex flex-col items-center basis-1/2">
           <p>
             From the radar chart in the top-right, it is possible to observe data
-            multivariate by combining the months with minimum, average and maximum temperatures.  
+            multivariate by combining the months with minimum, average and maximum temperatures.
             This type of representation makes the comparison between differences and similarities immediate
-            in temperature values, highlighting seasonal variations and underlining 
+            in temperature values, highlighting seasonal variations and underlining
             as in the previous case, a general increase in temperatures.
           </p>
         </div>
       </div>
-      
-      
-    
+
+
+
+      <!-- Visualization options ridge -->
+      <div class="flex flex-row gap-32 items-center justify-center">
+        <!-- Celsius selector -->
+        <div class="flex flex-1 items-center justify-center">
+          <span class="mr-2 text-base text-gray-800">Celsius</span>
+          <label for="toggle-unit-ridge" class="relative cursor-pointer">
+            <input type="checkbox" id="toggle-unit-ridge" class="sr-only peer" />
+            <div class="switch"></div>
+          </label>
+          <span class="ml-2 text-base text-gray-800">Fahrenheit</span>
+        </div>
+        <!-- end Celsius selector -->
+        <!-- Year slider -->
+        <div class="flex-1">
+          <label for="year-slider-ridge" class="block text-sm font-medium mb-2">
+            Select Decade
+          </label>
+          <input type="range" id="year-slider-ridge" name="year-slider" min="2000" max="2023" value="2023"
+            class="w-full accent-blue-500">
+          <div class="flex justify-between text-sm text-gray-400">
+            <span id="min-year-text-ridge"></span>
+            <span id="max-year-text-ridge"></span>
+          </div>
+          <div class="flex justify-center">
+            <span id="ridge-decade"></span>
+          </div>
+        </div>
+        <!-- End year slider -->
+
+        <!-- State selector -->
+        <div class="flex-col items-start flex-1">
+          <label for="state-selector-ridge" class="block text-sm font-medium mb-2">
+            Select State
+          </label>
+          <select id="state-selector-ridge" name="state-selector" class="w-full h-full"></select>
+        </div>
+        <!-- End state selector -->
+      </div>
+      <!-- End visualization options ridge -->
       <div id="ridge-line"></div>
       <p>
-        Thanks to the ridgeline it is possible to observe the trends and the 
-        temperature values ​​of the 2014-2023 year range in the American states. 
+        Thanks to the ridgeline it is possible to observe the trends and the
+        temperature values of the 2014-2023 year range in the American states.
         For each year the graph shows two curves, one blue and one red representing
         the minimum and maximum temperature distributions respectively.
-        From the graph we can see a general increase in minimum and maximum temperatures 
+        From the graph we can see a general increase in minimum and maximum temperatures
         in recent years, with a greater density of values ​​towards higher temperatures.
       </p>
 
-      
 
-      
+
+
 
 
 

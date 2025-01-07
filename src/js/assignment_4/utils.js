@@ -57,4 +57,30 @@ function kernelEpanechnikov(k) {
   };
 }
 
-export { toCelsius, toFahrenheit, kernelDensityEstimator, kernelEpanechnikov };
+const tooltip = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("position", "absolute")
+  .style("padding", "6px")
+  .style("background", "rgba(0, 0, 0, 0.7)")
+  .style("color", "#fff")
+  .style("border-radius", "4px")
+  .style("pointer-events", "none")
+  .style("opacity", 0);
+
+
+const monthsMap = {
+  "Jan": "January",
+  "Feb": "February",
+  "Mar": "March",
+  "Apr": "April",
+  "May": "May",
+  "Jun": "June",
+  "Jul": "July",
+  "Aug": "August",
+  "Sep": "September",
+  "Oct": "October",
+  "Nov": "November",
+  "Dec": "December"
+}
+
+export { toCelsius, toFahrenheit, kernelDensityEstimator, kernelEpanechnikov, tooltip, monthsMap };
