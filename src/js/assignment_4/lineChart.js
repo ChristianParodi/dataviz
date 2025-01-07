@@ -24,7 +24,7 @@ const monthsMap = {
   "Oct": "October",
   "Nov": "November",
   "Dec": "December"
-}
+};
 
 function lineChart() {
   d3.csv("./../../../dataset/assignment_4/min_max_avg_states.csv", d3.autoType)

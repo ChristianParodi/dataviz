@@ -1,5 +1,31 @@
 import { toFahrenheit, toCelsius } from './utils.js';
 
+const tooltip = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("position", "absolute")
+  .style("padding", "6px")
+  .style("background", "rgba(0, 0, 0, 0.7)")
+  .style("color", "#fff")
+  .style("border-radius", "4px")
+  .style("pointer-events", "none")
+  .style("opacity", 0);
+
+
+const monthsMap = {
+  "Jan": "January",
+  "Feb": "February",
+  "Mar": "March",
+  "Apr": "April",
+  "May": "May",
+  "Jun": "June",
+  "Jul": "July",
+  "Aug": "August",
+  "Sep": "September",
+  "Oct": "October",
+  "Nov": "November",
+  "Dec": "December"
+};
+
 function radarChart() {
   d3.csv("./../../dataset/assignment_4/min_max_avg_states.csv", d3.autoType)
     .then(data => {
@@ -32,7 +58,8 @@ function radarChart() {
 
         const width = 600;
         const height = 600;
-        const radius = Math.min(width, height) / 2 - 50;
+        const margin = 50;
+        const radius = Math.min(width, height) / 2 - margin;
 
         const svg = d3.select("#radar-chart").append("svg")
           .attr("width", width)
@@ -144,7 +171,63 @@ function radarChart() {
             .style("text-anchor", "middle")
             .style("font-size", "10px")
             .text(level.toFixed(1) + (isFahrenheit ? "°F" : "°C"));
-        })
+        });
+
+
+        // Add a transparent overlay for mouse interactions
+        svg.append("circle")
+          .attr("r", radius)
+          .style("fill", "none")
+          .style("pointer-events", "all")
+          .on("mousemove", function (event) {
+            const [mouseX, mouseY] = d3.pointer(event);
+
+            const angle = Math.atan2(mouseY, mouseX);
+
+            // Normalize the angle to match the radar chart's axes
+            const adjustedAngle = (angle + Math.PI / 2 + 2 * Math.PI) % (2 * Math.PI);
+
+            // Find the closest month based on the angle
+            const closestMonthIndex = Math.round((adjustedAngle / (2 * Math.PI)) * months.length) % months.length;
+            const closestMonth = months[closestMonthIndex]; // Array of months in order
+            const closestMonthAngle = angleScale(closestMonth);
+
+            // Find the corresponding data for the month
+            const monthData = selectedUnitData.find(d => d.month === closestMonth);
+
+            if (monthData) {
+              // Update the tooltip
+              const unit = isFahrenheit ? "°F" : "°C";
+              tooltip.style("opacity", 1)
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY + 10}px`)
+                .html(`
+                  <strong style="text-decoration: underline;">${monthsMap[closestMonth]}</strong><br>
+                  <strong>Max:</strong> ${monthData.max.toFixed(1)}${unit}<br>
+                  <strong>Avg:</strong> ${monthData.avg.toFixed(1)}${unit}<br>
+                  <strong>Min:</strong> ${monthData.min.toFixed(1)}${unit}
+                `);
+
+              // Update the axis highlight
+              svg.selectAll(".month-axis-highlight").remove();
+              svg.append("line")
+                .attr("class", "month-axis-highlight")
+                .attr("x1", 0)
+                .attr("y1", 0)
+                .attr("x2", (Math.sin(closestMonthAngle) * radius))
+                .attr("y2", (-Math.cos(closestMonthAngle) * radius))
+                .style("stroke", "black")
+                .style("stroke-width", 2)
+                .style("opacity", 1);
+
+            }
+          })
+          .on("mouseout", function () {
+            // Hide the tooltip
+            tooltip.style("opacity", 0);
+            // Remove the axis highlight
+            svg.selectAll(".month-axis-highlight").style("opacity", 0);
+          });
       };
 
       // Initial draw
