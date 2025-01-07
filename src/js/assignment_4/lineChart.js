@@ -63,7 +63,6 @@ function lineChart() {
 
       // Function to draw the chart
       function drawChart(selectedState, selectedYear, isFahrenheit) {
-        console.log("using", { selectedState, selectedYear, isFahrenheit })
         // Remove existing SVG
         d3.select("#line-chart").select("svg").remove();
 

@@ -51,7 +51,7 @@ function ridgelinePlot() {
           .filter(d => d.country === selectedState && (decade.start <= d.year && decade.end >= d.year)).map(d => ({ ...d }))
           .map(d => ({ ...d }));
 
-        const convert = isFahrenheit ? toFahrenheit : toCelsius;
+        const convert = (v) => isFahrenheit ? v : toCelsius(v);
 
         filteredData.forEach(d => {
           d.min = convert(d.min);
@@ -65,7 +65,6 @@ function ridgelinePlot() {
             maxValues: arr.map(v => v.max)
           }))
           .sort((a, b) => d3.ascending(a.year, b.year));
-        console.log(grouped)
 
         const margin = { top: 50, right: 30, bottom: 30, left: 50 };
         const width = 700;
