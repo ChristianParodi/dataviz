@@ -173,6 +173,11 @@ function radarChart() {
             .text(level.toFixed(1) + (isFahrenheit ? "°F" : "°C"));
         });
 
+        const line = svg.append("line")
+          .attr("class", "month-axis-highlight")
+          .style("stroke", "black")
+          .style("stroke-width", 2)
+          .style("opacity", 0);
 
         // Add a transparent overlay for mouse interactions
         svg.append("circle")
@@ -209,15 +214,12 @@ function radarChart() {
                 `);
 
               // Update the axis highlight
-              svg.selectAll(".month-axis-highlight").remove();
-              svg.append("line")
+              line
                 .attr("class", "month-axis-highlight")
                 .attr("x1", 0)
                 .attr("y1", 0)
                 .attr("x2", (Math.sin(closestMonthAngle) * radius))
                 .attr("y2", (-Math.cos(closestMonthAngle) * radius))
-                .style("stroke", "black")
-                .style("stroke-width", 2)
                 .style("opacity", 1);
 
             }
@@ -226,7 +228,7 @@ function radarChart() {
             // Hide the tooltip
             tooltip.style("opacity", 0);
             // Remove the axis highlight
-            svg.selectAll(".month-axis-highlight").style("opacity", 0);
+            line.style("opacity", 0);
           });
       };
 
