@@ -143,7 +143,7 @@ function radarChart() {
             .attr("dy", "-0.5em")
             .style("text-anchor", "middle")
             .style("font-size", "10px")
-            .text(level.toFixed(1)+(isFahrenheit ? "°F" : "°C"));
+            .text(level.toFixed(1) + (isFahrenheit ? "°F" : "°C"));
         })
       };
 

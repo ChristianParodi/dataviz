@@ -14,15 +14,19 @@
   .btn-primary {
     @apply px-6 py-3 bg-black/50 text-white rounded-lg shadow-xl  hover:bg-black/70 transition duration-500;
   }
-   /*.buttonstyle {
+   .buttonstyle {
     @apply bg-green-600 text-gray-900 font-semibold py-2 px-4 rounded-lg shadow hover:shadow-lg focus:shadow-lg active:shadow transition-shadow duration-150;
-  }*/
-
-  .buttonstyle {
-    @apply bg-grey/50 text-white font-semibold py-2 px-4 rounded-lg shadow hover:shadow-lg focus:shadow-lg active:shadow   hover:bg-black/70 transition duration-500;
   }
 
+  /* .buttonstyle {
+    @apply bg-gray/50 text-white font-semibold py-2 px-4 rounded-lg shadow hover:shadow-lg focus:shadow-lg active:shadow hover:bg-black/70 transition duration-500;
+  } */
 
+
+}
+
+.denied {
+  accent-color: #ff4747;
 }
 
 @layer utilities {

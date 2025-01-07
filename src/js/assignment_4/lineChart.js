@@ -276,7 +276,7 @@ function lineChart() {
           this.value = minimumAllowedYear;
           selectedYear = minimumAllowedYear;
 
-          yearSlider.classed("accent-blue-500", false).classed("accent-red-500", true);
+          yearSlider.classed("accent-blue-500", false).classed("denied", true);
 
           // Show a tooltip
           tooltip.style("opacity", 1)
@@ -286,7 +286,7 @@ function lineChart() {
           // Hide the tooltip after a delay
           setTimeout(() => {
             tooltip.style("opacity", 0);
-            yearSlider.classed("accent-red-500", false).classed("accent-blue-500", true);
+            yearSlider.classed("denied", false).classed("accent-blue-500", true);
           }, 2000);
 
         }
