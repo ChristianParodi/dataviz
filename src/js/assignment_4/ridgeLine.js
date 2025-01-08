@@ -29,11 +29,15 @@ function ridgelinePlot() {
 
       const states = Array.from(new Set(data.map(d => d.country)));
       states.sort();
+
+      // DO NOT REPREAT THIS IN OTHER JS FILES THAT
+      // USE THE SAME STATE SELECTOR (radar decade)
       states.forEach(state => {
         stateSelector.append("option")
           .attr("value", state)
           .text(state);
       });
+      /////////////////////////////////////////////
 
       const firstState = states[0];
 
@@ -48,7 +52,7 @@ function ridgelinePlot() {
         svg.selectAll("*").remove()
 
         const filteredData = data
-          .filter(d => d.country === selectedState && (decade.start <= d.year && decade.end >= d.year)).map(d => ({ ...d }))
+          .filter(d => d.country === selectedState && (decade.start <= d.year && decade.end >= d.year))
           .map(d => ({ ...d }));
 
         const convert = (v) => isFahrenheit ? v : toCelsius(v);
@@ -148,28 +152,29 @@ function ridgelinePlot() {
           .text(isFahrenheit ? "Temperature (°F)" : "Temperature (°C)");
       }
 
-      const decade = { start: maxYear - 10, end: maxYear };
-      drawChart(firstState, decade, toggleUnit.property("checked"));
+      // Initial draw
+      let decade = { start: maxYear - 10, end: maxYear };
+      let selectedState = firstState;
+      let isFahrenheit = toggleUnit.property("checked");
+      drawChart(selectedState, decade, isFahrenheit);
 
       // Update chart on slider input
       yearSlider.node().addEventListener("input", function () {
-        const selectedState = stateSelector.property("value");
-        let decade = { start: (+this.value) - 10, end: +this.value };
-        const isFahrenheit = toggleUnit.property("checked");
+        decade = { start: (+this.value) - 10, end: +this.value };
 
         if (decade.start < minimumAllowedYear) {
-          // Set tooltip text, hence width
+          // Set tooltip text to set its width
           tooltip.html(`No data available for ${selectedState} before ${minimumAllowedYear}.`);
 
           const sliderRect = yearSlider.node().getBoundingClientRect();
           const sliderValue = +this.value;
-          const sliderPositionX = 0.5 * sliderRect.width + sliderRect.left - 0.5 * tooltip.node().offsetWidth;
+          const sliderPositionX = 0.5 * sliderRect.width + sliderRect.left;
           const sliderPositionY = sliderRect.top + sliderRect.height;
 
           // Reset slider value to minimumAllowedYear
-          this.value = minimumAllowedYear + 10;
           decade.start = minimumAllowedYear;
           decade.end = minimumAllowedYear + 10;
+          this.value = decade.end;
 
           yearSlider
             .classed("accent-blue-500", false)
@@ -178,7 +183,7 @@ function ridgelinePlot() {
           // Show a tooltip
           tooltip.style("opacity", 1)
             .style("left", `${sliderPositionX}px`) // Position the tooltip near the slider
-            .style("top", `${sliderPositionY - 55}px`);
+            .style("top", `${sliderPositionY}px`);
 
           // Hide the tooltip after a delay
           setTimeout(() => {
@@ -196,32 +201,22 @@ function ridgelinePlot() {
 
       // Update chart on state selection
       stateSelector.node().addEventListener("change", function () {
-        const selectedState = this.value;
+        selectedState = this.value;
+        
+        // Adjust year, if needed
         minimumAllowedYear = d3.min(data.filter(d => d.country === this.value), d => d.year);
-        let decade = {
-          start: (+yearSlider.property("value")) - 10,
-          end: +yearSlider.property("value")
-        };
-
         if (decade.start < minimumAllowedYear) {
-          yearSlider.property("value", minimumAllowedYear);
           decade.start = minimumAllowedYear;
           decade.end = minimumAllowedYear + 10;
+          yearSlider.property("value", decade.end);
         }
-        const isFahrenheit = toggleUnit.property("checked");
 
         drawChart(selectedState, decade, isFahrenheit);
       });
 
       // Update chart on toggle
       toggleUnit.node().addEventListener("change", function () {
-        const selectedState = stateSelector.property("value");
-        const decade = {
-          start: (+yearSlider.property("value")) - 10,
-          end: +yearSlider.property("value")
-        };
-        const isFahrenheit = toggleUnit.property("checked");
-
+        isFahrenheit = toggleUnit.property("checked");
         drawChart(selectedState, decade, isFahrenheit);
       });
     });

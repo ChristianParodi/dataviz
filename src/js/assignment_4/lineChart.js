@@ -276,12 +276,14 @@ function lineChart() {
           this.value = minimumAllowedYear;
           selectedYear = minimumAllowedYear;
 
-          yearSlider.classed("accent-blue-500", false).classed("denied", true);
+          yearSlider
+            .classed("accent-blue-500", false)
+            .classed("denied", true);
 
           // Show a tooltip
           tooltip.style("opacity", 1)
             .style("left", `${sliderPositionX}px`) // Position the tooltip near the slider
-            .style("top", `${sliderPositionY - 55}px`);
+            .style("top", `${sliderPositionY}px`);
 
           // Hide the tooltip after a delay
           setTimeout(() => {

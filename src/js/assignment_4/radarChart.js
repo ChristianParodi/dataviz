@@ -110,8 +110,10 @@ function radarChart() {
 
         // Draw radial gridlines
         const numLevels = 5;
-        const gridLevels = d3.range(0, numLevels + 1).map(i => absMin + (i * (absMax - absMin) / numLevels));
+        const gridLevels = d3.range(0, numLevels + 1)
+          .map(i => absMin + (i * (absMax - absMin) / numLevels));
 
+        // Draw radial gridlines
         gridLevels.forEach(level => {
           const r = radialScale(level);
           svg.append("circle")
@@ -121,6 +123,14 @@ function radarChart() {
             .style("fill", "none")
             .style("stroke", "#ccc")
             .style("stroke-dasharray", "2,2");
+
+          svg.append("text")
+            .attr("x", 0)
+            .attr("y", -r)
+            .attr("dy", "-0.5em")
+            .style("text-anchor", "middle")
+            .style("font-size", "10px")
+            .text(level.toFixed(1) + (isFahrenheit ? "°F" : "°C"));
         });
 
         // Function to calculate radar path
@@ -161,18 +171,7 @@ function radarChart() {
             .style("fill", color);
         });
 
-        // draw legend numbers
-        gridLevels.forEach(level => {
-          const r = radialScale(level);
-          svg.append("text")
-            .attr("x", 0)
-            .attr("y", -r)
-            .attr("dy", "-0.5em")
-            .style("text-anchor", "middle")
-            .style("font-size", "10px")
-            .text(level.toFixed(1) + (isFahrenheit ? "°F" : "°C"));
-        });
-
+        // Line for tooltip
         const line = svg.append("line")
           .attr("class", "month-axis-highlight")
           .style("stroke", "black")
@@ -221,7 +220,6 @@ function radarChart() {
                 .attr("x2", (Math.sin(closestMonthAngle) * radius))
                 .attr("y2", (-Math.cos(closestMonthAngle) * radius))
                 .style("opacity", 1);
-
             }
           })
           .on("mouseout", function () {
