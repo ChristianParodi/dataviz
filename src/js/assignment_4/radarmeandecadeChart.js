@@ -251,14 +251,24 @@ function radarmeandecadeChart() {
             .x(d => xScale(d.year))
             .y(d => yScale(d.avg));
 
-
-
           lineChartSvg.append("path")
             .datum(monthData)
             .attr("d", lineGenerator)
             .attr("fill", "none")
-            .attr("stroke", "steelblue")
+            .attr("stroke", "white")
             .attr("stroke-width", 1.5);
+
+          lineChartSvg.selectAll(".dot")
+            .data(monthData)
+            .enter().append("circle")
+            .attr("class", "dot")
+            .attr("cx", d => xScale(d.year))
+            .attr("cy", d => yScale(d.avg))
+            .attr("r", 3)
+            .style("fill", (d, i) => {
+              const colors = [...d3.schemeTableau10, "#ff00ff"];
+              return colors[i % colors.length];
+            });
 
           lineChartSvg.append("g")
             .attr("transform", `translate(0,${lineChartHeight - lineChartMargin.bottom})`)
