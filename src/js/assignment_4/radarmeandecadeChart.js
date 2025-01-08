@@ -264,7 +264,7 @@ function radarmeandecadeChart() {
             .attr("class", "dot")
             .attr("cx", d => xScale(d.year))
             .attr("cy", d => yScale(d.avg))
-            .attr("r", 3)
+            .attr("r", 4)
             .style("fill", (d, i) => {
               const colors = [...d3.schemeTableau10, "#ff00ff"];
               return colors[i % colors.length];
