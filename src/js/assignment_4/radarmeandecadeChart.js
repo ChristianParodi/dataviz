@@ -199,10 +199,7 @@ function radarmeandecadeChart() {
               const pageX = event.pageX + 10;
               const pageY = event.pageY + 10;
               const windowWidth = window.innerWidth;
-
-
               const adjustedX = (pageX + tooltipWidth > windowWidth - 10) ? (windowWidth - tooltipWidth - 10) : pageX;
-
               tooltip.style("opacity", 1)
                 .style("left", `${adjustedX}px`)
                 .style("top", `${pageY}px`)
