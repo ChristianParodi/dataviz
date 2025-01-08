@@ -3,7 +3,7 @@ import { toFahrenheit, toCelsius } from './utils.js';
 import { tooltip } from './utils.js';
 
 function ridgelinePlot() {
-  d3.csv("./../../../dataset/assignment_4/min_max_avg_states.csv", d3.autoType)
+  d3.csv("./../../dataset/assignment_4/min_max_avg_states.csv", d3.autoType)
     .then(data => {
       const toggleUnit = d3.select("#toggle-unit-ridge");
 
@@ -202,7 +202,7 @@ function ridgelinePlot() {
       // Update chart on state selection
       stateSelector.node().addEventListener("change", function () {
         selectedState = this.value;
-        
+
         // Adjust year, if needed
         minimumAllowedYear = d3.min(data.filter(d => d.country === this.value), d => d.year);
         if (decade.start < minimumAllowedYear) {
