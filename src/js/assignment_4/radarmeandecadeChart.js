@@ -195,9 +195,18 @@ function radarmeandecadeChart() {
             if (monthData) {
               // Update the tooltip
               updateTooltipChart(monthData, monthsMap[closestMonth]);
+              const tooltipWidth = 400; // Adjust based on your tooltip's width
+              const pageX = event.pageX + 10;
+              const pageY = event.pageY + 10;
+              const windowWidth = window.innerWidth;
+
+
+              const adjustedX = (pageX + tooltipWidth > windowWidth - 10) ? (windowWidth - tooltipWidth - 10) : pageX;
+
               tooltip.style("opacity", 1)
-                .style("left", `${event.pageX + 10}px`)
-                .style("top", `${event.pageY + 10}px`)
+                .style("left", `${adjustedX}px`)
+                .style("top", `${pageY}px`)
+                
 
               // Update the axis highlight
               line
