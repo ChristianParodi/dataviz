@@ -98,11 +98,8 @@ function radarmeandecadeChart() {
           }))
           .sort((a, b) => d3.ascending(a.year, b.year));
 
-        console.log(stateData)
         const absMin = convert(d3.min(stateData, d => +d.avg));
         const absMax = convert(d3.max(stateData, d => +d.avg));
-
-        console.log(absMin, absMax);
 
         const radialScale = d3.scaleLinear()
           .domain([absMin, absMax])
@@ -197,19 +194,10 @@ function radarmeandecadeChart() {
 
             if (monthData) {
               // Update the tooltip
-              const unit = isFahrenheit ? "°F" : "°C";
-              let tooltipText = `<strong style="text-decoration: underline;">Means for ${monthsMap[closestMonth]}</strong><br>`;
-              monthData.forEach((d, i) => {
-                tooltipText += `<strong>${d.year}:</strong> ${d.avg.toFixed(1)}${unit}`;
-                if (i !== monthData.length - 1) {
-                  tooltipText += "<br>";
-                }
-              });
-
+              updateTooltipChart(monthData, monthsMap[closestMonth]);
               tooltip.style("opacity", 1)
                 .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY + 10}px`)
-                .html(tooltipText);
 
               // Update the axis highlight
               line
@@ -228,6 +216,59 @@ function radarmeandecadeChart() {
             line.style("opacity", 0);
           });
 
+
+        function updateTooltipChart(monthData, month) {
+          const lineChartWidth = 400;
+          const lineChartHeight = 200;
+          const lineChartMargin = { top: 10, right: 10, bottom: 20, left: 30 };
+
+          tooltip.selectAll("svg").remove();
+          const lineChartSvg = tooltip.append("svg")
+            .attr("width", lineChartWidth)
+            .attr("height", lineChartHeight);
+
+          lineChartSvg.append("text")
+            .attr("x", (lineChartWidth / 2))
+            .attr("y", lineChartMargin.top)
+            .attr("text-anchor", "middle")
+            .style("font-size", "14px")
+            .style("fill", "white")
+            .text(`Mean temperatures in ${month}`);
+
+          const xScale = d3.scaleLinear()
+            .domain(d3.extent(monthData, d => d.year))
+            .range([lineChartMargin.left, lineChartWidth - lineChartMargin.right]);
+
+          const xAxis = d3.axisBottom(xScale)
+            .tickValues(monthData.map(d => d.year))
+            .tickFormat(d3.format("d"));
+
+          const yScale = d3.scaleLinear()
+            .domain([convert(32), absMax])
+            .range([lineChartHeight - lineChartMargin.bottom, lineChartMargin.top]);
+
+          const lineGenerator = d3.line()
+            .x(d => xScale(d.year))
+            .y(d => yScale(d.avg));
+
+
+
+          lineChartSvg.append("path")
+            .datum(monthData)
+            .attr("d", lineGenerator)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 1.5);
+
+          lineChartSvg.append("g")
+            .attr("transform", `translate(0,${lineChartHeight - lineChartMargin.bottom})`)
+            .call(xAxis);
+
+
+          lineChartSvg.append("g")
+            .attr("transform", `translate(${lineChartMargin.left},0)`)
+            .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => `${d}${isFahrenheit ? '°F' : '°C'}`));
+        }
       }
 
       // Initial draw
