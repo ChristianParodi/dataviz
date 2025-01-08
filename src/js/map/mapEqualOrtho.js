@@ -1,5 +1,5 @@
 function mapOrthographic() {
-  const width = 1000;
+  const width = 1200;
   const height = 600;
 
   // Tooltip for showing information
@@ -12,6 +12,15 @@ function mapOrthographic() {
     .style("border-radius", "4px")
     .style("pointer-events", "none")
     .style("opacity", 0);
+
+  const legendWidth = width + 30;
+  const legendHeight = 100;
+
+  const legendSvg = d3.select("#legend-container-equal")
+    .append("svg")
+    .attr("width", legendWidth)
+    .attr("height", legendHeight)
+    .style("background", "#fff");
 
   // Create the projection and path
   const projection = d3.geoOrthographic().scale(300).translate([width / 2, height / 2]);
@@ -74,7 +83,7 @@ function mapOrthographic() {
       5e9,
       6e9,
       8e9,
-      10e9,
+      11.40e9,
     ];
 
     const colors = (thresholds) => thresholds.map((d, i) => {
@@ -178,11 +187,198 @@ function mapOrthographic() {
         .attr("fill", "none")
         .attr("stroke", "#ccc")
         .attr("stroke-width", 0.5);
-    }
+      }
+        
+        function updateLegend() {
+          const isPerCapita = document.getElementById("toggle-ortho").checked;
+          const scale = isPerCapita ? colorScalePerCapita : colorScaleTotal;
+    
+          const selectedThreshold = isPerCapita ? perCapitaThresholds : thresholds;
+          // Create the bins for the legend (based on thresholds and colors)
+          let legendBins = selectedThreshold.map((threshold, i) => {
+            return { threshold, color: scale(threshold), next: selectedThreshold[i + 1] };
+          }).slice(0, -1); // Remove the last bin as it doesn't have a corresponding range
+    
+          legendBins.unshift({ threshold: undefined, color: "#ccc", next: undefined });
+    
+          // Set dimensions for the legend
+          const squareSize = 20; // Size of each square
+          const spacing = 15; // Space between squares and text
+          const legendPadding = 15; // Padding for the legend container
+    
+          const legendSpacing = isPerCapita
+            ? squareSize + spacing
+            : 2 * (squareSize + spacing)
+          // Define a scale for the widths of the legend squares based on the range
+          const squareWidthScale = d3.scaleLinear()
+            .domain([0, selectedThreshold[selectedThreshold.length - 1]]) // Input domain is the range of emission values
+            .range([0, legendWidth - 2 * legendPadding - legendSpacing]); // Output range for square widths (min to max length)
+          let cumulativeX = legendPadding; // Inizializza la posizione iniziale
+    
+          legendSvg.selectAll("rect")
+            .data(legendBins)
+            .join("rect")
+            .attr("x", (d, i) => {
+              const currentX = cumulativeX; // Memorizza la posizione corrente
+              if ((isPerCapita && i > 0) || i > 1) { // after the gray and the 0.00 - 0.01, do it normally. Do it on total only
+                cumulativeX += squareWidthScale(d.next - d.threshold); // Aggiorna la posizione cumulativa
+              }
+              else
+                cumulativeX += squareSize + spacing
+              return currentX; // Ritorna la posizione corrente per l'elemento
+            })
+            .attr("y", 10) // Posizione verticale costante
+            .attr("width", (d, i) => {
+              return (isPerCapita && i > 0) || i > 1 ? squareWidthScale(d.next - d.threshold) : squareSize;
+            }) // Larghezza proporzionale
+            .attr("height", squareSize) // Altezza costante
+            .attr("stroke", "orange")
+            .attr("stroke-width", "1px")
+            .style("fill", d => d.color) // Colore basato sulla scala
+            .on("mousemove", function (event, d) {
+              const legendValue = isPerCapita ? d.threshold : d.threshold / 1e9;
+              const legendValueNext = isPerCapita ? d.next : d.next / 1e9;
+              const tooltipText = isPerCapita
+                ? `Emissions: ${legendValue.toFixed(2)} - ${legendValueNext.toFixed(2)} t`
+                : `Emissions: ${legendValue.toFixed(2)} - ${legendValueNext.toFixed(2)} Bil t`
+              // Tooltip
+              tooltip.style("opacity", 1)
+                .html(d.color === "#ccc" ? "Data not available" : tooltipText)
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY + 10}px`);
+    
+              // Highlight the legend square
+              d3.select(this)
+                .style("opacity", 1);
+    
+              // Gray out all other legend squares
+              legendSvg.selectAll("rect")
+                .filter(node => node !== d) // Exclude the hovered square
+                .style("opacity", 0.3);
+    
+              // Highlight the countries with the same emission
+              g.selectAll("path")
+                .data(world.features)
+                .attr("stroke", function (node) {
+                  const emissions = isPerCapita
+                    ? emissionsPerCapitaByCountry.get(node.id)
+                    : emissionsByCountry.get(node.id) / 1e9;
+                  if (isNaN(legendValue))
+                    return isNaN(emissions) ? "#000" : null;
+                  return emissions >= legendValue && emissions <= legendValueNext ? "#000" : null;
+                })
+                .attr("stroke-width", function (node) {
+                  const emissions = isPerCapita
+                    ? emissionsPerCapitaByCountry.get(node.id)
+                    : emissionsByCountry.get(node.id) / 1e9;
+                  if (isNaN(legendValue))
+                    return isNaN(emissions) ? 0.5 : 0;
+                  return (emissions >= legendValue && emissions <= legendValueNext) ? 0.5 : 0;
+                })
+                .attr("fill-opacity", function (node) {
+                  const emissions = isPerCapita
+                    ? emissionsPerCapitaByCountry.get(node.id)
+                    : emissionsByCountry.get(node.id) / 1e9;
+                  if (isNaN(legendValue))
+                    return isNaN(emissions) ? 1 : 0.5;
+                  return emissions >= legendValue && emissions <= legendValueNext ? 1 : 0.5;
+                });
+            })
+            .on("mouseout", function () {
+              // reset legend squares
+              legendSvg.selectAll("rect")
+                .attr("stroke", "orange")
+                .attr("stroke-width", "1px")
+                .style("opacity", 1);
+    
+              // Reset the countries highlighting
+              g.selectAll("path")
+                .attr("stroke", "#ccc")
+                .attr("stroke-width", 0.5)
+                .attr("fill-opacity", 1);
+    
+              tooltip.style("opacity", 0);
+            });
+    
+          legendSvg.selectAll("text").remove();
+    
+          cumulativeX = legendPadding; // Reinizializza per i testi
+          legendSvg.selectAll(".bar-text")
+            .data(legendBins.slice(0)) // I numeri per le barrette
+            .join("text")
+            .attr("x", (d, i) => {
+              let currentX = cumulativeX;
+              if ((isPerCapita && i > 0) || i > 1) { // after the gray and the 0.00 - 0.01, do it normally
+                if ((!isPerCapita && i === 2) || (isPerCapita && i === 1))
+                  currentX -= squareSize * 0.5;
+                cumulativeX = currentX + squareWidthScale(d.next - d.threshold); // Aggiorna la posizione cumulativa
+                return currentX; // Ritorna la posizione corrente per l'elemento
+              }
+              else {
+                if (i === 0)
+                  currentX += squareSize * 0.5; // Memorizza la posizione corrente
+                cumulativeX = currentX + squareSize + spacing
+                return currentX; // Ritorna la posizione corrente per l'elemento
+              }
+            })
+            .attr("y", 45) // Posizione sopra i quadratini
+            .text((d, i) => {
+              if (i === 0) // gray
+                return "Nd";
+    
+              if (i === 1 && !isPerCapita) // 0 - 0.01
+                return "<0.01";
+    
+              return (isPerCapita ? legendBins[i].threshold : legendBins[i].threshold / 1e9).toFixed(2)
+            }) // Mostra il valore di tonnellate
+            .style("font-size", "10px")
+            .style("fill", "#333")
+            .style("text-anchor", "middle");
+    
+    
+          legendSvg.append("text")
+            .attr("x", cumulativeX) // Posizione finale dopo l'ultimo quadratino
+            .attr("y", 45)
+            .text((isPerCapita ? selectedThreshold[selectedThreshold.length - 1] : selectedThreshold[selectedThreshold.length - 1] / 1e9).toFixed(2)) // Ultimo valore (d.next)
+            .style("font-size", "10px")
+            .style("fill", "#333")
+            .style("text-anchor", "middle");
+    
+          const firstTickX = isPerCapita
+            ? legendPadding + spacing + squareSize
+            : legendPadding + 2 * spacing + 2 * squareSize;
+    
+          // Primo tick (iniziale)
+          legendSvg.append("rect")
+            .attr("x", firstTickX - 1) // Posizione iniziale del primo tick
+            .attr("y", 9.5)
+            .attr("width", 2)
+            .attr("height", 25)
+            .attr("fill", "orange")
+            .attr("stroke-width", "2px");
+    
+          // Ultimo tick (finale)
+          legendSvg.append("rect")
+            .attr("x", cumulativeX - 1) // Posizione finale dopo l'ultimo rettangolo
+            .attr("y", 9.5)
+            .attr("width", 2)
+            .attr("height", 25)
+            .attr("fill", "orange")
+            .attr("stroke-width", "2px");
+    
+          // Append the axis to the legend
+          legendSvg.append("g")
+            .attr("transform", `translate(60, 0)`) // Position the axis beside the legend rectangles
+            .call(g => g.select(".domain").remove()); // Remove the line of the axis
+        }
+    
+    
 
-    updateMap()
+    updateMap();
+    updateLegend();
 
-    document.getElementById("toggle-ortho").addEventListener("change", updateMap)
+    document.getElementById("toggle-ortho").addEventListener("change", updateMap);
+    document.getElementById("toggle-ortho").addEventListener("change", updateLegend);
   });
 }
 

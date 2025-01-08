@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link href="./../../dist/global.css" rel="stylesheet" type="text/css" />
+    <link href="./../../dist/assignment_4.css" rel="stylesheet" type="text/css" />
+    <script src="./../../libs/d3.v7.min.js"></script>
+    <style>
+      p {
+        max-width: 70%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col sm:flex-row justify-between items-center">
+          <div class="flex gap-4 self-start justify-center items-center">
+            <a href="./../../index.html">
+              <button class="buttonstyle ">←</button>
+            </a>
+            <span>Home</span>
+          </div>
+          <img src="./../../tristi.png" width="50">
+        </div>
+      </div>
+    </div>
+    <main class="flex flex-col gap-10 items-center my-10">
+      <h1 class="text-3xl font-bold">Temperatures change overtime</h1>
+      <p>
+        Let's now have a look at the way temperatures behave overtime:
+        we will focus on US only, proposing different visualizations that show
+        how maximum, minimum and average temperatures
+      </p>
+      <!-- Visualization options -->
+      <div class="flex flex-row gap-32 items-center justify-center">
+
+        <!-- Celsius selector -->
+        <div class="flex flex-1 items-center justify-center">
+          <span class="mr-2 text-base text-gray-800">Celsius</span>
+          <label for="toggle-unit" class="relative cursor-pointer">
+            <input type="checkbox" id="toggle-unit" class="sr-only peer" />
+            <div class="switch"></div>
+          </label>
+          <span class="ml-2 text-base text-gray-800">Fahrenheit</span>
+        </div>
+        <!-- end Celsius selector -->
+
+        <!-- Year slider -->
+        <div class="flex-1">
+          <label for="year-slider" class="block text-sm font-medium mb-2">
+            Select Year
+          </label>
+          <input type="range" id="year-slider" name="year-slider" min="2000" max="2024" value="2024"
+            class="w-full accent-blue-500">
+          <div class="flex justify-between text-sm text-gray-400">
+            <span id="min-year-text"></span>
+            <span id="max-year-text"></span>
+          </div>
+        </div>
+        <!-- End year slider -->
+
+        <!-- State selector -->
+        <div class="flex-col items-start flex-1">
+          <label for="state-selector" class="block text-sm font-medium mb-2">
+            Select State
+          </label>
+          <select id="state-selector" name="state-selector" class="w-full h-full"></select>
+        </div>
+        <!-- End state selector -->
+
+      </div>
+      <!-- End visualization options -->
+      <div class="flex items-center justify-center gap-10">
+        <div id="line-chart"></div>
+        <div id="radar-chart"></div>
+      </div>
+      <div class="flex flex-row gap-10 items-stretch">
+        <div class="flex flex-col items-center basis-1/2">
+          <p style="margin-left: 150px;">
+            From the line chart in the top-left, you can observe the changes in temperature
+            maximum, average and minimum in a year in different months with respect to a single country. Using the
+            silder of years
+            it is possible to observe how these temperatures have changed over time.
+            Thanks to these graphs, a general trend of increasing temperatures is observed in all months of the year,
+            indicating a possible effect of global warming.
+          </p>
+        </div>
+        <div class="flex flex-col items-center basis-1/2">
+          <p>
+            From the radar chart in the top-right, it is possible to observe data
+            multivariate by combining the months with minimum, average and maximum temperatures.
+            This type of representation makes the comparison between differences and similarities immediate
+            in temperature values, highlighting seasonal variations and underlining
+            as in the previous case, a general increase in temperatures.
+          </p>
+        </div>
+      </div>
+
+      <!-- Visualization options randmeandecade -->
+      <!-- <div class="flex flex-row gap-32 items-center justify-center"> -->
+
+        <!-- Celsius selector -->
+        <!-- <div class="flex flex-1 items-center justify-center">
+          <span class="mr-2 text-base text-gray-800">Celsius</span>
+          <label for="toggle-unit-randmean" class="relative cursor-pointer">
+            <input type="checkbox" id="toggle-unit-randmean" class="sr-only peer" />
+            <div class="switch"></div>
+          </label>
+          <span class="ml-2 text-base text-gray-800">Fahrenheit</span>
+        </div> -->
+        <!-- end Celsius selector -->
+
+
+        <!-- State selector -->
+        <!-- <div class="flex-col items-start flex-1">
+          <label for="state-selector-randmean" class="block text-sm font-medium mb-2">
+            Select State
+          </label>
+          <select id="state-selector-randmean" name="state-selector" class="w-full h-full"></select>
+        </div> -->
+        <!-- End state selector -->
+
+      <!-- </div>
+      <p>range of decades</p>
+      <span id="randmean-chart"></span> -->
+      
+      <!-- End visualization options randmean -->
+
+
+      <!-- Visualization options ridge & radar-decade -->
+      <div class="flex flex-row gap-32 items-center justify-center">
+        <!-- Celsius selector -->
+        <div class="flex flex-1 items-center justify-center">
+          <span class="mr-2 text-base text-gray-800">Celsius</span>
+          <label for="toggle-unit-ridge" class="relative cursor-pointer">
+            <input type="checkbox" id="toggle-unit-ridge" class="sr-only peer" />
+            <div class="switch"></div>
+          </label>
+          <span class="ml-2 text-base text-gray-800">Fahrenheit</span>
+        </div>
+        <!-- end Celsius selector -->
+        <!-- Year slider -->
+        <div class="flex-1">
+          <label for="year-slider-ridge" class="block text-sm font-medium mb-2">
+            Select decade (end year)
+          </label>
+          <input type="range" id="year-slider-ridge" name="year-slider" min="2000" max="2023" value="2023"
+            class="w-full accent-blue-500">
+          <div class="flex justify-between text-sm text-gray-400">
+            <span id="min-year-text-ridge"></span>
+            <span id="max-year-text-ridge"></span>
+          </div>
+          <div class="flex justify-center">
+            <span id="ridge-decade"></span>
+          </div>
+        </div>
+        <!-- End year slider -->
+
+        <!-- State selector -->
+        <div class="flex-col items-start flex-1">
+          <label for="state-selector-ridge" class="block text-sm font-medium mb-2">
+            Select State
+          </label>
+          <select id="state-selector-ridge" name="state-selector" class="w-full h-full"></select>
+        </div>
+        <!-- End state selector -->
+      </div>
+      <!-- End visualization options ridge -->
+      <div class="flex items-center justify-center gap-10">
+        <div id="ridge-line"></div>
+        <div id="radardecade-chart"></div>
+      </div>
+      
+      <p>
+        Thanks to the ridgeline it is possible to observe the trends and the
+        temperature values of the 2014-2023 year range in the American states.
+        For each year the graph shows two curves, one blue and one red representing
+        the minimum and maximum temperature distributions respectively.
+        From the graph we can see a general increase in minimum and maximum temperatures
+        in recent years, with a greater density of values towards higher temperatures.
+      </p>
+      <script type="module" src="./../js/assignment_4/lineChart.js"></script>
+      <script type="module" src="./../js/assignment_4/radarChart.js"></script>
+      <script type="module" src="./../js/assignment_4/ridgeLine.js"></script>
+      <script type="module" src="./../js/assignment_4/radarmeandecadeChart.js"></script>
+    </main>
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col sm:flex-row justify-between items-center">
+          <p class="text-center sm:text-left mb-4 sm:mb-0">© 2024 Data Visualization - Bazzi, Parodi, Valentini</p>
+          <div class="flex space-x-6">
+            <a href="#" class="hover:text-gray-400">About Us</a>
+            <a href="#" class="hover:text-gray-400">Contact</a>
+            <a href="#" class="hover:text-gray-400">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  </body>
+
+
+</html>

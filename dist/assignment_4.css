@@ -1,13 +1,9 @@
-p {
-  max-width: 80%;
-}
-
 .rule_container {
   border-width: 2px;
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
   --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity, 1));
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity, 1))
 }
 
 .switch {
@@ -21,7 +17,7 @@ p {
   background-color: rgb(234 88 12 / var(--tw-bg-opacity, 1));
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+  transition-duration: 300ms
 }
 
 .switch::after {
@@ -42,13 +38,13 @@ p {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   content: var(--tw-content);
-  transition-duration: 300ms;
+  transition-duration: 300ms
 }
 
 .switch:focus {
   outline-style: solid;
   outline-offset: 2px;
-  outline-color: #9a3412;
+  outline-color: #9a3412
 }
 
 .peer:checked ~ .switch::after {
@@ -56,5 +52,5 @@ p {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   content: var(--tw-content);
   --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
+  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1))
 }
