@@ -27,7 +27,7 @@ const monthsMap = {
 };
 
 function lineChart() {
-  d3.csv("./../../dataset/assignment_4/min_max_avg_states.csv", d3.autoType)
+  d3.csv("./../dataset/assignment_4/min_max_avg_states.csv", d3.autoType)
     .then(data => {
       const toggleUnit = d3.select("#toggle-unit");
 
